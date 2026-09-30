@@ -3,6 +3,7 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 version="${1:-$(grep -m1 '^Version:' wp-content/themes/bfd-theme/style.css | awk '{print $2}')}"
+./bin/build-assets.sh >/dev/null 2>&1 || echo "warning: asset build skipped (needs Node/npx); shipping unminified fallbacks"
 mkdir -p dist
 python3 - "$version" <<'PY'
 import sys, os, zipfile

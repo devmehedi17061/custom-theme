@@ -37,10 +37,14 @@ Use a small site plugin/child theme and these hooks instead of editing the frame
 | `bfd_schema_graph`, `bfd_breadcrumb_items` | adjust JSON-LD and breadcrumbs |
 | `bfd_form_allowed_mimes`, `bfd_form_max_upload`, `bfd_form_rate_limit` | form upload/spam limits |
 | `bfd_client_ip` | real client IP behind a proxy |
+| `bfd_csp_directives` | adjust the Content-Security-Policy directives |
+| `bfd_activity_retention_days` | how long the activity log is kept |
 
 A new built-in section = one entry in `bfd_section_definitions` + `template-parts/sections/{type}.php` in the theme.
 
 Translations: `python3 bin/make-pot.py` writes `languages/bfd-core.pot` and `bfd-theme.pot`.
+Assets: edit `assets/css|js/*.css|js`, then `./bin/build-assets.sh` regenerates the `.min` files (served automatically; add `define( 'SCRIPT_DEBUG', true )` to use the sources).
+Quality gates before a release: `./bin/lint.sh`, `./bin/phpcs.sh`, the smoke test, `./bin/ui-test.sh`.
 
 ## 4. Before launch
 Work through [LAUNCH.md](LAUNCH.md).

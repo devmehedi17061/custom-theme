@@ -1,6 +1,7 @@
 var R = [];
 function ok(name, cond, extra) { R.push((cond ? 'PASS ' : 'FAIL ') + name + (extra ? '  ' + extra : '')); }
 function finish() {
+	if (document.getElementById('uitest')) return;
 	var pre = document.createElement('pre');
 	pre.id = 'uitest';
 	pre.textContent = R.join('\n');
@@ -32,6 +33,8 @@ function postForm(form, extra) {
 }
 function guard(fn) {
 	window.addEventListener('load', function () {
+		// Watchdog: always report something, even if a step never completes.
+		setTimeout(function () { R.push('ERROR test did not finish (timeout)'); finish(); }, 24000);
 		try { fn(); } catch (e) { R.push('ERROR ' + e.message); finish(); }
 	});
 }

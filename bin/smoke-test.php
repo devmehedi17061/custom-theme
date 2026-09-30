@@ -8,6 +8,7 @@ require dirname( __DIR__ ) . '/wp-load.php';
 
 use BFD\Core\Fields\Sanitizer;
 use BFD\Core\Forms\Form_Definition;
+use BFD\Core\Forms\Submission_Handler;
 use BFD\Core\Sections\Section_Registry;
 use BFD\Core\Sections\Template_Engine;
 
@@ -78,6 +79,47 @@ check( 'form field type whitelisted', 'text' === $fields[1]['type'] );
 $conf = Form_Definition::sanitize_settings( array( 'recipients' => 'a@example.com, bad', 'subject' => "Hi\r\nBcc: x@y.z" ) );
 check( 'form recipients validated', 'a@example.com' === $conf['recipients'] );
 check( 'form subject single line', false === strpbrk( $conf['subject'], "\r\n" ) );
+
+/* Form conditions + steps */
+$cf = Form_Definition::sanitize_fields(
+	array(
+		array( 'label' => 'Type', 'type' => 'select', 'options' => "a|A\nb|B" ),
+		array( 'label' => 'Step two', 'type' => 'step' ),
+		array( 'label' => 'Extra', 'type' => 'text', 'show_if' => array( 'field' => 'type', 'op' => 'equals', 'value' => 'b' ) ),
+		array( 'label' => 'Bad ref', 'type' => 'text', 'show_if' => array( 'field' => 'later', 'op' => 'equals', 'value' => 'x' ) ),
+		array( 'label' => 'Bad op', 'type' => 'text', 'show_if' => array( 'field' => 'type', 'op' => 'DROP', 'value' => 'x' ) ),
+		array( 'label' => 'Later', 'type' => 'text' ),
+	)
+);
+$by = array_column( $cf, null, 'key' );
+check( 'step field type kept', 'step' === $by['step_two']['type'] );
+check( 'condition on earlier field kept', 'b' === ( $by['extra']['show_if']['value'] ?? '' ) );
+check( 'condition on later/unknown field dropped', ! isset( $by['bad_ref']['show_if'] ) );
+check( 'condition with invalid operator dropped', ! isset( $by['bad_op']['show_if'] ) );
+
+$ref = new ReflectionClass( Form_Definition::class );
+$fd  = $ref->newInstanceWithoutConstructor();
+$fd->fields = $cf;
+$vis = Submission_Handler::visible_fields( $fd, array( 'f_type' => 'a' ) );
+check( 'condition false hides field', empty( $vis['extra'] ) && ! empty( $vis['type'] ) );
+check( 'step break is never processed', empty( $vis['step_two'] ) );
+$vis = Submission_Handler::visible_fields( $fd, array( 'f_type' => 'b' ) );
+check( 'condition true shows field', ! empty( $vis['extra'] ) );
+
+/* Two-factor (RFC 6238 test vectors) + storage */
+$rfc = BFD\Core\Security\Two_Factor::base32_encode( '12345678901234567890' );
+foreach ( array( 59 => '94287082', 1111111109 => '07081804', 1234567890 => '89005924', 20000000000 => '65353130' ) as $t => $want ) {
+	check( "TOTP matches RFC 6238 at t=$t", BFD\Core\Security\Two_Factor::code( $rfc, intdiv( $t, 30 ), 8 ) === $want );
+}
+$enc = BFD\Core\Security\Two_Factor::encrypt( 'TOPSECRET' );
+check( '2FA secret is encrypted at rest', false === strpos( base64_decode( $enc ), 'TOPSECRET' ) && 'TOPSECRET' === BFD\Core\Security\Two_Factor::decrypt( $enc ) );
+check( '2FA rejects tampered ciphertext', '' === BFD\Core\Security\Two_Factor::decrypt( substr( $enc, 0, -4 ) . 'AAAA' ) );
+$s2 = BFD\Core\Security\Two_Factor::base32_encode( random_bytes( 20 ) );
+$c2 = BFD\Core\Security\Two_Factor::code( $s2, intdiv( 1700000000, 30 ) );
+check( '2FA accepts adjacent window, rejects far-off code', 0 !== BFD\Core\Security\Two_Factor::match_step( $s2, $c2, 1700000030 ) && 0 === BFD\Core\Security\Two_Factor::match_step( $s2, $c2, 1700000090 ) );
+global $wpdb;
+check( 'activity log table exists', $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->prefix . 'bfd_activity' ) ) === $wpdb->prefix . 'bfd_activity' );
+check( 'CSP is off by default', ! isset( array_change_key_case( headers_list() )['content-security-policy'] ) );
 
 /* Security */
 wp_set_current_user( 0 );

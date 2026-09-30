@@ -18,7 +18,8 @@ python3 bin/page-audit.py http://localhost:8081/ http://localhost:8081/about/   
 - [ ] Real mail delivery (SMTP plugin or host mail). Form emails use `wp_mail`; with no mail server, submissions are still saved
 - [ ] Behind a proxy/CDN? Add `add_filter( 'bfd_client_ip', ... )` to read the real client IP, or rate limits and the login lockout will treat everyone as one IP
 - [ ] Backups (files + database) scheduled and a restore tested
-- [ ] Admin accounts: strong unique passwords + 2FA (plugin or host-level); delete the default "admin" user; remove unused users
+- [ ] Admin accounts: strong unique passwords; **turn on two-factor** for every admin (Users > Two-factor); delete the default "admin" user; remove unused users
+- [ ] Review Tools > Activity Log after launch (logins, lockouts, user/plugin changes)
 - [ ] Update WordPress core, remove unused themes/plugins (Hello Dolly, Akismet if unused)
 
 **Content / SEO**
@@ -40,7 +41,9 @@ python3 bin/page-audit.py http://localhost:8081/ http://localhost:8081/about/   
 
 **Performance**
 - [ ] Lighthouse mobile >= 90 on home + a content page
+- [ ] Run `./bin/build-assets.sh` after CSS/JS edits (the `.min` files are what visitors get)
 - [ ] Page cache + object cache (host or plugin), gzip/brotli
+- [ ] Optional: Settings > BFD Options > Design > *Inline the theme stylesheet* for small sites
 - [ ] WebP: JPEG/PNG sizes are generated as WebP automatically; upload originals at <= 2000 px wide
 
 **Security spot-checks** (should all already pass)
@@ -48,4 +51,4 @@ python3 bin/page-audit.py http://localhost:8081/ http://localhost:8081/about/   
 - [ ] `/wp-json/wp/v2/users` and `/?author=1` return 404 when logged out
 - [ ] 6 wrong logins from one IP lock that IP for 15 minutes
 - [ ] Response headers include `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`
-- [ ] Optional: enable a Content-Security-Policy as Report-Only first (see `Security_Module::send_headers`)
+- [ ] Optional: Settings > BFD Options > Advanced > Content-Security-Policy: start with *Report only*, browse the site with the browser console open, then switch to *Enforce*

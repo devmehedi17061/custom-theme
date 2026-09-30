@@ -31,7 +31,7 @@ guard(function () {
 			btn(cards()[0], 'Preview').click();
 			wait(function () { var f = q('iframe', cards()[0]); return f && f.srcdoc && f.srcdoc.length > 200; }, function (e3) {
 				var html = e3 ? '' : q('iframe', cards()[0]).srcdoc;
-				ok('live preview returns themed HTML', /bfd-section--hero/.test(html) && /UI Hero/.test(html) && /main\.css/.test(html));
+				ok('live preview returns themed HTML', /bfd-section--hero/.test(html) && /UI Hero/.test(html) && /main(\.min)?\.css/.test(html));
 
 				// Save with the real WordPress form (nonce, capability, sanitize)
 				var form = q('#post');
