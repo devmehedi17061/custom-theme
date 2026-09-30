@@ -7,10 +7,16 @@ $cols = in_array( $f['columns'] ?? '3', array( '2', '3', '4' ), true ) ? $f['col
 <?php endif; ?>
 <div class="bfd-grid bfd-grid--<?php echo esc_attr( $cols ); ?> gallery">
 	<?php foreach ( $f['images'] ?? array() as $img ) : ?>
-		<?php if ( empty( $img['image'] ) ) { continue; } ?>
+		<?php
+		if ( empty( $img['image'] ) ) {
+			continue; }
+		?>
 		<figure>
 			<?php echo wp_get_attachment_image( (int) $img['image'], 'bfd-card', false, array( 'loading' => 'lazy' ) ); ?>
-			<?php if ( ! empty( $img['caption'] ) ) : ?><figcaption><?php echo esc_html( $img['caption'] ); ?></figcaption><?php endif; ?>
+			<?php
+			if ( ! empty( $img['caption'] ) ) :
+				?>
+				<figcaption><?php echo esc_html( $img['caption'] ); ?></figcaption><?php endif; ?>
 		</figure>
 	<?php endforeach; ?>
 </div>

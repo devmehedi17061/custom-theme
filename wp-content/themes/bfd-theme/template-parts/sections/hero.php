@@ -1,12 +1,12 @@
 <?php
-$f     = $args['fields'] ?? array();
-$first = 0 === ( $args['index'] ?? 0 );
-$tag   = $first ? 'h1' : 'h2';
+$f        = $args['fields'] ?? array();
+$first    = 0 === ( $args['index'] ?? 0 );
+$hero_tag = $first ? 'h1' : 'h2';
 ?>
 <div class="hero">
 	<div class="hero__content">
 		<?php if ( ! empty( $f['heading'] ) ) : ?>
-			<<?php echo $tag; ?> class="hero__title"><?php echo esc_html( $f['heading'] ); ?></<?php echo $tag; ?>>
+			<<?php echo esc_attr( tag_escape( $hero_tag ) ); ?> class="hero__title"><?php echo esc_html( $f['heading'] ); ?></<?php echo esc_attr( tag_escape( $hero_tag ) ); ?>>
 		<?php endif; ?>
 		<?php if ( ! empty( $f['subheading'] ) ) : ?>
 			<p class="hero__sub"><?php echo esc_html( $f['subheading'] ); ?></p>
@@ -22,7 +22,10 @@ $tag   = $first ? 'h1' : 'h2';
 				(int) $f['image'],
 				'bfd-hero',
 				false,
-				$first ? array( 'loading' => 'eager', 'fetchpriority' => 'high' ) : array( 'loading' => 'lazy' )
+				$first ? array(
+					'loading'       => 'eager',
+					'fetchpriority' => 'high',
+				) : array( 'loading' => 'lazy' )
 			);
 			?>
 		</div>

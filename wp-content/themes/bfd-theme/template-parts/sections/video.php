@@ -25,7 +25,10 @@ if ( preg_match( '#^https?://(?:www\.)?(?:youtube\.com/(?:watch\?(?:.*&)?v=|embe
 				<video src="<?php echo esc_url( $file ); ?>" controls preload="metadata"></video>
 			<?php endif; ?>
 		</div>
-		<?php if ( ! empty( $f['caption'] ) ) : ?><figcaption><?php echo esc_html( $f['caption'] ); ?></figcaption><?php endif; ?>
+		<?php
+		if ( ! empty( $f['caption'] ) ) :
+			?>
+			<figcaption><?php echo esc_html( $f['caption'] ); ?></figcaption><?php endif; ?>
 	</figure>
 <?php elseif ( current_user_can( 'edit_pages' ) ) : ?>
 	<p class="section__intro"><em><?php esc_html_e( 'Enter a YouTube, Vimeo or .mp4 URL.', 'bfd-theme' ); ?></em></p>

@@ -30,7 +30,10 @@ function bfd_design_css() {
 
 	if ( function_exists( 'bfd_font_stacks' ) ) {
 		$stacks = bfd_font_stacks();
-		foreach ( array( 'heading_font' => '--font-heading', 'body_font' => '--font-body' ) as $key => $var ) {
+		foreach ( array(
+			'heading_font' => '--font-heading',
+			'body_font'    => '--font-body',
+		) as $key => $var ) {
 			$choice = (string) bfd_option( $key, 'system' );
 			if ( 'system' !== $choice && isset( $stacks[ $choice ] ) ) {
 				$vars[ $var ] = $stacks[ $choice ][1];

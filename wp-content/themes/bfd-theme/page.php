@@ -1,8 +1,14 @@
 <?php get_header(); ?>
 
-<?php if ( ! is_front_page() ) { bfd_theme_breadcrumbs(); } ?>
+<?php
+if ( ! is_front_page() ) {
+	bfd_theme_breadcrumbs(); }
+?>
 
-<?php while ( have_posts() ) : the_post(); ?>
+<?php
+while ( have_posts() ) :
+	the_post();
+	?>
 	<?php if ( function_exists( 'bfd_has_sections' ) && bfd_has_sections() ) : ?>
 		<?php bfd_render_sections(); ?>
 	<?php else : ?>

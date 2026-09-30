@@ -8,7 +8,15 @@
 		if ( empty( $logo['image'] ) ) {
 			continue;
 		}
-		$img = wp_get_attachment_image( (int) $logo['image'], 'medium', false, array( 'alt' => $logo['name'] ?? '', 'loading' => 'lazy' ) );
+		$img = wp_get_attachment_image(
+			(int) $logo['image'],
+			'medium',
+			false,
+			array(
+				'alt'     => $logo['name'] ?? '',
+				'loading' => 'lazy',
+			)
+		);
 		?>
 		<li>
 			<?php if ( ! empty( $logo['url'] ) ) : ?>

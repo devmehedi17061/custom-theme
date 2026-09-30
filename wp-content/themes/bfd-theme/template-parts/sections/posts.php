@@ -1,13 +1,13 @@
 <?php
-$f     = $args['fields'] ?? array();
-$types = get_post_types( array( 'public' => true ) );
-$type  = isset( $f['post_type'] ) && isset( $types[ $f['post_type'] ] ) ? $f['post_type'] : 'post';
-$count = max( 1, min( 24, (int) ( $f['count'] ?? 3 ) ?: 3 ) );
-$cols  = in_array( $f['columns'] ?? '3', array( '2', '3', '4' ), true ) ? $f['columns'] : '3';
+$f            = $args['fields'] ?? array();
+$types        = get_post_types( array( 'public' => true ) );
+$listing_type = isset( $f['post_type'] ) && isset( $types[ $f['post_type'] ] ) ? $f['post_type'] : 'post';
+$count        = max( 1, min( 24, (int) ( $f['count'] ?? 3 ) ?: 3 ) );
+$cols         = in_array( $f['columns'] ?? '3', array( '2', '3', '4' ), true ) ? $f['columns'] : '3';
 
 $q = new WP_Query(
 	array(
-		'post_type'           => $type,
+		'post_type'           => $listing_type,
 		'posts_per_page'      => $count,
 		'ignore_sticky_posts' => true,
 		'no_found_rows'       => true,

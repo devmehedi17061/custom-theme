@@ -67,7 +67,11 @@ function bfd_related_posts( $post_id = 0, $limit = 3 ) {
 		}
 		$terms = wp_get_object_terms( $post->ID, $tax->name, array( 'fields' => 'ids' ) );
 		if ( $terms && ! is_wp_error( $terms ) ) {
-			$tax_query[] = array( 'taxonomy' => $tax->name, 'field' => 'term_id', 'terms' => $terms );
+			$tax_query[] = array(
+				'taxonomy' => $tax->name,
+				'field'    => 'term_id',
+				'terms'    => $terms,
+			);
 		}
 		break;
 	}
