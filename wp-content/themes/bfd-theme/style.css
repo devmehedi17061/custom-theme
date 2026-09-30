@@ -1,0 +1,12 @@
+/*
+Theme Name: BFD Theme
+Theme URI: https://example.com/
+Author: BFD
+Description: Lightweight custom theme. Presentation only; functionality lives in the bfd-core plugin.
+Version: 0.2.0
+Requires at least: 6.4
+Requires PHP: 8.0
+License: GPL-2.0-or-later
+Text Domain: bfd-theme
+*/
+/* Real styles live in assets/css/main.css (enqueued in inc/enqueue.php). */
