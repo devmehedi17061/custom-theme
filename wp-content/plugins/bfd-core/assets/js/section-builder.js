@@ -19,6 +19,45 @@
 
 	function sync() { input.value = JSON.stringify(state); }
 
+	/* ---------- Visual editors (WordPress TinyMCE) for rich text fields ---------- */
+
+	var editorSeq = 0;
+	var activeEditors = [];
+	var pendingEditors = [];
+
+	function canUseEditor() {
+		return !!(window.wp && wp.editor && typeof wp.editor.initialize === 'function');
+	}
+
+	function initEditors() {
+		pendingEditors.splice(0).forEach(function (p) {
+			wp.editor.initialize(p.id, {
+				tinymce: {
+					wpautop: true,
+					menubar: false,
+					height: 200,
+					toolbar1: 'formatselect,bold,italic,bullist,numlist,blockquote,link,unlink,undo,redo',
+					setup: function (ed) {
+						ed.on('input change keyup undo redo', function () { p.set(ed.getContent()); });
+					}
+				},
+				quicktags: true,
+				mediaButtons: false
+			});
+			activeEditors.push(p);
+		});
+	}
+
+	function destroyEditors() {
+		activeEditors.splice(0).forEach(function (p) {
+			try {
+				var ed = window.tinymce && window.tinymce.get(p.id);
+				if (ed) p.set(ed.getContent());
+				wp.editor.remove(p.id);
+			} catch (e) { /* editor already gone */ }
+		});
+	}
+
 	function el(tag, cls, text) {
 		var n = document.createElement(tag);
 		if (cls) n.className = cls;
@@ -72,8 +111,17 @@
 		function set(v) { obj[f.key] = v; sync(); }
 
 		switch (f.type) {
-			case 'textarea':
 			case 'richtext':
+				var rt = el('textarea', 'widefat');
+				rt.id = 'bfd-ed-' + (++editorSeq);
+				rt.rows = 8;
+				rt.value = obj[f.key] || '';
+				rt.addEventListener('input', function () { set(rt.value); }); // Text tab / no visual editor
+				wrap.appendChild(rt);
+				if (canUseEditor()) pendingEditors.push({ id: rt.id, set: set });
+				break;
+
+			case 'textarea':
 			case 'html':
 				var ta = el('textarea', 'widefat');
 				ta.rows = f.type === 'textarea' ? 3 : 8;
@@ -204,9 +252,13 @@
 		bar.appendChild(el('strong', '', title));
 		var status = el('span', 'bfd-preview__status');
 		bar.appendChild(status);
+		[['Desktop', '100%'], ['Tablet', '768px'], ['Mobile', '390px']].forEach(function (d) {
+			bar.appendChild(button(d[0], 'button-small', function () { frame.style.width = d[1]; setTimeout(fit, 150); }));
+		});
 		var frame = el('iframe', 'bfd-preview__frame');
 		frame.setAttribute('sandbox', 'allow-same-origin'); // no scripts, no navigation
 		frame.title = title;
+		frame.style.width = '100%';
 
 		function fit() {
 			try {
@@ -241,6 +293,30 @@
 		return c;
 	}
 
+	/* ---------- Clipboard / duplicate / drag ---------- */
+
+	var CLIP_KEY = 'bfdSectionClipboard';
+
+	function clone(o) { return JSON.parse(JSON.stringify(o)); }
+
+	function readClip() {
+		try {
+			var c = JSON.parse(localStorage.getItem(CLIP_KEY) || 'null');
+			return c && findDef(c.type) ? c : null;
+		} catch (e) { return null; }
+	}
+
+	function writeClip(section) {
+		try { localStorage.setItem(CLIP_KEY, JSON.stringify(section)); return true; } catch (e) { return false; }
+	}
+
+	function moveTo(from, to) {
+		if (from === to || from < 0 || to < 0 || from >= state.length || to >= state.length) return;
+		var item = state.splice(from, 1)[0];
+		state.splice(to, 0, item);
+		sync(); render();
+	}
+
 	/* ---------- Sections ---------- */
 
 	function summary(section) {
@@ -266,6 +342,26 @@
 
 		var card = el('div', 'bfd-section-card');
 		var head = el('div', 'bfd-section-card__head');
+
+		var handle = el('span', 'bfd-drag', '⋮⋮');
+		handle.draggable = true;
+		handle.title = 'Drag to reorder';
+		handle.addEventListener('dragstart', function (e) {
+			e.dataTransfer.setData('text/plain', String(i));
+			e.dataTransfer.effectAllowed = 'move';
+			card.classList.add('is-dragging');
+		});
+		handle.addEventListener('dragend', function () { card.classList.remove('is-dragging'); });
+		card.addEventListener('dragover', function (e) { e.preventDefault(); card.classList.add('is-over'); });
+		card.addEventListener('dragleave', function () { card.classList.remove('is-over'); });
+		card.addEventListener('drop', function (e) {
+			e.preventDefault();
+			card.classList.remove('is-over');
+			var from = parseInt(e.dataTransfer.getData('text/plain'), 10);
+			if (!isNaN(from)) moveTo(from, i);
+		});
+		head.appendChild(handle);
+
 		var title = el('span', 'bfd-section-card__title');
 		title.appendChild(el('strong', '', (i + 1) + '. ' + def.label));
 		var sum = summary(section);
@@ -275,6 +371,15 @@
 		var actions = el('span', 'bfd-section-card__actions');
 		actions.appendChild(button('↑', 'button-small', function () { move(state, i, -1); }));
 		actions.appendChild(button('↓', 'button-small', function () { move(state, i, 1); }));
+		actions.appendChild(button('Duplicate', 'button-small', function () {
+			var copy = clone(section);
+			state.splice(i + 1, 0, copy);
+			expanded.add(copy);
+			sync(); render();
+		}));
+		actions.appendChild(button('Copy', 'button-small', function () {
+			if (writeClip(section)) render(); // re-render so "Paste section" shows up
+		}));
 		actions.appendChild(button(isPreview ? 'Hide preview' : 'Preview', 'button-small', function () {
 			if (isPreview) { previewing['delete'](section); } else { previewing.add(section); cacheFor(section).html = null; }
 			render();
@@ -307,6 +412,7 @@
 	}
 
 	function render() {
+		destroyEditors();
 		root.textContent = '';
 
 		if (!state.length) root.appendChild(el('p', 'bfd-empty', 'No sections yet. Add one below.'));
@@ -327,6 +433,16 @@
 			expanded.add(section);
 			sync(); render();
 		}));
+		if (readClip()) {
+			add.appendChild(button('Paste section', '', function () {
+				var c = readClip();
+				if (!c) return;
+				var section = clone(c);
+				state.push(section);
+				expanded.add(section);
+				sync(); render();
+			}));
+		}
 		if (state.length) {
 			add.appendChild(button(pageOpen ? 'Hide page preview' : 'Preview full page', '', function () {
 				pageOpen = !pageOpen;
@@ -339,6 +455,7 @@
 		if (pageOpen && state.length) {
 			root.appendChild(previewBox('Full page preview', function () { return state; }, pageCache));
 		}
+		initEditors();
 	}
 
 	sync();

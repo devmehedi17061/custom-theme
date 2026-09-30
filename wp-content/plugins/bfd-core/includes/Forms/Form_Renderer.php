@@ -10,6 +10,7 @@ final class Form_Renderer {
 		'timing'   => 'Please wait a moment and try again.',
 		'rate'     => 'Too many submissions. Please try again later.',
 		'security' => 'Security check failed. Please reload the page and try again.',
+		'captcha'  => 'Please complete the spam check and try again.',
 		'server'   => 'Sorry, something went wrong. Please try again later.',
 	);
 
@@ -48,6 +49,11 @@ final class Form_Renderer {
 			<?php foreach ( $form->fields as $f ) : ?>
 				<?php self::field( $form, $f ); ?>
 			<?php endforeach; ?>
+
+			<?php if ( Turnstile::enabled() ) : ?>
+				<?php wp_enqueue_script( 'cf-turnstile', 'https://challenges.cloudflare.com/turnstile/v0/api.js', array(), null, array( 'in_footer' => true, 'strategy' => 'async' ) ); // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion ?>
+				<div class="cf-turnstile" data-sitekey="<?php echo esc_attr( Turnstile::site_key() ); ?>"></div>
+			<?php endif; ?>
 
 			<div class="bfd-form__actions">
 				<button type="submit" class="btn"><?php echo esc_html( $form->settings['submit_label'] ); ?></button>

@@ -25,4 +25,8 @@
 			img.style.display = 'none';
 		});
 	});
+
+	if (window.jQuery && jQuery.fn.wpColorPicker) {
+		jQuery('.bfd-color').wpColorPicker();
+	}
 })();

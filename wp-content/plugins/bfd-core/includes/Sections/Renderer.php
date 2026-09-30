@@ -24,13 +24,41 @@ final class Renderer {
 			$container = $def['container'] ?? true;
 			$settings = $section['settings'] ?? array();
 
+			$classes = array(
+				'bfd-section',
+				'bfd-section--' . $section['type'],
+				'bfd-bg--' . ( $settings['background'] ?? 'none' ),
+				'bfd-align--' . ( $settings['align'] ?? 'left' ),
+				'bfd-pad--' . ( $settings['padding'] ?? 'normal' ),
+			);
+			$hide = $settings['hide'] ?? 'none';
+			if ( in_array( $hide, array( 'mobile', 'desktop' ), true ) ) {
+				$classes[] = 'bfd-hide-' . $hide;
+			}
+			$style = '';
+			if ( ! empty( $settings['background_image'] ) ) {
+				$url = wp_get_attachment_image_url( (int) $settings['background_image'], 'full' );
+				if ( $url ) {
+					$classes[] = 'has-bg-image';
+					$style     = 'background-image:url(' . esc_url( $url ) . ')';
+					if ( ! empty( $settings['overlay'] ) ) {
+						$classes[] = 'has-overlay';
+					}
+				}
+			}
+			foreach ( preg_split( '/\s+/', (string) ( $settings['css_class'] ?? '' ) ) as $extra ) {
+				if ( '' !== sanitize_html_class( $extra ) ) {
+					$classes[] = sanitize_html_class( $extra );
+				}
+			}
+			$id = ! empty( $settings['anchor'] ) ? sanitize_title( $settings['anchor'] ) : 'section-' . ( (int) $i + 1 );
+
 			printf(
-				'<section id="section-%1$d" class="bfd-section bfd-section--%2$s bfd-bg--%3$s bfd-align--%4$s">%5$s',
-				(int) $i + 1,
-				esc_attr( $section['type'] ),
-				esc_attr( $settings['background'] ?? 'none' ),
-				esc_attr( $settings['align'] ?? 'left' ),
-				$container ? '<div class="container">' : ''
+				'<section id="%1$s" class="%2$s"%3$s>%4$s',
+				esc_attr( $id ),
+				esc_attr( implode( ' ', array_map( 'sanitize_html_class', $classes ) ) ),
+				$style ? ' style="' . esc_attr( $style ) . '"' : '', // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped above.
+				$container ? '<div class="container">' : '' // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static markup.
 			);
 			if ( isset( $def['custom_id'] ) ) {
 				Custom_Sections::render( $def, $section['fields'] ?? array() );

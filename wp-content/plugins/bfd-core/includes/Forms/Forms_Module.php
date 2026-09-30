@@ -149,6 +149,9 @@ final class Forms_Module implements Module {
 				<td><input type="text" id="bfd_f_submit" name="bfd_form_settings[submit_label]" value="<?php echo esc_attr( $conf['submit_label'] ); ?>"></td></tr>
 			<tr><th><?php esc_html_e( 'Save submissions', 'bfd-core' ); ?></th>
 				<td><label><input type="checkbox" name="bfd_form_settings[store]" value="1" <?php checked( ! empty( $conf['store'] ) ); ?>> <?php esc_html_e( 'Keep a copy in Forms > Submissions', 'bfd-core' ); ?></label></td></tr>
+			<tr><th><?php esc_html_e( 'Auto-reply', 'bfd-core' ); ?></th>
+				<td><label><input type="checkbox" name="bfd_form_settings[autoreply]" value="1" <?php checked( ! empty( $conf['autoreply'] ) ); ?>> <?php esc_html_e( 'Send a confirmation to the visitor (needs an Email field)', 'bfd-core' ); ?></label>
+				<textarea class="large-text" rows="3" name="bfd_form_settings[autoreply_message]"><?php echo esc_textarea( $conf['autoreply_message'] ); ?></textarea></td></tr>
 		</table>
 		<?php
 	}

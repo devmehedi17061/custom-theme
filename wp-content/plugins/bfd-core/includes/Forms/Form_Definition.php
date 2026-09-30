@@ -48,6 +48,8 @@ final class Form_Definition {
 			'success_message' => __( 'Thank you! Your message has been sent.', 'bfd-core' ),
 			'submit_label'    => __( 'Send', 'bfd-core' ),
 			'store'           => true,
+			'autoreply'       => false,
+			'autoreply_message' => __( 'Thanks for getting in touch. We have received your message and will reply soon.', 'bfd-core' ),
 		);
 	}
 
@@ -134,6 +136,10 @@ final class Form_Definition {
 			'success_message' => $line( $raw['success_message'] ?? '', $def['success_message'] ),
 			'submit_label'    => $line( $raw['submit_label'] ?? '', $def['submit_label'] ),
 			'store'           => ! empty( $raw['store'] ),
+			'autoreply'       => ! empty( $raw['autoreply'] ),
+			'autoreply_message' => is_scalar( $raw['autoreply_message'] ?? '' ) && '' !== trim( (string) ( $raw['autoreply_message'] ?? '' ) )
+				? sanitize_textarea_field( (string) $raw['autoreply_message'] )
+				: $def['autoreply_message'],
 		);
 	}
 }

@@ -55,9 +55,49 @@ final class Options_Page {
 					array( 'key' => 'org_name', 'type' => 'text', 'label' => __( 'Organization name (schema)', 'bfd-core' ) ),
 					array( 'key' => 'default_og_image', 'type' => 'image', 'label' => __( 'Default social share image', 'bfd-core' ) ),
 					array( 'key' => 'twitter_handle', 'type' => 'text', 'label' => __( 'Twitter/X handle (e.g. @brand)', 'bfd-core' ) ),
+					array( 'key' => 'redirects', 'type' => 'textarea', 'label' => __( 'Redirects (one per line: /old-path /new-path [301|302])', 'bfd-core' ) ),
+				),
+			),
+			'design'        => array(
+				'title'  => __( 'Design', 'bfd-core' ),
+				'fields' => array(
+					array( 'key' => 'primary_color', 'type' => 'color', 'label' => __( 'Primary color', 'bfd-core' ) ),
+					array( 'key' => 'primary_dark', 'type' => 'color', 'label' => __( 'Primary color (hover, dark)', 'bfd-core' ) ),
+					array( 'key' => 'text_color', 'type' => 'color', 'label' => __( 'Text color', 'bfd-core' ) ),
+					array( 'key' => 'bg_color', 'type' => 'color', 'label' => __( 'Page background', 'bfd-core' ) ),
+					array( 'key' => 'surface_color', 'type' => 'color', 'label' => __( 'Light section background', 'bfd-core' ) ),
+					array( 'key' => 'heading_font', 'type' => 'select', 'label' => __( 'Heading font', 'bfd-core' ), 'default' => 'system', 'options' => self::font_options() ),
+					array( 'key' => 'body_font', 'type' => 'select', 'label' => __( 'Body font', 'bfd-core' ), 'default' => 'system', 'options' => self::font_options() ),
+					array( 'key' => 'container_width', 'type' => 'number', 'label' => __( 'Content width in px (800-1800)', 'bfd-core' ) ),
+					array( 'key' => 'sticky_header', 'type' => 'checkbox', 'label' => __( 'Keep the header visible when scrolling', 'bfd-core' ) ),
+					array( 'key' => 'custom_css', 'type' => 'textarea', 'label' => __( 'Additional CSS', 'bfd-core' ) ),
+				),
+			),
+			'integrations'  => array(
+				'title'  => __( 'Integrations (optional)', 'bfd-core' ),
+				'fields' => array(
+					array( 'key' => 'ga_id', 'type' => 'text', 'label' => __( 'Google Analytics 4 ID (G-XXXXXXX)', 'bfd-core' ) ),
+					array( 'key' => 'gsc_verification', 'type' => 'text', 'label' => __( 'Google Search Console verification code', 'bfd-core' ) ),
+					array( 'key' => 'bing_verification', 'type' => 'text', 'label' => __( 'Bing Webmaster verification code', 'bfd-core' ) ),
+					array( 'key' => 'turnstile_site_key', 'type' => 'text', 'label' => __( 'Cloudflare Turnstile site key (spam protection for forms)', 'bfd-core' ) ),
+					array( 'key' => 'turnstile_secret', 'type' => 'text', 'label' => __( 'Cloudflare Turnstile secret key', 'bfd-core' ) ),
+				),
+			),
+			'advanced'      => array(
+				'title'  => __( 'Advanced', 'bfd-core' ),
+				'fields' => array(
+					array( 'key' => 'delete_on_uninstall', 'type' => 'checkbox', 'label' => __( 'Delete ALL plugin data (forms, submissions, custom sections, page sections, SEO fields, settings) when this plugin is deleted', 'bfd-core' ) ),
 				),
 			),
 		);
+	}
+
+	private static function font_options(): array {
+		$out = array();
+		foreach ( bfd_font_stacks() as $key => $stack ) {
+			$out[ $key ] = $stack[0];
+		}
+		return $out;
 	}
 
 	private static function all_fields(): array {
@@ -85,7 +125,20 @@ final class Options_Page {
 	}
 
 	public function sanitize( $raw ): array {
-		return Sanitizer::fields( self::all_fields(), is_array( $raw ) ? $raw : array() );
+		$out = Sanitizer::fields( self::all_fields(), is_array( $raw ) ? $raw : array() );
+
+		$out['ga_id']             = preg_match( '/^G-[A-Z0-9]{4,12}$/i', $out['ga_id'] ) ? strtoupper( $out['ga_id'] ) : '';
+		$out['gsc_verification']  = preg_match( '/^[A-Za-z0-9_\-]{10,100}$/', $out['gsc_verification'] ) ? $out['gsc_verification'] : '';
+		$out['bing_verification'] = preg_match( '/^[A-Za-z0-9_\-]{10,100}$/', $out['bing_verification'] ) ? $out['bing_verification'] : '';
+		$out['turnstile_site_key'] = preg_match( '/^[A-Za-z0-9_\-]{5,80}$/', $out['turnstile_site_key'] ) ? $out['turnstile_site_key'] : '';
+		$out['turnstile_secret']   = preg_match( '/^[A-Za-z0-9_\-]{5,120}$/', $out['turnstile_secret'] ) ? $out['turnstile_secret'] : '';
+
+		$width = (int) $out['container_width'];
+		$out['container_width'] = ( $width >= 800 && $width <= 1800 ) ? $width : '';
+
+		// Admin-authored CSS: no HTML tags, so it can never close its <style> element.
+		$out['custom_css'] = wp_strip_all_tags( (string) ( is_array( $raw ) ? ( $raw['custom_css'] ?? '' ) : '' ) );
+		return $out;
 	}
 
 	public function enqueue( string $hook ): void {
@@ -93,7 +146,8 @@ final class Options_Page {
 			return;
 		}
 		wp_enqueue_media();
-		wp_enqueue_script( 'bfd-options', BFD_CORE_URL . 'assets/js/options.js', array(), BFD_CORE_VERSION, true );
+		wp_enqueue_style( 'wp-color-picker' );
+		wp_enqueue_script( 'bfd-options', BFD_CORE_URL . 'assets/js/options.js', array( 'wp-color-picker' ), BFD_CORE_VERSION, true );
 	}
 
 	public function render(): void {
@@ -128,7 +182,8 @@ final class Options_Page {
 		$id   = 'bfd-opt-' . $f['key'];
 
 		if ( 'textarea' === $f['type'] ) {
-			printf( '<textarea id="%s" name="%s" rows="3" class="large-text">%s</textarea>', esc_attr( $id ), esc_attr( $name ), esc_textarea( (string) $value ) );
+			$rows = in_array( $f['key'], array( 'custom_css', 'redirects' ), true ) ? 8 : 3;
+			printf( '<textarea id="%s" name="%s" rows="%d" class="large-text%s">%s</textarea>', esc_attr( $id ), esc_attr( $name ), $rows, 8 === $rows ? ' code' : '', esc_textarea( (string) $value ) );
 			return;
 		}
 		if ( 'image' === $f['type'] ) {
@@ -143,7 +198,30 @@ final class Options_Page {
 			<?php
 			return;
 		}
+		if ( 'color' === $f['type'] ) {
+			printf( '<input type="text" class="bfd-color" id="%s" name="%s" value="%s" data-default-color="">', esc_attr( $id ), esc_attr( $name ), esc_attr( (string) $value ) );
+			return;
+		}
+		if ( 'select' === $f['type'] ) {
+			printf( '<select id="%s" name="%s">', esc_attr( $id ), esc_attr( $name ) );
+			foreach ( $f['options'] as $opt => $label ) {
+				printf( '<option value="%s" %s>%s</option>', esc_attr( (string) $opt ), selected( (string) ( $value ?: ( $f['default'] ?? '' ) ), (string) $opt, false ), esc_html( $label ) );
+			}
+			echo '</select>';
+			return;
+		}
+		if ( 'checkbox' === $f['type'] ) {
+			printf( '<label><input type="checkbox" id="%s" name="%s" value="1" %s> %s</label>', esc_attr( $id ), esc_attr( $name ), checked( ! empty( $value ), true, false ), esc_html( $f['label'] ) );
+			return;
+		}
+		if ( 'number' === $f['type'] ) {
+			printf( '<input type="number" class="small-text" id="%s" name="%s" value="%s" min="800" max="1800" step="10">', esc_attr( $id ), esc_attr( $name ), esc_attr( (string) $value ) );
+			return;
+		}
 		$type = in_array( $f['type'], array( 'url', 'email', 'tel' ), true ) ? $f['type'] : 'text';
+		if ( 'turnstile_secret' === $f['key'] ) {
+			$type = 'password';
+		}
 		printf( '<input type="%s" id="%s" name="%s" value="%s" class="regular-text">', esc_attr( $type ), esc_attr( $id ), esc_attr( $name ), esc_attr( (string) $value ) );
 	}
 }

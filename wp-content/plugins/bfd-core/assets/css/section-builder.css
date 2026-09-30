@@ -40,3 +40,11 @@
 #bfd-section-builder > .bfd-preview { margin-top: 12px; border: 1px solid #c3c4c7; }
 .bfd-add { flex-wrap: wrap; }
 .bfd-fd-req { display: inline-flex; align-items: center; margin-right: 6px; font-size: 12px; white-space: nowrap; }
+
+/* Drag handle + device toggles */
+.bfd-drag { cursor: grab; color: #8c8f94; padding: 0 8px 0 0; user-select: none; letter-spacing: -2px; }
+.bfd-section-card.is-dragging { opacity: .5; }
+.bfd-section-card.is-over { outline: 2px dashed #2271b1; outline-offset: -2px; }
+.bfd-section-card__head { gap: 8px; }
+.bfd-section-card__title { flex: 1; }
+.bfd-preview__frame { margin: 0 auto; max-width: 100%; transition: width .2s; }

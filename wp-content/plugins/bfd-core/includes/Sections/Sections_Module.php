@@ -64,6 +64,7 @@ final class Sections_Module implements Module {
 		}
 
 		wp_enqueue_media();
+		wp_enqueue_editor(); // TinyMCE for rich text fields.
 		wp_enqueue_style( 'bfd-section-builder', BFD_CORE_URL . 'assets/css/section-builder.css', array(), BFD_CORE_VERSION );
 		wp_enqueue_script( 'bfd-section-builder', BFD_CORE_URL . 'assets/js/section-builder.js', array(), BFD_CORE_VERSION, true );
 		wp_add_inline_script(

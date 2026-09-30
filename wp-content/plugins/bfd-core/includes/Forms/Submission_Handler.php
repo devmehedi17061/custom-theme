@@ -39,6 +39,10 @@ final class Submission_Handler {
 			return self::result( false, 'rate' );
 		}
 
+		if ( Turnstile::enabled() && ! Turnstile::verify( $post['cf-turnstile-response'] ?? '' ) ) {
+			return self::result( false, 'captcha' );
+		}
+
 		$values = array();
 		$errors = array();
 		foreach ( $form->fields as $f ) {
@@ -79,6 +83,9 @@ final class Submission_Handler {
 
 		if ( ! $stored && ! $mailed ) {
 			return self::result( false, 'server' );
+		}
+		if ( ! empty( $form->settings['autoreply'] ) ) {
+			self::send_autoreply( $form, $rows );
 		}
 		return self::result( true, 'ok', $form );
 	}
@@ -266,5 +273,21 @@ final class Submission_Handler {
 		$subject = trim( preg_replace( '/[\r\n]+/', ' ', $form->settings['subject'] ) );
 
 		return (bool) wp_mail( $to, $subject, $body, $headers );
+	}
+
+	/** Confirmation to the sender. Only their own (validated) address is used; the submission is not echoed back. */
+	private static function send_autoreply( Form_Definition $form, array $rows ): void {
+		foreach ( $rows as $r ) {
+			if ( 'email' === $r['type'] && is_email( $r['value'] ) ) {
+				wp_mail(
+					$r['value'],
+					/* translators: %s: site name */
+					sprintf( __( '%s: we received your message', 'bfd-core' ), wp_specialchars_decode( get_bloginfo( 'name' ), ENT_QUOTES ) ),
+					$form->settings['autoreply_message'],
+					array( 'Content-Type: text/plain; charset=UTF-8' )
+				);
+				return;
+			}
+		}
 	}
 }

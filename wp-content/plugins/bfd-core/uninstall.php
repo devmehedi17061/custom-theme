@@ -1,4 +1,7 @@
 <?php
-// Runs on plugin deletion. Data (posts, meta, submissions) is intentionally kept;
-// add explicit cleanup here only for plugin-owned options/tables when they exist.
+// Runs when the plugin is deleted in wp-admin. Data is kept unless "Delete ALL plugin data"
+// is ticked in Settings > BFD Options > Advanced (see includes/Uninstaller.php).
 defined( 'WP_UNINSTALL_PLUGIN' ) || exit;
+
+require_once __DIR__ . '/includes/Uninstaller.php';
+\BFD\Core\Uninstaller::run();

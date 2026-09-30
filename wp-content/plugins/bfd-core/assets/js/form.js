@@ -50,6 +50,7 @@
 			}).catch(function () {
 				setMsg(form, 'Network error. Please try again.', 'error');
 			}).then(function () {
+				if (window.turnstile) { try { window.turnstile.reset(); } catch (e) { /* ignore */ } }
 				if (btn) btn.disabled = false;
 			});
 		});

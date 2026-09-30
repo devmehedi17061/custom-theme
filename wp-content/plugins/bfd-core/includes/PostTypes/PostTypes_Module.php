@@ -18,6 +18,8 @@ final class PostTypes_Module implements Module {
 	public function register(): void {
 		add_action( 'init', array( $this, 'register_types' ) );
 		add_filter( 'bfd_sections_post_types', array( $this, 'enable_section_builder' ) );
+		add_action( 'add_meta_boxes_testimonial', array( $this, 'add_testimonial_box' ) );
+		add_action( 'save_post_testimonial', array( $this, 'save_testimonial' ) );
 	}
 
 	private function post_types(): array {
@@ -128,5 +130,37 @@ final class PostTypes_Module implements Module {
 			}
 		}
 		return array_values( array_unique( $types ) );
+	}
+
+	/* ---------- Testimonial: role / company ---------- */
+
+	public function add_testimonial_box(): void {
+		add_meta_box(
+			'bfd-testimonial',
+			__( 'Testimonial details', 'bfd-core' ),
+			static function ( \WP_Post $post ): void {
+				wp_nonce_field( 'bfd_testimonial_save', 'bfd_testimonial_nonce' );
+				printf(
+					'<p><label for="bfd_role"><strong>%s</strong></label><input type="text" class="widefat" id="bfd_role" name="bfd_role" value="%s"></p><p class="description">%s</p>',
+					esc_html__( 'Role / company', 'bfd-core' ),
+					esc_attr( (string) get_post_meta( $post->ID, '_bfd_role', true ) ),
+					esc_html__( 'Title = person name, editor = the quote, featured image = photo.', 'bfd-core' )
+				);
+			},
+			'testimonial',
+			'side'
+		);
+	}
+
+	public function save_testimonial( int $post_id ): void {
+		if ( ! isset( $_POST['bfd_testimonial_nonce'] ) ||
+			! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['bfd_testimonial_nonce'] ) ), 'bfd_testimonial_save' ) ) {
+			return;
+		}
+		if ( ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) || wp_is_post_revision( $post_id ) || ! current_user_can( 'edit_post', $post_id ) ) {
+			return;
+		}
+		$role = isset( $_POST['bfd_role'] ) ? sanitize_text_field( wp_unslash( $_POST['bfd_role'] ) ) : '';
+		'' === $role ? delete_post_meta( $post_id, '_bfd_role' ) : update_post_meta( $post_id, '_bfd_role', $role );
 	}
 }

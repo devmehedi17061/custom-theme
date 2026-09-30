@@ -1,0 +1,898 @@
+# Translation template for bfd-core.
+msgid ""
+msgstr ""
+"Project-Id-Version: bfd-core\n"
+"POT-Creation-Date: 2026-09-30 04:04+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Domain: bfd-core\n"
+
+#: includes/Sections/Builtin_Sections.php:77
+msgid "\"View all\" button text"
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:78
+msgid "\"View all\" URL"
+msgstr ""
+
+#: includes/Forms/Submission_Handler.php:285
+msgid "%s: we received your message"
+msgstr ""
+
+#: includes/Security/Login_Limiter.php:67
+msgid "<strong>Error:</strong> The username or password is incorrect."
+msgstr ""
+
+#: includes/PostTypes/PostTypes_Module.php:89
+msgid "Add New %s"
+msgstr ""
+
+#: includes/Sections/Custom_Sections.php:55
+msgid "Add New Custom Section"
+msgstr ""
+
+#: includes/Forms/Forms_Module.php:45
+msgid "Add New Form"
+msgstr ""
+
+#: includes/Admin/Options_Page.php:73
+msgid "Additional CSS"
+msgstr ""
+
+#: includes/Admin/Options_Page.php:39
+msgid "Address"
+msgstr ""
+
+#: includes/Admin/Options_Page.php:87
+msgid "Advanced"
+msgstr ""
+
+#: includes/Forms/Submissions.php:100
+msgid "All forms"
+msgstr ""
+
+#: includes/Sections/Section_Registry.php:62
+msgid "Anchor ID (for menu links like #pricing)"
+msgstr ""
+
+#: includes/Sections/Section_Registry.php:128
+msgid "Answer"
+msgstr ""
+
+#: includes/Forms/Forms_Module.php:152
+msgid "Auto-reply"
+msgstr ""
+
+#: includes/Sections/Custom_Sections.php:280
+msgid "Automatically scoped to this section using CSS nesting. Write normal selectors like .my-section h2 { … }; use & for the section wrapper itself."
+msgstr ""
+
+#: includes/Sections/Section_Registry.php:21
+msgid "Background"
+msgstr ""
+
+#: includes/Sections/Section_Registry.php:29
+msgid "Background image"
+msgstr ""
+
+#: includes/Admin/Options_Page.php:112 includes/Admin/Options_Page.php:112 includes/Admin/Options_Page.php:160
+msgid "BFD Options"
+msgstr ""
+
+#: includes/Admin/Options_Page.php:81
+msgid "Bing Webmaster verification code"
+msgstr ""
+
+#: includes/Seo/Breadcrumbs.php:50
+msgid "Blog"
+msgstr ""
+
+#: includes/Admin/Options_Page.php:70
+msgid "Body font"
+msgstr ""
+
+#: includes/Seo/Breadcrumbs.php:67
+msgid "Breadcrumb"
+msgstr ""
+
+#: includes/Forms/Forms_Module.php:148
+msgid "Button label"
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:58 includes/Sections/Builtin_Sections.php:102 includes/Sections/Section_Registry.php:80
+msgid "Button text"
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:59 includes/Sections/Builtin_Sections.php:103 includes/Sections/Section_Registry.php:81
+msgid "Button URL"
+msgstr ""
+
+#: includes/Sections/Section_Registry.php:110
+msgid "Call to Action"
+msgstr ""
+
+#: includes/Seo/Seo_Module.php:311
+msgid "Canonical URL"
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:166 includes/Sections/Builtin_Sections.php:176
+msgid "Caption"
+msgstr ""
+
+#: includes/Sections/Section_Registry.php:99
+msgid "Cards"
+msgstr ""
+
+#: includes/Sections/Section_Registry.php:37
+msgid "Center"
+msgstr ""
+
+#: includes/Forms/Forms_Module.php:127
+msgid "Checkbox"
+msgstr ""
+
+#: includes/Forms/Submission_Handler.php:151
+msgid "Choose a valid option."
+msgstr ""
+
+#: includes/Admin/Options_Page.php:83
+msgid "Cloudflare Turnstile secret key"
+msgstr ""
+
+#: includes/Admin/Options_Page.php:82
+msgid "Cloudflare Turnstile site key (spam protection for forms)"
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:23 includes/Sections/Section_Registry.php:92
+msgid "Columns"
+msgstr ""
+
+#: includes/Admin/Options_Page.php:35
+msgid "Contact"
+msgstr ""
+
+#: includes/Sections/Section_Registry.php:137
+msgid "Content (HTML allowed)"
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:70
+msgid "Content type"
+msgstr ""
+
+#: includes/Admin/Options_Page.php:71
+msgid "Content width in px (800-1800)"
+msgstr ""
+
+#: includes/Sections/Custom_Sections.php:226
+msgid "CSS"
+msgstr ""
+
+#: includes/Sections/Section_Registry.php:141
+msgid "Custom HTML"
+msgstr ""
+
+#: includes/Sections/Custom_Sections.php:54
+msgid "Custom Section"
+msgstr ""
+
+#: includes/Sections/Custom_Sections.php:53 includes/Sections/Custom_Sections.php:57
+msgid "Custom Sections"
+msgstr ""
+
+#: includes/Sections/Section_Registry.php:25
+msgid "Dark"
+msgstr ""
+
+#: includes/Sections/Section_Registry.php:30
+msgid "Dark overlay on background image"
+msgstr ""
+
+#: includes/Forms/Submissions.php:110
+msgid "Data"
+msgstr ""
+
+#: includes/Forms/Submissions.php:110
+msgid "Date"
+msgstr ""
+
+#: includes/Admin/Options_Page.php:56
+msgid "Default social share image"
+msgstr ""
+
+#: includes/Seo/Seo_Module.php:312
+msgid "Default: the permalink"
+msgstr ""
+
+#: includes/Sections/Custom_Sections.php:233
+msgid "Define the fields editors fill in when they add this section to a page."
+msgstr ""
+
+#: includes/Forms/Submissions.php:125
+msgid "Delete"
+msgstr ""
+
+#: includes/Admin/Options_Page.php:89
+msgid "Delete ALL plugin data (forms, submissions, custom sections, page sections, SEO fields, settings) when this plugin is deleted"
+msgstr ""
+
+#: includes/Forms/Submissions.php:125
+msgid "Delete this submission?"
+msgstr ""
+
+#: includes/Admin/Options_Page.php:62
+msgid "Design"
+msgstr ""
+
+#: includes/PostTypes/PostTypes_Module.php:90
+msgid "Edit %s"
+msgstr ""
+
+#: includes/Sections/Custom_Sections.php:56
+msgid "Edit Custom Section"
+msgstr ""
+
+#: includes/Forms/Forms_Module.php:46
+msgid "Edit Form"
+msgstr ""
+
+#: includes/Admin/Options_Page.php:38 includes/Forms/Forms_Module.php:123
+msgid "Email"
+msgstr ""
+
+#: includes/Forms/Forms_Module.php:144
+msgid "Email subject"
+msgstr ""
+
+#: includes/Forms/Submission_Handler.php:148
+msgid "Enter a number."
+msgstr ""
+
+#: includes/Forms/Submission_Handler.php:142
+msgid "Enter a valid email address."
+msgstr ""
+
+#: includes/Forms/Submission_Handler.php:146
+msgid "Enter a valid phone number."
+msgstr ""
+
+#: includes/Forms/Submissions.php:106
+msgid "Export CSV"
+msgstr ""
+
+#: includes/Sections/Section_Registry.php:63
+msgid "Extra CSS classes"
+msgstr ""
+
+#: includes/Sections/Section_Registry.php:119
+msgid "FAQ"
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:101
+msgid "Features (one per line)"
+msgstr ""
+
+#: includes/Sections/Section_Registry.php:85
+msgid "Features / Cards"
+msgstr ""
+
+#: includes/Forms/Forms_Module.php:101 includes/Sections/Custom_Sections.php:224
+msgid "Fields"
+msgstr ""
+
+#: includes/Forms/Forms_Module.php:129
+msgid "File upload"
+msgstr ""
+
+#: includes/Forms/Forms_Module.php:134
+msgid "File uploads accept PDF, JPG, PNG, WebP, DOC and DOCX up to 5 MB."
+msgstr ""
+
+#: includes/Forms/Submissions.php:105
+msgid "Filter"
+msgstr ""
+
+#: includes/Admin/Options_Page.php:31
+msgid "Footer text"
+msgstr ""
+
+#: includes/Forms/Forms_Module.php:44 includes/Forms/Submissions.php:110 includes/Sections/Section_Registry.php:151
+msgid "Form"
+msgstr ""
+
+#: includes/Sections/Section_Registry.php:158
+msgid "Form (create under Forms)"
+msgstr ""
+
+#: includes/Forms/Form_Renderer.php:26
+msgid "Form not found or not published."
+msgstr ""
+
+#: includes/Forms/Submissions.php:90
+msgid "Form Submissions"
+msgstr ""
+
+#: includes/Forms/Forms_Module.php:43
+msgid "Forms"
+msgstr ""
+
+#: includes/Admin/Options_Page.php:79
+msgid "Google Analytics 4 ID (G-XXXXXXX)"
+msgstr ""
+
+#: includes/Admin/Options_Page.php:80
+msgid "Google Search Console verification code"
+msgstr ""
+
+#: includes/Admin/Options_Page.php:27
+msgid "Header & Footer"
+msgstr ""
+
+#: includes/Admin/Options_Page.php:29
+msgid "Header button text"
+msgstr ""
+
+#: includes/Admin/Options_Page.php:30
+msgid "Header button URL"
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:49 includes/Sections/Builtin_Sections.php:65 includes/Sections/Builtin_Sections.php:84
+msgid "Heading"
+msgstr ""
+
+#: includes/Admin/Options_Page.php:69
+msgid "Heading font"
+msgstr ""
+
+#: includes/Sections/Section_Registry.php:75
+msgid "Hero"
+msgstr ""
+
+#: includes/Seo/Seo_Module.php:323
+msgid "Hide from search engines (noindex) and the sitemap"
+msgstr ""
+
+#: includes/Sections/Section_Registry.php:59
+msgid "Hide on desktop"
+msgstr ""
+
+#: includes/Sections/Section_Registry.php:58
+msgid "Hide on mobile"
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:104
+msgid "Highlight this plan"
+msgstr ""
+
+#: includes/Seo/Breadcrumbs.php:18
+msgid "Home"
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:74 includes/Sections/Builtin_Sections.php:85
+msgid "How many (1-24)"
+msgstr ""
+
+#: includes/Sections/Section_Registry.php:143
+msgid "HTML (unfiltered only for users with the unfiltered_html capability)"
+msgstr ""
+
+#: includes/Sections/Custom_Sections.php:225
+msgid "HTML Template"
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:51 includes/Sections/Builtin_Sections.php:165 includes/Sections/Section_Registry.php:79
+msgid "Image"
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:47
+msgid "Image + Text"
+msgstr ""
+
+#: includes/Sections/Custom_Sections.php:250
+msgid "image as an &lt;img&gt; tag"
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:157
+msgid "Image gallery"
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:55
+msgid "Image position"
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:163
+msgid "Images"
+msgstr ""
+
+#: includes/Admin/Options_Page.php:77
+msgid "Integrations (optional)"
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:66 includes/Sections/Builtin_Sections.php:93 includes/Sections/Builtin_Sections.php:113
+msgid "Intro"
+msgstr ""
+
+#: includes/Sections/Sections_Module.php:128
+msgid "Invalid sections data."
+msgstr ""
+
+#: includes/Sections/Sections_Module.php:53
+msgid "JavaScript is required for the section builder."
+msgstr ""
+
+#: includes/Forms/Forms_Module.php:151
+msgid "Keep a copy in Forms > Submissions"
+msgstr ""
+
+#: includes/Admin/Options_Page.php:72
+msgid "Keep the header visible when scrolling"
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:136
+msgid "Label"
+msgstr ""
+
+#: includes/Sections/Section_Registry.php:49
+msgid "Large"
+msgstr ""
+
+#: includes/Seo/Seo_Module.php:308
+msgid "Leave empty to generate from the excerpt or first section. Aim for 120-160 characters."
+msgstr ""
+
+#: includes/Seo/Seo_Module.php:303
+msgid "Leave empty to use the page title. Aim for under 60 characters."
+msgstr ""
+
+#: includes/Forms/Form_Renderer.php:45
+msgid "Leave this field empty"
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:56 includes/Sections/Section_Registry.php:36
+msgid "Left"
+msgstr ""
+
+#: includes/Sections/Section_Registry.php:24
+msgid "Light"
+msgstr ""
+
+#: includes/Admin/Options_Page.php:68
+msgid "Light section background"
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:151 includes/Sections/Section_Registry.php:104
+msgid "Link URL"
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:149
+msgid "Logo"
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:142
+msgid "Logo strip"
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:147
+msgid "Logos"
+msgstr ""
+
+#: includes/Sections/Custom_Sections.php:251
+msgid "loop over a repeater, or show only if the field is not empty"
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:117
+msgid "Members"
+msgstr ""
+
+#: includes/Seo/Seo_Module.php:306
+msgid "Meta description"
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:120
+msgid "Name"
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:150
+msgid "Name (used as alt text)"
+msgstr ""
+
+#: includes/Forms/Form_Definition.php:47
+msgid "New form submission"
+msgstr ""
+
+#: includes/Forms/Submission_Handler.php:245
+msgid "No"
+msgstr ""
+
+#: includes/Forms/Submissions.php:113
+msgid "No submissions yet."
+msgstr ""
+
+#: includes/Sections/Section_Registry.php:23 includes/Sections/Section_Registry.php:47
+msgid "None"
+msgstr ""
+
+#: includes/Sections/Section_Registry.php:46
+msgid "Normal"
+msgstr ""
+
+#: includes/Forms/Submissions.php:150 includes/Forms/Submissions.php:182 includes/Sections/Sections_Module.php:122
+msgid "Not allowed."
+msgstr ""
+
+#: includes/Seo/Breadcrumbs.php:52
+msgid "Not found"
+msgstr ""
+
+#: includes/Sections/Sections_Module.php:147
+msgid "Nothing to preview yet."
+msgstr ""
+
+#: includes/Forms/Forms_Module.php:128
+msgid "Number"
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:135
+msgid "Number (e.g. 250+)"
+msgstr ""
+
+#: includes/Sections/Custom_Sections.php:291
+msgid "Only published custom sections appear in the page builder."
+msgstr ""
+
+#: includes/Admin/Options_Page.php:55
+msgid "Organization name (schema)"
+msgstr ""
+
+#: includes/Admin/Options_Page.php:67
+msgid "Page background"
+msgstr ""
+
+#: includes/Sections/Sections_Module.php:39
+msgid "Page Sections"
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:100
+msgid "Period (e.g. /month)"
+msgstr ""
+
+#: includes/Admin/Options_Page.php:37 includes/Forms/Forms_Module.php:124
+msgid "Phone"
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:119
+msgid "Photo"
+msgstr ""
+
+#: includes/Sections/Custom_Sections.php:247
+msgid "Placeholder syntax"
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:98
+msgid "Plan name"
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:96
+msgid "Plans"
+msgstr ""
+
+#: includes/Forms/Submission_Handler.php:185
+msgid "Please choose a file."
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:63
+msgid "Posts / Services / Projects grid"
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:99
+msgid "Price (e.g. $29)"
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:90
+msgid "Pricing"
+msgstr ""
+
+#: includes/Admin/Options_Page.php:64 includes/Sections/Section_Registry.php:26
+msgid "Primary color"
+msgstr ""
+
+#: includes/Admin/Options_Page.php:65
+msgid "Primary color (hover, dark)"
+msgstr ""
+
+#: includes/PostTypes/PostTypes_Module.php:39
+msgid "Project"
+msgstr ""
+
+#: includes/PostTypes/PostTypes_Module.php:73
+msgid "Project Categories"
+msgstr ""
+
+#: includes/PostTypes/PostTypes_Module.php:72
+msgid "Project Category"
+msgstr ""
+
+#: includes/PostTypes/PostTypes_Module.php:40
+msgid "Projects"
+msgstr ""
+
+#: includes/Forms/Forms_Module.php:161
+msgid "Publish the form to use it."
+msgstr ""
+
+#: includes/Sections/Section_Registry.php:127
+msgid "Question"
+msgstr ""
+
+#: includes/Sections/Section_Registry.php:125
+msgid "Questions"
+msgstr ""
+
+#: includes/Admin/Options_Page.php:58
+msgid "Redirects (one per line: /old-path /new-path [301|302])"
+msgstr ""
+
+#: includes/Admin/Options_Page.php:196 includes/Seo/Seo_Module.php:319
+msgid "Remove"
+msgstr ""
+
+#: includes/Sections/Section_Registry.php:134
+msgid "Rich Text"
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:56
+msgid "Right"
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:121
+msgid "Role"
+msgstr ""
+
+#: includes/PostTypes/PostTypes_Module.php:145
+msgid "Role / company"
+msgstr ""
+
+#: includes/Sections/Custom_Sections.php:253
+msgid "row number inside a loop"
+msgstr ""
+
+#: includes/Forms/Forms_Module.php:150
+msgid "Save submissions"
+msgstr ""
+
+#: includes/Seo/Breadcrumbs.php:48
+msgid "Search: %s"
+msgstr ""
+
+#: includes/Forms/Forms_Module.php:126
+msgid "Select"
+msgstr ""
+
+#: includes/Admin/Options_Page.php:195 includes/Seo/Seo_Module.php:318
+msgid "Select image"
+msgstr ""
+
+#: includes/Forms/Form_Renderer.php:109
+msgid "Select…"
+msgstr ""
+
+#: includes/Forms/Form_Definition.php:49
+msgid "Send"
+msgstr ""
+
+#: includes/Forms/Forms_Module.php:153
+msgid "Send a confirmation to the visitor (needs an Email field)"
+msgstr ""
+
+#: includes/Forms/Forms_Module.php:142
+msgid "Send to (comma separated)"
+msgstr ""
+
+#: includes/Seo/Seo_Module.php:283
+msgid "SEO"
+msgstr ""
+
+#: includes/Admin/Options_Page.php:53
+msgid "SEO defaults"
+msgstr ""
+
+#: includes/Seo/Seo_Module.php:301
+msgid "SEO title"
+msgstr ""
+
+#: includes/PostTypes/PostTypes_Module.php:30
+msgid "Service"
+msgstr ""
+
+#: includes/PostTypes/PostTypes_Module.php:67
+msgid "Service Categories"
+msgstr ""
+
+#: includes/PostTypes/PostTypes_Module.php:66
+msgid "Service Category"
+msgstr ""
+
+#: includes/PostTypes/PostTypes_Module.php:31
+msgid "Services"
+msgstr ""
+
+#: includes/Forms/Forms_Module.php:102 includes/Sections/Custom_Sections.php:227
+msgid "Settings"
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:122
+msgid "Short bio"
+msgstr ""
+
+#: includes/Forms/Forms_Module.php:164
+msgid "Shortcode, or pick this form in a page's \"Form\" section:"
+msgstr ""
+
+#: includes/Sections/Section_Registry.php:57
+msgid "Show everywhere"
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:76
+msgid "Show excerpt"
+msgstr ""
+
+#: includes/Sections/Custom_Sections.php:252
+msgid "show only if the field is empty"
+msgstr ""
+
+#: includes/Sections/Section_Registry.php:48
+msgid "Small"
+msgstr ""
+
+#: includes/Admin/Options_Page.php:43
+msgid "Social links"
+msgstr ""
+
+#: includes/Seo/Seo_Module.php:315
+msgid "Social share image"
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:133
+msgid "Stats"
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:128
+msgid "Stats / Counters"
+msgstr ""
+
+#: includes/Sections/Section_Registry.php:78
+msgid "Subheading"
+msgstr ""
+
+#: includes/Forms/Submissions.php:93
+msgid "Submission deleted."
+msgstr ""
+
+#: includes/Forms/Submissions.php:66 includes/Forms/Submissions.php:67
+msgid "Submissions"
+msgstr ""
+
+#: includes/Forms/Forms_Module.php:146
+msgid "Success message"
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:110
+msgid "Team"
+msgstr ""
+
+#: includes/PostTypes/PostTypes_Module.php:49
+msgid "Testimonial"
+msgstr ""
+
+#: includes/PostTypes/PostTypes_Module.php:140
+msgid "Testimonial details"
+msgstr ""
+
+#: includes/PostTypes/PostTypes_Module.php:50
+msgid "Testimonials"
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:82
+msgid "Testimonials (from Testimonials post type)"
+msgstr ""
+
+#: includes/Forms/Forms_Module.php:122 includes/Sections/Section_Registry.php:103 includes/Sections/Section_Registry.php:113
+msgid "Text"
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:50
+msgid "Text (HTML allowed)"
+msgstr ""
+
+#: includes/Sections/Section_Registry.php:34
+msgid "Text alignment"
+msgstr ""
+
+#: includes/Admin/Options_Page.php:66
+msgid "Text color"
+msgstr ""
+
+#: includes/Forms/Forms_Module.php:125
+msgid "Textarea"
+msgstr ""
+
+#: includes/Forms/Form_Definition.php:48
+msgid "Thank you! Your message has been sent."
+msgstr ""
+
+#: includes/Forms/Form_Definition.php:52
+msgid "Thanks for getting in touch. We have received your message and will reply soon."
+msgstr ""
+
+#: includes/Forms/Submission_Handler.php:188
+msgid "The file could not be uploaded."
+msgstr ""
+
+#: includes/Forms/Submission_Handler.php:193
+msgid "The file is too large (max %s)."
+msgstr ""
+
+#: includes/Forms/Submission_Handler.php:128
+msgid "This field is required."
+msgstr ""
+
+#: includes/Forms/Submission_Handler.php:217
+msgid "This file type is not allowed."
+msgstr ""
+
+#: includes/Sections/Section_Registry.php:102
+msgid "Title"
+msgstr ""
+
+#: includes/PostTypes/PostTypes_Module.php:147
+msgid "Title = person name, editor = the quote, featured image = photo."
+msgstr ""
+
+#: includes/Security/Login_Limiter.php:41
+msgid "Too many failed login attempts. Try again in %d minutes."
+msgstr ""
+
+#: includes/Admin/Options_Page.php:57
+msgid "Twitter/X handle (e.g. @brand)"
+msgstr ""
+
+#: includes/Forms/Forms_Module.php:103
+msgid "Use this form"
+msgstr ""
+
+#: includes/Sections/Custom_Sections.php:249
+msgid "value, escaped (image gives its URL, url gives a safe link)"
+msgstr ""
+
+#: includes/Sections/Section_Registry.php:43
+msgid "Vertical spacing"
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:172
+msgid "Video (YouTube, Vimeo or .mp4)"
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:175
+msgid "Video URL"
+msgstr ""
+
+#: includes/Sections/Section_Registry.php:55
+msgid "Visibility"
+msgstr ""
+
+#: includes/Sections/Custom_Sections.php:289
+msgid "Wrap in the site container (uncheck for full-width HTML)"
+msgstr ""
+
+#: includes/Forms/Submission_Handler.php:245
+msgid "Yes"
+msgstr ""
+
+#: includes/Sections/Custom_Sections.php:259
+msgid "Your fields:"
+msgstr ""
+
+#: includes/Sections/Section_Registry.php:160
+msgid "— Select a form —"
+msgstr ""
+

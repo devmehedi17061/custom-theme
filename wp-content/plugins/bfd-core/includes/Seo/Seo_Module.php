@@ -20,6 +20,8 @@ final class Seo_Module implements Module {
 	}
 
 	public function register(): void {
+		( new Redirects() )->register();
+
 		add_action( 'add_meta_boxes', array( $this, 'add_meta_box' ) );
 		add_action( 'save_post', array( $this, 'save' ), 10, 2 );
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_assets' ) );
@@ -205,11 +207,38 @@ final class Seo_Module implements Module {
 			printf( "<link rel=\"canonical\" href=\"%s\">\n", esc_url( $url ) );
 		}
 
+		$this->output_verification_and_analytics();
+
 		$graph = Schema::graph( $post, $title, $desc, $url, $img_u ? $img_u[0] : '' );
 		if ( $graph ) {
 			printf(
 				"<script type=\"application/ld+json\">%s</script>\n",
 				wp_json_encode( array( '@context' => 'https://schema.org', '@graph' => $graph ), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP )
+			);
+		}
+	}
+
+	/** Search-console verification tags (front page only) and optional Google Analytics 4. */
+	private function output_verification_and_analytics(): void {
+		if ( is_front_page() ) {
+			$gsc  = (string) bfd_option( 'gsc_verification' );
+			$bing = (string) bfd_option( 'bing_verification' );
+			if ( preg_match( '/^[A-Za-z0-9_\-]{10,100}$/', $gsc ) ) {
+				printf( "<meta name=\"google-site-verification\" content=\"%s\">\n", esc_attr( $gsc ) );
+			}
+			if ( preg_match( '/^[A-Za-z0-9_\-]{10,100}$/', $bing ) ) {
+				printf( "<meta name=\"msvalidate.01\" content=\"%s\">\n", esc_attr( $bing ) );
+			}
+		}
+
+		$ga = (string) bfd_option( 'ga_id' );
+		// Skip for editors so their own visits don't skew the numbers.
+		$track = ! ( is_user_logged_in() && current_user_can( 'edit_posts' ) );
+		if ( $track && (bool) apply_filters( 'bfd_analytics_enabled', true ) && preg_match( '/^G-[A-Z0-9]{4,12}$/', $ga ) ) {
+			printf( "<script async src=\"https://www.googletagmanager.com/gtag/js?id=%s\"></script>\n", esc_attr( $ga ) );
+			printf(
+				"<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','%s');</script>\n",
+				esc_js( $ga )
 			);
 		}
 	}

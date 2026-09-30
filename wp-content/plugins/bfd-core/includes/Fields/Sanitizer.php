@@ -34,6 +34,10 @@ final class Sanitizer {
 				return current_user_can( 'unfiltered_html' ) ? $scalar : wp_kses_post( $scalar );
 			case 'url':
 				return esc_url_raw( $scalar );
+			case 'slug':
+				return sanitize_title( $scalar );
+			case 'classes':
+				return implode( ' ', array_filter( array_map( 'sanitize_html_class', preg_split( '/\s+/', trim( $scalar ) ) ) ) );
 			case 'email':
 				return sanitize_email( $scalar );
 			case 'tel':

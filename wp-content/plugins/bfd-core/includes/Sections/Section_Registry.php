@@ -26,6 +26,8 @@ final class Section_Registry {
 					'primary' => __( 'Primary color', 'bfd-core' ),
 				),
 			),
+			array( 'key' => 'background_image', 'type' => 'image', 'label' => __( 'Background image', 'bfd-core' ) ),
+			array( 'key' => 'overlay', 'type' => 'checkbox', 'label' => __( 'Dark overlay on background image', 'bfd-core' ) ),
 			array(
 				'key'     => 'align',
 				'type'    => 'select',
@@ -35,6 +37,30 @@ final class Section_Registry {
 					'center' => __( 'Center', 'bfd-core' ),
 				),
 			),
+			array(
+				'key'     => 'padding',
+				'type'    => 'select',
+				'label'   => __( 'Vertical spacing', 'bfd-core' ),
+				'default' => 'normal',
+				'options' => array(
+					'normal' => __( 'Normal', 'bfd-core' ),
+					'none'   => __( 'None', 'bfd-core' ),
+					'small'  => __( 'Small', 'bfd-core' ),
+					'large'  => __( 'Large', 'bfd-core' ),
+				),
+			),
+			array(
+				'key'     => 'hide',
+				'type'    => 'select',
+				'label'   => __( 'Visibility', 'bfd-core' ),
+				'options' => array(
+					'none'    => __( 'Show everywhere', 'bfd-core' ),
+					'mobile'  => __( 'Hide on mobile', 'bfd-core' ),
+					'desktop' => __( 'Hide on desktop', 'bfd-core' ),
+				),
+			),
+			array( 'key' => 'anchor', 'type' => 'slug', 'label' => __( 'Anchor ID (for menu links like #pricing)', 'bfd-core' ) ),
+			array( 'key' => 'css_class', 'type' => 'classes', 'label' => __( 'Extra CSS classes', 'bfd-core' ) ),
 		);
 	}
 
@@ -118,6 +144,8 @@ final class Section_Registry {
 				),
 			),
 		);
+
+		$defs += Builtin_Sections::definitions();
 
 		$defs['form'] = array(
 			'label'  => __( 'Form', 'bfd-core' ),
