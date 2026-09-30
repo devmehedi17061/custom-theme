@@ -16,3 +16,4 @@ require_once BFD_THEME_DIR . '/inc/menus.php';
 require_once BFD_THEME_DIR . '/inc/enqueue.php';
 require_once BFD_THEME_DIR . '/inc/cleanup.php';
 require_once BFD_THEME_DIR . '/inc/template-tags.php';
+require_once BFD_THEME_DIR . '/inc/customize.php';

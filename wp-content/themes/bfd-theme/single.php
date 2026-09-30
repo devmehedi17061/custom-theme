@@ -29,6 +29,10 @@
 		</article>
 	<?php endif; ?>
 
+	<?php if ( 'post' === get_post_type() && ( comments_open() || get_comments_number() ) ) : ?>
+		<?php comments_template(); ?>
+	<?php endif; ?>
+
 	<?php $related = bfd_related_posts( get_the_ID() ); ?>
 	<?php if ( $related->have_posts() ) : ?>
 		<section class="container section related">

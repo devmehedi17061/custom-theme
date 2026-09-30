@@ -7,6 +7,8 @@
 	<div class="card__body">
 		<h2 class="card__title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
 		<div class="card__meta"><?php bfd_posted_on(); ?></div>
-		<div class="card__excerpt"><?php the_excerpt(); ?></div>
+		<?php if ( $args['excerpt'] ?? true ) : ?>
+			<div class="card__excerpt"><?php the_excerpt(); ?></div>
+		<?php endif; ?>
 	</div>
 </article>
