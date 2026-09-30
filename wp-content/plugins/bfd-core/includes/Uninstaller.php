@@ -13,13 +13,25 @@ final class Uninstaller {
 	public static function run( bool $dry_run = false ): array {
 		global $wpdb;
 		$opts   = get_option( 'bfd_options', array() );
-		$report = array( 'posts' => 0, 'meta_rows' => 0, 'table_rows' => 0, 'files' => 0 );
+		$report = array(
+			'posts'      => 0,
+			'meta_rows'  => 0,
+			'table_rows' => 0,
+			'files'      => 0,
+		);
 
 		if ( empty( $opts['delete_on_uninstall'] ) ) {
 			return $report; // Default: keep everything.
 		}
 
-		$post_ids = get_posts( array( 'post_type' => array( 'bfd_section', 'bfd_form' ), 'post_status' => 'any', 'numberposts' => -1, 'fields' => 'ids' ) );
+		$post_ids        = get_posts(
+			array(
+				'post_type'   => array( 'bfd_section', 'bfd_form' ),
+				'post_status' => 'any',
+				'numberposts' => -1,
+				'fields'      => 'ids',
+			)
+		);
 		$report['posts'] = count( $post_ids );
 
 		$report['meta_rows'] = (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->postmeta} WHERE meta_key LIKE '\\_bfd\\_%'" ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
@@ -43,8 +55,10 @@ final class Uninstaller {
 		}
 		$wpdb->query( "DELETE FROM {$wpdb->postmeta} WHERE meta_key LIKE '\\_bfd\\_%'" ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		$wpdb->query( "DROP TABLE IF EXISTS {$table}" ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+		$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}bfd_activity" ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+		wp_clear_scheduled_hook( 'bfd_activity_purge' );
 		$wpdb->query( "DELETE FROM {$wpdb->options} WHERE option_name LIKE '\\_transient\\_bfd\\_%' OR option_name LIKE '\\_transient\\_timeout\\_bfd\\_%'" ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-		foreach ( array( 'bfd_options', 'bfd_submissions_db', 'bfd_core_rewrite_version' ) as $option ) {
+		foreach ( array( 'bfd_options', 'bfd_submissions_db', 'bfd_activity_db', 'bfd_core_rewrite_version' ) as $option ) {
 			delete_option( $option );
 		}
 		if ( is_dir( $dir ) ) {

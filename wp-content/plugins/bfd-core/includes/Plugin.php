@@ -78,6 +78,7 @@ final class Plugin {
 	}
 
 	public static function deactivate(): void {
+		\BFD\Core\Security\Activity_Log::unschedule();
 		flush_rewrite_rules();
 	}
 }

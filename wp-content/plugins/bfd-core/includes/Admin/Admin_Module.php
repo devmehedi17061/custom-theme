@@ -26,8 +26,8 @@ final class Admin_Module implements Module {
 		add_action( 'init', array( $this, 'remove_editor_support' ), 20 );
 	}
 
-	public function maybe_disable_block_editor( bool $use, string $post_type ): bool {
-		return in_array( $post_type, $this->builder_types(), true ) ? false : $use;
+	public function maybe_disable_block_editor( bool $use_block_editor, string $post_type ): bool {
+		return in_array( $post_type, $this->builder_types(), true ) ? false : $use_block_editor;
 	}
 
 	public function remove_editor_support(): void {

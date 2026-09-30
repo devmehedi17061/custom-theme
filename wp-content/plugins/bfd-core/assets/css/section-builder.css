@@ -48,3 +48,7 @@
 .bfd-section-card__head { gap: 8px; }
 .bfd-section-card__title { flex: 1; }
 .bfd-preview__frame { margin: 0 auto; max-width: 100%; transition: width .2s; }
+
+/* Form builder: conditions */
+.bfd-fd-cond { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.bfd-fd-cond select, .bfd-fd-cond input[type="text"] { max-width: 14rem; }

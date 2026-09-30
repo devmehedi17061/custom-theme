@@ -9,20 +9,32 @@ defined( 'ABSPATH' ) || exit;
 final class Builtin_Sections {
 
 	private static function text( string $key, string $label ): array {
-		return array( 'key' => $key, 'type' => 'text', 'label' => $label );
+		return array(
+			'key'   => $key,
+			'type'  => 'text',
+			'label' => $label,
+		);
 	}
 
 	private static function area( string $key, string $label ): array {
-		return array( 'key' => $key, 'type' => 'textarea', 'label' => $label );
+		return array(
+			'key'   => $key,
+			'type'  => 'textarea',
+			'label' => $label,
+		);
 	}
 
-	private static function columns( string $default = '3' ): array {
+	private static function columns( string $default_columns = '3' ): array {
 		return array(
 			'key'     => 'columns',
 			'type'    => 'select',
 			'label'   => __( 'Columns', 'bfd-core' ),
-			'default' => $default,
-			'options' => array( '2' => '2', '3' => '3', '4' => '4' ),
+			'default' => $default_columns,
+			'options' => array(
+				'2' => '2',
+				'3' => '3',
+				'4' => '4',
+			),
 		);
 	}
 
@@ -39,7 +51,12 @@ final class Builtin_Sections {
 
 	public static function definitions(): array {
 		$repeater = static function ( string $key, string $label, array $subs ): array {
-			return array( 'key' => $key, 'type' => 'repeater', 'label' => $label, 'sub_fields' => $subs );
+			return array(
+				'key'        => $key,
+				'type'       => 'repeater',
+				'label'      => $label,
+				'sub_fields' => $subs,
+			);
 		};
 
 		return array(
@@ -47,16 +64,31 @@ final class Builtin_Sections {
 				'label'  => __( 'Image + Text', 'bfd-core' ),
 				'fields' => array(
 					self::text( 'heading', __( 'Heading', 'bfd-core' ) ),
-					array( 'key' => 'text', 'type' => 'richtext', 'label' => __( 'Text (HTML allowed)', 'bfd-core' ) ),
-					array( 'key' => 'image', 'type' => 'image', 'label' => __( 'Image', 'bfd-core' ) ),
+					array(
+						'key'   => 'text',
+						'type'  => 'richtext',
+						'label' => __( 'Text (HTML allowed)', 'bfd-core' ),
+					),
+					array(
+						'key'   => 'image',
+						'type'  => 'image',
+						'label' => __( 'Image', 'bfd-core' ),
+					),
 					array(
 						'key'     => 'image_side',
 						'type'    => 'select',
 						'label'   => __( 'Image position', 'bfd-core' ),
-						'options' => array( 'right' => __( 'Right', 'bfd-core' ), 'left' => __( 'Left', 'bfd-core' ) ),
+						'options' => array(
+							'right' => __( 'Right', 'bfd-core' ),
+							'left'  => __( 'Left', 'bfd-core' ),
+						),
 					),
 					self::text( 'button_text', __( 'Button text', 'bfd-core' ) ),
-					array( 'key' => 'button_url', 'type' => 'url', 'label' => __( 'Button URL', 'bfd-core' ) ),
+					array(
+						'key'   => 'button_url',
+						'type'  => 'url',
+						'label' => __( 'Button URL', 'bfd-core' ),
+					),
 				),
 			),
 			'posts'        => array(
@@ -71,18 +103,34 @@ final class Builtin_Sections {
 						'default' => 'post',
 						'options' => self::listable_types(),
 					),
-					array( 'key' => 'count', 'type' => 'number', 'label' => __( 'How many (1-24)', 'bfd-core' ) ),
+					array(
+						'key'   => 'count',
+						'type'  => 'number',
+						'label' => __( 'How many (1-24)', 'bfd-core' ),
+					),
 					self::columns(),
-					array( 'key' => 'show_excerpt', 'type' => 'checkbox', 'label' => __( 'Show excerpt', 'bfd-core' ) ),
+					array(
+						'key'   => 'show_excerpt',
+						'type'  => 'checkbox',
+						'label' => __( 'Show excerpt', 'bfd-core' ),
+					),
 					self::text( 'button_text', __( '"View all" button text', 'bfd-core' ) ),
-					array( 'key' => 'button_url', 'type' => 'url', 'label' => __( '"View all" URL', 'bfd-core' ) ),
+					array(
+						'key'   => 'button_url',
+						'type'  => 'url',
+						'label' => __( '"View all" URL', 'bfd-core' ),
+					),
 				),
 			),
 			'testimonials' => array(
 				'label'  => __( 'Testimonials (from Testimonials post type)', 'bfd-core' ),
 				'fields' => array(
 					self::text( 'heading', __( 'Heading', 'bfd-core' ) ),
-					array( 'key' => 'count', 'type' => 'number', 'label' => __( 'How many (1-24)', 'bfd-core' ) ),
+					array(
+						'key'   => 'count',
+						'type'  => 'number',
+						'label' => __( 'How many (1-24)', 'bfd-core' ),
+					),
 					self::columns(),
 				),
 			),
@@ -100,8 +148,16 @@ final class Builtin_Sections {
 							self::text( 'period', __( 'Period (e.g. /month)', 'bfd-core' ) ),
 							self::area( 'features', __( 'Features (one per line)', 'bfd-core' ) ),
 							self::text( 'button_text', __( 'Button text', 'bfd-core' ) ),
-							array( 'key' => 'button_url', 'type' => 'url', 'label' => __( 'Button URL', 'bfd-core' ) ),
-							array( 'key' => 'highlight', 'type' => 'checkbox', 'label' => __( 'Highlight this plan', 'bfd-core' ) ),
+							array(
+								'key'   => 'button_url',
+								'type'  => 'url',
+								'label' => __( 'Button URL', 'bfd-core' ),
+							),
+							array(
+								'key'   => 'highlight',
+								'type'  => 'checkbox',
+								'label' => __( 'Highlight this plan', 'bfd-core' ),
+							),
 						)
 					),
 				),
@@ -116,7 +172,11 @@ final class Builtin_Sections {
 						'members',
 						__( 'Members', 'bfd-core' ),
 						array(
-							array( 'key' => 'image', 'type' => 'image', 'label' => __( 'Photo', 'bfd-core' ) ),
+							array(
+								'key'   => 'image',
+								'type'  => 'image',
+								'label' => __( 'Photo', 'bfd-core' ),
+							),
 							self::text( 'name', __( 'Name', 'bfd-core' ) ),
 							self::text( 'role', __( 'Role', 'bfd-core' ) ),
 							self::area( 'bio', __( 'Short bio', 'bfd-core' ) ),
@@ -146,9 +206,17 @@ final class Builtin_Sections {
 						'logos',
 						__( 'Logos', 'bfd-core' ),
 						array(
-							array( 'key' => 'image', 'type' => 'image', 'label' => __( 'Logo', 'bfd-core' ) ),
+							array(
+								'key'   => 'image',
+								'type'  => 'image',
+								'label' => __( 'Logo', 'bfd-core' ),
+							),
 							self::text( 'name', __( 'Name (used as alt text)', 'bfd-core' ) ),
-							array( 'key' => 'url', 'type' => 'url', 'label' => __( 'Link URL', 'bfd-core' ) ),
+							array(
+								'key'   => 'url',
+								'type'  => 'url',
+								'label' => __( 'Link URL', 'bfd-core' ),
+							),
 						)
 					),
 				),
@@ -162,7 +230,11 @@ final class Builtin_Sections {
 						'images',
 						__( 'Images', 'bfd-core' ),
 						array(
-							array( 'key' => 'image', 'type' => 'image', 'label' => __( 'Image', 'bfd-core' ) ),
+							array(
+								'key'   => 'image',
+								'type'  => 'image',
+								'label' => __( 'Image', 'bfd-core' ),
+							),
 							self::text( 'caption', __( 'Caption', 'bfd-core' ) ),
 						)
 					),
@@ -172,7 +244,11 @@ final class Builtin_Sections {
 				'label'  => __( 'Video (YouTube, Vimeo or .mp4)', 'bfd-core' ),
 				'fields' => array(
 					self::text( 'heading', __( 'Heading', 'bfd-core' ) ),
-					array( 'key' => 'url', 'type' => 'url', 'label' => __( 'Video URL', 'bfd-core' ) ),
+					array(
+						'key'   => 'url',
+						'type'  => 'url',
+						'label' => __( 'Video URL', 'bfd-core' ),
+					),
 					self::text( 'caption', __( 'Caption', 'bfd-core' ) ),
 				),
 			),

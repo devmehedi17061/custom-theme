@@ -21,7 +21,16 @@ final class Custom_Sections {
 	private const NONCE_FIELD  = 'bfd_cs_nonce';
 
 	private const TYPES = array(
-		'text', 'textarea', 'richtext', 'url', 'image', 'select', 'checkbox', 'color', 'number', 'repeater',
+		'text',
+		'textarea',
+		'richtext',
+		'url',
+		'image',
+		'select',
+		'checkbox',
+		'color',
+		'number',
+		'repeater',
 	);
 
 	private const DEFAULT_TEMPLATE = "<div class=\"my-section\">\n\t<h2>{{heading}}</h2>\n\t<p>{{text}}</p>\n</div>";
@@ -112,7 +121,7 @@ final class Custom_Sections {
 			printf( '<style>.bfd-cs-%d{%s}</style>', $id, $css ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- sanitized on save.
 		}
 
-		printf( '<div class="bfd-cs bfd-cs-%d">', $id );
+		printf( '<div class="bfd-cs bfd-cs-%d">', absint( $id ) );
 		echo Template_Engine::render( $tpl, $fields, $def['fields'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- template is admin-authored; values escaped by the engine.
 		echo '</div>';
 	}

@@ -62,7 +62,7 @@ final class Forms_Module implements Module {
 	private function run(): array {
 		$post    = wp_unslash( $_POST ); // phpcs:ignore WordPress.Security.NonceVerification.Missing -- verified in Submission_Handler.
 		$form_id = isset( $post['form_id'] ) ? absint( $post['form_id'] ) : 0;
-		return array( $form_id, Submission_Handler::handle( $form_id, $post, $_FILES ) );
+		return array( $form_id, Submission_Handler::handle( $form_id, $post, $_FILES ) ); // phpcs:ignore WordPress.Security.NonceVerification.Missing -- nonce is verified in Submission_Handler::handle().
 	}
 
 	public function handle_ajax(): void {
@@ -70,13 +70,20 @@ final class Forms_Module implements Module {
 		if ( $r['ok'] ) {
 			wp_send_json_success( array( 'message' => $r['message'] ) );
 		}
-		wp_send_json_error( array( 'message' => $r['message'], 'errors' => $r['errors'], 'code' => $r['code'] ), 'invalid' === $r['code'] ? 422 : 400 );
+		wp_send_json_error(
+			array(
+				'message' => $r['message'],
+				'errors'  => $r['errors'],
+				'code'    => $r['code'],
+			),
+			'invalid' === $r['code'] ? 422 : 400
+		);
 	}
 
 	public function handle_post(): void {
 		list( $form_id, $r ) = $this->run();
-		$back = remove_query_arg( array( 'bfd_form', 'bfd_form_status', 'bfd_code' ), wp_get_referer() ?: home_url( '/' ) );
-		$back = add_query_arg(
+		$back                = remove_query_arg( array( 'bfd_form', 'bfd_form_status', 'bfd_code' ), wp_get_referer() ?: home_url( '/' ) );
+		$back                = add_query_arg(
 			array(
 				'bfd_form'        => $form_id,
 				'bfd_form_status' => $r['ok'] ? 'ok' : 'error',
@@ -127,10 +134,11 @@ final class Forms_Module implements Module {
 			array( 'checkbox', __( 'Checkbox', 'bfd-core' ) ),
 			array( 'number', __( 'Number', 'bfd-core' ) ),
 			array( 'file', __( 'File upload', 'bfd-core' ) ),
+			array( 'step', __( 'Step break (starts a new step)', 'bfd-core' ) ),
 		);
 		?>
 		<input type="hidden" id="bfd-cs-fields-input" name="bfd_form_fields" value="<?php echo esc_attr( wp_json_encode( is_array( $fields ) ? $fields : array() ) ); ?>">
-		<div id="bfd-field-definer" data-types="<?php echo esc_attr( wp_json_encode( $types ) ); ?>" data-repeater="0" data-ph="0" data-required="1"></div>
+		<div id="bfd-field-definer" data-types="<?php echo esc_attr( wp_json_encode( $types ) ); ?>" data-repeater="0" data-ph="0" data-required="1" data-conditions="1"></div>
 		<p class="description"><?php esc_html_e( 'File uploads accept PDF, JPG, PNG, WebP, DOC and DOCX up to 5 MB.', 'bfd-core' ); ?></p>
 		<?php
 	}

@@ -5,14 +5,23 @@ defined( 'ABSPATH' ) || exit;
 
 final class Form_Renderer {
 
-	public const MESSAGES = array(
-		'invalid'  => 'Please check the highlighted fields and try again.',
-		'timing'   => 'Please wait a moment and try again.',
-		'rate'     => 'Too many submissions. Please try again later.',
-		'security' => 'Security check failed. Please reload the page and try again.',
-		'captcha'  => 'Please complete the spam check and try again.',
-		'server'   => 'Sorry, something went wrong. Please try again later.',
-	);
+	/** Visitor-facing error text by result code (literal strings so they can be translated). */
+	public static function message( string $code ): string {
+		switch ( $code ) {
+			case 'invalid':
+				return __( 'Please check the highlighted fields and try again.', 'bfd-core' );
+			case 'timing':
+				return __( 'Please wait a moment and try again.', 'bfd-core' );
+			case 'rate':
+				return __( 'Too many submissions. Please try again later.', 'bfd-core' );
+			case 'security':
+				return __( 'Security check failed. Please reload the page and try again.', 'bfd-core' );
+			case 'captcha':
+				return __( 'Please complete the spam check and try again.', 'bfd-core' );
+			default:
+				return __( 'Sorry, something went wrong. Please try again later.', 'bfd-core' );
+		}
+	}
 
 	public static function timestamp_token( int $form_id ): string {
 		$ts = time();
@@ -28,7 +37,17 @@ final class Form_Renderer {
 			return;
 		}
 
-		wp_enqueue_script( 'bfd-form', BFD_CORE_URL . 'assets/js/form.js', array(), BFD_CORE_VERSION, array( 'in_footer' => true, 'strategy' => 'defer' ) );
+		$form_js = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) || ! file_exists( BFD_CORE_DIR . 'assets/js/form.min.js' ) ? 'form.js' : 'form.min.js';
+		wp_enqueue_script(
+			'bfd-form',
+			BFD_CORE_URL . 'assets/js/' . $form_js,
+			array(),
+			BFD_CORE_VERSION,
+			array(
+				'in_footer' => true,
+				'strategy'  => 'defer',
+			)
+		);
 
 		$dom_id = 'bfd-form-' . $form->id;
 		$status = self::status_for( $form->id, $form );
@@ -46,12 +65,47 @@ final class Form_Renderer {
 					<input type="text" name="bfd_website" tabindex="-1" autocomplete="off"></label>
 			</div>
 
-			<?php foreach ( $form->fields as $f ) : ?>
-				<?php self::field( $form, $f ); ?>
+			<?php
+			$groups = self::groups( $form );
+			$multi  = count( $groups ) > 1;
+			foreach ( $groups as $n => $group ) :
+				?>
+				<?php if ( $multi ) : ?>
+					<fieldset class="bfd-form__step" data-step="<?php echo (int) $n; ?>" data-title="<?php echo esc_attr( $group['title'] ); ?>">
+						<?php if ( '' !== $group['title'] ) : ?>
+							<legend><?php echo esc_html( $group['title'] ); ?></legend>
+						<?php endif; ?>
+				<?php endif; ?>
+				<?php foreach ( $group['fields'] as $f ) : ?>
+					<?php self::field( $form, $f ); ?>
+				<?php endforeach; ?>
+				<?php if ( $multi ) : ?>
+					</fieldset>
+				<?php endif; ?>
 			<?php endforeach; ?>
+			<?php if ( $multi ) : ?>
+				<p class="bfd-form__progress" aria-live="polite" hidden></p>
+				<div class="bfd-form__nav" hidden>
+					<button type="button" class="btn btn--ghost" data-prev><?php esc_html_e( 'Back', 'bfd-core' ); ?></button>
+					<button type="button" class="btn" data-next><?php esc_html_e( 'Next', 'bfd-core' ); ?></button>
+				</div>
+			<?php endif; ?>
 
 			<?php if ( Turnstile::enabled() ) : ?>
-				<?php wp_enqueue_script( 'cf-turnstile', 'https://challenges.cloudflare.com/turnstile/v0/api.js', array(), null, array( 'in_footer' => true, 'strategy' => 'async' ) ); // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion ?>
+				<?php
+				// phpcs:disable WordPress.WP.EnqueuedResourceParameters.MissingVersion -- third-party script, always the latest version.
+				wp_enqueue_script(
+					'cf-turnstile',
+					'https://challenges.cloudflare.com/turnstile/v0/api.js',
+					array(),
+					null,
+					array(
+						'in_footer' => true,
+						'strategy'  => 'async',
+					)
+				);
+				// phpcs:enable WordPress.WP.EnqueuedResourceParameters.MissingVersion // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion 
+				?>
 				<div class="cf-turnstile" data-sitekey="<?php echo esc_attr( Turnstile::site_key() ); ?>"></div>
 			<?php endif; ?>
 
@@ -70,11 +124,17 @@ final class Form_Renderer {
 			return null;
 		}
 		if ( 'ok' === $_GET['bfd_form_status'] ) {
-			return array( 'type' => 'success', 'text' => $form->settings['success_message'] );
+			return array(
+				'type' => 'success',
+				'text' => $form->settings['success_message'],
+			);
 		}
 		$code = isset( $_GET['bfd_code'] ) ? sanitize_key( wp_unslash( $_GET['bfd_code'] ) ) : 'server';
 		// phpcs:enable
-		return array( 'type' => 'error', 'text' => __( self::MESSAGES[ $code ] ?? self::MESSAGES['server'], 'bfd-core' ) ); // phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText
+		return array(
+			'type' => 'error',
+			'text' => self::message( $code ),
+		); // phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText
 	}
 
 	private static function field( Form_Definition $form, array $f ): void {
@@ -83,7 +143,19 @@ final class Form_Renderer {
 		$req  = ! empty( $f['required'] );
 		$attr = ( $req ? ' required aria-required="true"' : '' ) . ' aria-describedby="' . esc_attr( $id ) . '-err"';
 
-		echo '<div class="bfd-form__field bfd-form__field--' . esc_attr( $f['type'] ) . '">';
+		$cond_attr = '';
+		if ( ! empty( $f['show_if'] ) ) {
+			$cond_attr = ' data-show-if="' . esc_attr(
+				wp_json_encode(
+					array(
+						'f'  => $f['show_if']['field'],
+						'op' => $f['show_if']['op'],
+						'v'  => $f['show_if']['value'],
+					)
+				)
+			) . '"';
+		}
+		echo '<div class="bfd-form__field bfd-form__field--' . esc_attr( $f['type'] ) . '" data-field="' . esc_attr( $f['key'] ) . '"' . $cond_attr . '>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- each part escaped above.
 
 		if ( 'checkbox' === $f['type'] ) {
 			printf(
@@ -124,5 +196,33 @@ final class Form_Renderer {
 
 		printf( '<span class="bfd-form__error" id="%s-err" data-error-for="%s" role="alert"></span>', esc_attr( $id ), esc_attr( $f['key'] ) );
 		echo '</div>';
+	}
+
+	/**
+	 * Split fields into steps at each "step" field. Without step breaks there is a single group.
+	 *
+	 * @return array<int, array{title:string, fields:array}>
+	 */
+	private static function groups( Form_Definition $form ): array {
+		$groups  = array();
+		$current = array(
+			'title'  => '',
+			'fields' => array(),
+		);
+		foreach ( $form->fields as $f ) {
+			if ( 'step' === $f['type'] ) {
+				if ( $current['fields'] || $groups ) {
+					$groups[] = $current;
+				}
+				$current = array(
+					'title'  => $f['label'],
+					'fields' => array(),
+				);
+				continue;
+			}
+			$current['fields'][] = $f;
+		}
+		$groups[] = $current;
+		return $groups;
 	}
 }

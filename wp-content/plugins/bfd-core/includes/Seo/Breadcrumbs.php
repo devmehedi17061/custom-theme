@@ -15,45 +15,84 @@ final class Breadcrumbs {
 		}
 
 		$items   = array();
-		$items[] = array( 'name' => __( 'Home', 'bfd-core' ), 'url' => home_url( '/' ) );
+		$items[] = array(
+			'name' => __( 'Home', 'bfd-core' ),
+			'url'  => home_url( '/' ),
+		);
 
 		if ( is_singular() ) {
 			$post = get_queried_object();
 			if ( 'post' === $post->post_type ) {
 				$posts_page = (int) get_option( 'page_for_posts' );
 				if ( $posts_page ) {
-					$items[] = array( 'name' => get_the_title( $posts_page ), 'url' => (string) get_permalink( $posts_page ) );
+					$items[] = array(
+						'name' => get_the_title( $posts_page ),
+						'url'  => (string) get_permalink( $posts_page ),
+					);
 				}
 				$cats = get_the_category( $post->ID );
 				if ( $cats ) {
-					$items[] = array( 'name' => $cats[0]->name, 'url' => (string) get_category_link( $cats[0] ) );
+					$items[] = array(
+						'name' => $cats[0]->name,
+						'url'  => (string) get_category_link( $cats[0] ),
+					);
 				}
 			} elseif ( is_post_type_hierarchical( $post->post_type ) ) {
 				foreach ( array_reverse( get_post_ancestors( $post ) ) as $ancestor_id ) {
-					$items[] = array( 'name' => get_the_title( $ancestor_id ), 'url' => (string) get_permalink( $ancestor_id ) );
+					$items[] = array(
+						'name' => get_the_title( $ancestor_id ),
+						'url'  => (string) get_permalink( $ancestor_id ),
+					);
 				}
 			} else {
 				$obj = get_post_type_object( $post->post_type );
 				if ( $obj && $obj->has_archive ) {
-					$items[] = array( 'name' => $obj->labels->name, 'url' => (string) get_post_type_archive_link( $post->post_type ) );
+					$items[] = array(
+						'name' => $obj->labels->name,
+						'url'  => (string) get_post_type_archive_link( $post->post_type ),
+					);
 				}
 			}
-			$items[] = array( 'name' => get_the_title( $post ), 'url' => '' );
+			$items[] = array(
+				'name' => get_the_title( $post ),
+				'url'  => '',
+			);
 		} elseif ( is_post_type_archive() ) {
-			$items[] = array( 'name' => post_type_archive_title( '', false ), 'url' => '' );
+			$items[] = array(
+				'name' => post_type_archive_title( '', false ),
+				'url'  => '',
+			);
 		} elseif ( is_category() || is_tag() || is_tax() ) {
-			$items[] = array( 'name' => single_term_title( '', false ), 'url' => '' );
+			$items[] = array(
+				'name' => single_term_title( '', false ),
+				'url'  => '',
+			);
 		} elseif ( is_search() ) {
-			/* translators: %s: search query */
-			$items[] = array( 'name' => sprintf( __( 'Search: %s', 'bfd-core' ), get_search_query() ), 'url' => '' );
+			$items[] = array(
+				/* translators: %s: search query */
+				'name' => sprintf( __( 'Search: %s', 'bfd-core' ), get_search_query() ),
+				'url'  => '',
+			);
 		} elseif ( is_home() ) {
-			$items[] = array( 'name' => single_post_title( '', false ) ?: __( 'Blog', 'bfd-core' ), 'url' => '' );
+			$items[] = array(
+				'name' => single_post_title( '', false ) ?: __( 'Blog', 'bfd-core' ),
+				'url'  => '',
+			);
 		} elseif ( is_404() ) {
-			$items[] = array( 'name' => __( 'Not found', 'bfd-core' ), 'url' => '' );
+			$items[] = array(
+				'name' => __( 'Not found', 'bfd-core' ),
+				'url'  => '',
+			);
 		} elseif ( is_author() ) {
-			$items[] = array( 'name' => get_the_author(), 'url' => '' );
+			$items[] = array(
+				'name' => get_the_author(),
+				'url'  => '',
+			);
 		} elseif ( is_date() ) {
-			$items[] = array( 'name' => get_the_archive_title(), 'url' => '' );
+			$items[] = array(
+				'name' => get_the_archive_title(),
+				'url'  => '',
+			);
 		}
 
 		return (array) apply_filters( 'bfd_breadcrumb_items', $items );

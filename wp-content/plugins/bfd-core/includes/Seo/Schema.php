@@ -17,7 +17,7 @@ final class Schema {
 
 		$graph = array();
 
-		$org = array(
+		$org     = array(
 			'@type' => 'Organization',
 			'@id'   => $org_id,
 			'name'  => bfd_option( 'org_name', get_bloginfo( 'name' ) ),
@@ -50,7 +50,10 @@ final class Schema {
 			'publisher'       => array( '@id' => $org_id ),
 			'potentialAction' => array(
 				'@type'       => 'SearchAction',
-				'target'      => array( '@type' => 'EntryPoint', 'urlTemplate' => $home . '?s={search_term_string}' ),
+				'target'      => array(
+					'@type'       => 'EntryPoint',
+					'urlTemplate' => $home . '?s={search_term_string}',
+				),
 				'query-input' => 'required name=search_term_string',
 			),
 		);
@@ -73,14 +76,21 @@ final class Schema {
 				$page['image'] = $image;
 			}
 			if ( $is_article ) {
-				$page['author']    = array( '@type' => 'Person', 'name' => get_the_author_meta( 'display_name', (int) $post->post_author ) );
+				$page['author']    = array(
+					'@type' => 'Person',
+					'name'  => get_the_author_meta( 'display_name', (int) $post->post_author ),
+				);
 				$page['publisher'] = array( '@id' => $org_id );
 			}
 			$graph[] = $page;
 
 			$faq = self::faq_entities( $post );
 			if ( $faq ) {
-				$graph[] = array( '@type' => 'FAQPage', '@id' => $url . '#faq', 'mainEntity' => $faq );
+				$graph[] = array(
+					'@type'      => 'FAQPage',
+					'@id'        => $url . '#faq',
+					'mainEntity' => $faq,
+				);
 			}
 		}
 
@@ -88,13 +98,20 @@ final class Schema {
 		if ( count( $crumbs ) > 1 ) {
 			$list = array();
 			foreach ( $crumbs as $i => $c ) {
-				$item = array( '@type' => 'ListItem', 'position' => $i + 1, 'name' => $c['name'] );
+				$item = array(
+					'@type'    => 'ListItem',
+					'position' => $i + 1,
+					'name'     => $c['name'],
+				);
 				if ( $c['url'] ) {
 					$item['item'] = $c['url'];
 				}
 				$list[] = $item;
 			}
-			$graph[] = array( '@type' => 'BreadcrumbList', 'itemListElement' => $list );
+			$graph[] = array(
+				'@type'           => 'BreadcrumbList',
+				'itemListElement' => $list,
+			);
 		}
 
 		return (array) apply_filters( 'bfd_schema_graph', $graph, $post );
@@ -114,7 +131,10 @@ final class Schema {
 				$out[] = array(
 					'@type'          => 'Question',
 					'name'           => $item['question'],
-					'acceptedAnswer' => array( '@type' => 'Answer', 'text' => $item['answer'] ),
+					'acceptedAnswer' => array(
+						'@type' => 'Answer',
+						'text'  => $item['answer'],
+					),
 				);
 			}
 		}

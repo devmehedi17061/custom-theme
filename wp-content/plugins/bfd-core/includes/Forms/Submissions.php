@@ -154,6 +154,7 @@ final class Submissions {
 		if ( $row ) {
 			$this->delete_files( json_decode( $row->data, true ) ?: array() );
 			$wpdb->delete( self::table(), array( 'id' => $id ), array( '%d' ) );
+			do_action( 'bfd_submission_deleted', $id );
 		}
 		wp_safe_redirect( admin_url( 'edit.php?post_type=' . Form_Definition::POST_TYPE . '&page=bfd-submissions&deleted=1' ) );
 		exit;
@@ -191,18 +192,19 @@ final class Submissions {
 		foreach ( $rows as $row ) {
 			$line = array();
 			foreach ( json_decode( $row->data, true ) ?: array() as $d ) {
-				$label            = (string) ( $d['label'] ?? '' );
+				$label             = (string) ( $d['label'] ?? '' );
 				$columns[ $label ] = true;
-				$line[ $label ]   = (string) ( $d['value'] ?? '' );
+				$line[ $label ]    = (string) ( $d['value'] ?? '' );
 			}
 			$parsed[] = array( $row, $line );
 		}
 
+		do_action( 'bfd_submissions_exported' );
 		nocache_headers();
 		header( 'Content-Type: text/csv; charset=utf-8' );
 		header( 'Content-Disposition: attachment; filename="submissions-' . gmdate( 'Ymd-His' ) . '.csv"' );
 		$out = fopen( 'php://output', 'w' );
-		fwrite( $out, "\xEF\xBB\xBF" ); // UTF-8 BOM for Excel.
+		fwrite( $out, "\xEF\xBB\xBF" ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fwrite -- streaming a download to php://output, not the filesystem.
 		fputcsv( $out, array_merge( array( 'Date', 'Form' ), array_map( array( $this, 'csv_cell' ), array_keys( $columns ) ) ) );
 		foreach ( $parsed as [ $row, $line ] ) {
 			$cells = array( $row->created_at, get_the_title( (int) $row->form_id ) );
@@ -211,7 +213,7 @@ final class Submissions {
 			}
 			fputcsv( $out, array_map( array( $this, 'csv_cell' ), $cells ) );
 		}
-		fclose( $out );
+		fclose( $out ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose
 		exit;
 	}
 

@@ -43,9 +43,13 @@ final class Submission_Handler {
 			return self::result( false, 'captcha' );
 		}
 
-		$values = array();
-		$errors = array();
+		$values  = array();
+		$errors  = array();
+		$visible = self::visible_fields( $form, $post );
 		foreach ( $form->fields as $f ) {
+			if ( empty( $visible[ $f['key'] ] ) ) {
+				continue; // Step breaks and fields hidden by a condition are not processed at all.
+			}
 			$name = 'f_' . $f['key'];
 			if ( 'file' === $f['type'] ) {
 				$r = self::file( $f, $files[ $name ] ?? null );
@@ -70,6 +74,9 @@ final class Submission_Handler {
 
 		$rows = array();
 		foreach ( $form->fields as $f ) {
+			if ( empty( $visible[ $f['key'] ] ) ) {
+				continue;
+			}
 			$rows[] = array(
 				'key'   => $f['key'],
 				'label' => $f['label'],
@@ -90,11 +97,63 @@ final class Submission_Handler {
 		return self::result( true, 'ok', $form );
 	}
 
+
+	/**
+	 * Which fields apply to this submission: a field is skipped when it is a step break or when its
+	 * "show if" condition is false (a field hidden by a hidden field is hidden too).
+	 *
+	 * @return array<string,bool> key => visible
+	 */
+	public static function visible_fields( Form_Definition $form, array $post ): array {
+		$visible = array();
+		$by_key  = array();
+		foreach ( $form->fields as $f ) {
+			$by_key[ $f['key'] ] = $f;
+			if ( 'step' === $f['type'] ) {
+				$visible[ $f['key'] ] = false;
+				continue;
+			}
+			$show = true;
+			$cond = $f['show_if'] ?? null;
+			if ( is_array( $cond ) && isset( $by_key[ $cond['field'] ] ) ) {
+				$ref  = $by_key[ $cond['field'] ];
+				$show = ! empty( $visible[ $ref['key'] ] ) && self::condition_met( $cond, $ref, $post );
+			}
+			$visible[ $f['key'] ] = $show;
+		}
+		return $visible;
+	}
+
+	private static function condition_met( array $cond, array $ref, array $post ): bool {
+		$raw = $post[ 'f_' . $ref['key'] ] ?? '';
+		if ( 'checkbox' === $ref['type'] ) {
+			$val = in_array( $raw, array( '1', 1, true, 'on' ), true ) ? '1' : '';
+		} else {
+			$val = is_scalar( $raw ) ? trim( (string) $raw ) : '';
+		}
+		switch ( $cond['op'] ) {
+			case 'equals':
+				return $val === (string) $cond['value'];
+			case 'not_equals':
+				return $val !== (string) $cond['value'];
+			case 'not_empty':
+				return '' !== $val;
+			case 'empty':
+				return '' === $val;
+		}
+		return true;
+	}
+
 	private static function result( bool $ok, string $code, ?Form_Definition $form = null, array $errors = array() ): array {
 		$message = $ok
 			? ( $form ? $form->settings['success_message'] : '' )
-			: __( Form_Renderer::MESSAGES[ $code ] ?? Form_Renderer::MESSAGES['server'], 'bfd-core' ); // phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText
-		return array( 'ok' => $ok, 'code' => $code, 'message' => $message, 'errors' => $errors );
+			: Form_Renderer::message( $code );
+		return array(
+			'ok'      => $ok,
+			'code'    => $code,
+			'message' => $message,
+			'errors'  => $errors,
+		);
 	}
 
 	private static function timing_ok( int $form_id, $token ): bool {

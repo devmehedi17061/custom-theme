@@ -26,67 +26,216 @@ final class Options_Page {
 			'header_footer' => array(
 				'title'  => __( 'Header & Footer', 'bfd-core' ),
 				'fields' => array(
-					array( 'key' => 'header_cta_text', 'type' => 'text', 'label' => __( 'Header button text', 'bfd-core' ) ),
-					array( 'key' => 'header_cta_url', 'type' => 'url', 'label' => __( 'Header button URL', 'bfd-core' ) ),
-					array( 'key' => 'footer_text', 'type' => 'textarea', 'label' => __( 'Footer text', 'bfd-core' ) ),
+					array(
+						'key'   => 'header_cta_text',
+						'type'  => 'text',
+						'label' => __( 'Header button text', 'bfd-core' ),
+					),
+					array(
+						'key'   => 'header_cta_url',
+						'type'  => 'url',
+						'label' => __( 'Header button URL', 'bfd-core' ),
+					),
+					array(
+						'key'   => 'footer_text',
+						'type'  => 'textarea',
+						'label' => __( 'Footer text', 'bfd-core' ),
+					),
 				),
 			),
 			'contact'       => array(
 				'title'  => __( 'Contact', 'bfd-core' ),
 				'fields' => array(
-					array( 'key' => 'phone', 'type' => 'tel', 'label' => __( 'Phone', 'bfd-core' ) ),
-					array( 'key' => 'email', 'type' => 'email', 'label' => __( 'Email', 'bfd-core' ) ),
-					array( 'key' => 'address', 'type' => 'textarea', 'label' => __( 'Address', 'bfd-core' ) ),
+					array(
+						'key'   => 'phone',
+						'type'  => 'tel',
+						'label' => __( 'Phone', 'bfd-core' ),
+					),
+					array(
+						'key'   => 'email',
+						'type'  => 'email',
+						'label' => __( 'Email', 'bfd-core' ),
+					),
+					array(
+						'key'   => 'address',
+						'type'  => 'textarea',
+						'label' => __( 'Address', 'bfd-core' ),
+					),
 				),
 			),
 			'social'        => array(
 				'title'  => __( 'Social links', 'bfd-core' ),
 				'fields' => array(
-					array( 'key' => 'facebook', 'type' => 'url', 'label' => 'Facebook' ),
-					array( 'key' => 'x', 'type' => 'url', 'label' => 'X / Twitter' ),
-					array( 'key' => 'instagram', 'type' => 'url', 'label' => 'Instagram' ),
-					array( 'key' => 'linkedin', 'type' => 'url', 'label' => 'LinkedIn' ),
-					array( 'key' => 'youtube', 'type' => 'url', 'label' => 'YouTube' ),
+					array(
+						'key'   => 'facebook',
+						'type'  => 'url',
+						'label' => 'Facebook',
+					),
+					array(
+						'key'   => 'x',
+						'type'  => 'url',
+						'label' => 'X / Twitter',
+					),
+					array(
+						'key'   => 'instagram',
+						'type'  => 'url',
+						'label' => 'Instagram',
+					),
+					array(
+						'key'   => 'linkedin',
+						'type'  => 'url',
+						'label' => 'LinkedIn',
+					),
+					array(
+						'key'   => 'youtube',
+						'type'  => 'url',
+						'label' => 'YouTube',
+					),
 				),
 			),
 			'seo'           => array(
 				'title'  => __( 'SEO defaults', 'bfd-core' ),
 				'fields' => array(
-					array( 'key' => 'org_name', 'type' => 'text', 'label' => __( 'Organization name (schema)', 'bfd-core' ) ),
-					array( 'key' => 'default_og_image', 'type' => 'image', 'label' => __( 'Default social share image', 'bfd-core' ) ),
-					array( 'key' => 'twitter_handle', 'type' => 'text', 'label' => __( 'Twitter/X handle (e.g. @brand)', 'bfd-core' ) ),
-					array( 'key' => 'redirects', 'type' => 'textarea', 'label' => __( 'Redirects (one per line: /old-path /new-path [301|302])', 'bfd-core' ) ),
+					array(
+						'key'   => 'org_name',
+						'type'  => 'text',
+						'label' => __( 'Organization name (schema)', 'bfd-core' ),
+					),
+					array(
+						'key'   => 'default_og_image',
+						'type'  => 'image',
+						'label' => __( 'Default social share image', 'bfd-core' ),
+					),
+					array(
+						'key'   => 'twitter_handle',
+						'type'  => 'text',
+						'label' => __( 'Twitter/X handle (e.g. @brand)', 'bfd-core' ),
+					),
+					array(
+						'key'   => 'redirects',
+						'type'  => 'textarea',
+						'label' => __( 'Redirects (one per line: /old-path /new-path [301|302])', 'bfd-core' ),
+					),
 				),
 			),
 			'design'        => array(
 				'title'  => __( 'Design', 'bfd-core' ),
 				'fields' => array(
-					array( 'key' => 'primary_color', 'type' => 'color', 'label' => __( 'Primary color', 'bfd-core' ) ),
-					array( 'key' => 'primary_dark', 'type' => 'color', 'label' => __( 'Primary color (hover, dark)', 'bfd-core' ) ),
-					array( 'key' => 'text_color', 'type' => 'color', 'label' => __( 'Text color', 'bfd-core' ) ),
-					array( 'key' => 'bg_color', 'type' => 'color', 'label' => __( 'Page background', 'bfd-core' ) ),
-					array( 'key' => 'surface_color', 'type' => 'color', 'label' => __( 'Light section background', 'bfd-core' ) ),
-					array( 'key' => 'heading_font', 'type' => 'select', 'label' => __( 'Heading font', 'bfd-core' ), 'default' => 'system', 'options' => self::font_options() ),
-					array( 'key' => 'body_font', 'type' => 'select', 'label' => __( 'Body font', 'bfd-core' ), 'default' => 'system', 'options' => self::font_options() ),
-					array( 'key' => 'container_width', 'type' => 'number', 'label' => __( 'Content width in px (800-1800)', 'bfd-core' ) ),
-					array( 'key' => 'sticky_header', 'type' => 'checkbox', 'label' => __( 'Keep the header visible when scrolling', 'bfd-core' ) ),
-					array( 'key' => 'custom_css', 'type' => 'textarea', 'label' => __( 'Additional CSS', 'bfd-core' ) ),
+					array(
+						'key'   => 'primary_color',
+						'type'  => 'color',
+						'label' => __( 'Primary color', 'bfd-core' ),
+					),
+					array(
+						'key'   => 'primary_dark',
+						'type'  => 'color',
+						'label' => __( 'Primary color (hover, dark)', 'bfd-core' ),
+					),
+					array(
+						'key'   => 'text_color',
+						'type'  => 'color',
+						'label' => __( 'Text color', 'bfd-core' ),
+					),
+					array(
+						'key'   => 'bg_color',
+						'type'  => 'color',
+						'label' => __( 'Page background', 'bfd-core' ),
+					),
+					array(
+						'key'   => 'surface_color',
+						'type'  => 'color',
+						'label' => __( 'Light section background', 'bfd-core' ),
+					),
+					array(
+						'key'     => 'heading_font',
+						'type'    => 'select',
+						'label'   => __( 'Heading font', 'bfd-core' ),
+						'default' => 'system',
+						'options' => self::font_options(),
+					),
+					array(
+						'key'     => 'body_font',
+						'type'    => 'select',
+						'label'   => __( 'Body font', 'bfd-core' ),
+						'default' => 'system',
+						'options' => self::font_options(),
+					),
+					array(
+						'key'   => 'container_width',
+						'type'  => 'number',
+						'label' => __( 'Content width in px (800-1800)', 'bfd-core' ),
+					),
+					array(
+						'key'   => 'sticky_header',
+						'type'  => 'checkbox',
+						'label' => __( 'Keep the header visible when scrolling', 'bfd-core' ),
+					),
+					array(
+						'key'   => 'inline_css',
+						'type'  => 'checkbox',
+						'label' => __( 'Inline the theme stylesheet in the page head (one fewer request; best for small sites)', 'bfd-core' ),
+					),
+					array(
+						'key'   => 'custom_css',
+						'type'  => 'textarea',
+						'label' => __( 'Additional CSS', 'bfd-core' ),
+					),
 				),
 			),
 			'integrations'  => array(
 				'title'  => __( 'Integrations (optional)', 'bfd-core' ),
 				'fields' => array(
-					array( 'key' => 'ga_id', 'type' => 'text', 'label' => __( 'Google Analytics 4 ID (G-XXXXXXX)', 'bfd-core' ) ),
-					array( 'key' => 'gsc_verification', 'type' => 'text', 'label' => __( 'Google Search Console verification code', 'bfd-core' ) ),
-					array( 'key' => 'bing_verification', 'type' => 'text', 'label' => __( 'Bing Webmaster verification code', 'bfd-core' ) ),
-					array( 'key' => 'turnstile_site_key', 'type' => 'text', 'label' => __( 'Cloudflare Turnstile site key (spam protection for forms)', 'bfd-core' ) ),
-					array( 'key' => 'turnstile_secret', 'type' => 'text', 'label' => __( 'Cloudflare Turnstile secret key', 'bfd-core' ) ),
+					array(
+						'key'   => 'ga_id',
+						'type'  => 'text',
+						'label' => __( 'Google Analytics 4 ID (G-XXXXXXX)', 'bfd-core' ),
+					),
+					array(
+						'key'   => 'gsc_verification',
+						'type'  => 'text',
+						'label' => __( 'Google Search Console verification code', 'bfd-core' ),
+					),
+					array(
+						'key'   => 'bing_verification',
+						'type'  => 'text',
+						'label' => __( 'Bing Webmaster verification code', 'bfd-core' ),
+					),
+					array(
+						'key'   => 'turnstile_site_key',
+						'type'  => 'text',
+						'label' => __( 'Cloudflare Turnstile site key (spam protection for forms)', 'bfd-core' ),
+					),
+					array(
+						'key'   => 'turnstile_secret',
+						'type'  => 'text',
+						'label' => __( 'Cloudflare Turnstile secret key', 'bfd-core' ),
+					),
 				),
 			),
 			'advanced'      => array(
 				'title'  => __( 'Advanced', 'bfd-core' ),
 				'fields' => array(
-					array( 'key' => 'delete_on_uninstall', 'type' => 'checkbox', 'label' => __( 'Delete ALL plugin data (forms, submissions, custom sections, page sections, SEO fields, settings) when this plugin is deleted', 'bfd-core' ) ),
+					array(
+						'key'     => 'csp_mode',
+						'type'    => 'select',
+						'label'   => __( 'Content-Security-Policy for the public site', 'bfd-core' ),
+						'default' => 'off',
+						'options' => array(
+							'off'         => __( 'Off (default)', 'bfd-core' ),
+							'report_only' => __( 'Report only (browser console shows what would be blocked)', 'bfd-core' ),
+							'enforce'     => __( 'Enforce', 'bfd-core' ),
+						),
+					),
+					array(
+						'key'   => 'log_retention_days',
+						'type'  => 'number',
+						'label' => __( 'Keep the activity log for this many days (7-365)', 'bfd-core' ),
+					),
+					array(
+						'key'   => 'delete_on_uninstall',
+						'type'  => 'checkbox',
+						'label' => __( 'Delete ALL plugin data (forms, submissions, custom sections, page sections, SEO fields, settings) when this plugin is deleted', 'bfd-core' ),
+					),
 				),
 			),
 		);
@@ -127,14 +276,17 @@ final class Options_Page {
 	public function sanitize( $raw ): array {
 		$out = Sanitizer::fields( self::all_fields(), is_array( $raw ) ? $raw : array() );
 
-		$out['ga_id']             = preg_match( '/^G-[A-Z0-9]{4,12}$/i', $out['ga_id'] ) ? strtoupper( $out['ga_id'] ) : '';
-		$out['gsc_verification']  = preg_match( '/^[A-Za-z0-9_\-]{10,100}$/', $out['gsc_verification'] ) ? $out['gsc_verification'] : '';
-		$out['bing_verification'] = preg_match( '/^[A-Za-z0-9_\-]{10,100}$/', $out['bing_verification'] ) ? $out['bing_verification'] : '';
+		$out['ga_id']              = preg_match( '/^G-[A-Z0-9]{4,12}$/i', $out['ga_id'] ) ? strtoupper( $out['ga_id'] ) : '';
+		$out['gsc_verification']   = preg_match( '/^[A-Za-z0-9_\-]{10,100}$/', $out['gsc_verification'] ) ? $out['gsc_verification'] : '';
+		$out['bing_verification']  = preg_match( '/^[A-Za-z0-9_\-]{10,100}$/', $out['bing_verification'] ) ? $out['bing_verification'] : '';
 		$out['turnstile_site_key'] = preg_match( '/^[A-Za-z0-9_\-]{5,80}$/', $out['turnstile_site_key'] ) ? $out['turnstile_site_key'] : '';
 		$out['turnstile_secret']   = preg_match( '/^[A-Za-z0-9_\-]{5,120}$/', $out['turnstile_secret'] ) ? $out['turnstile_secret'] : '';
 
-		$width = (int) $out['container_width'];
+		$width                  = (int) $out['container_width'];
 		$out['container_width'] = ( $width >= 800 && $width <= 1800 ) ? $width : '';
+
+		$days                      = (int) $out['log_retention_days'];
+		$out['log_retention_days'] = ( $days >= 7 && $days <= 365 ) ? $days : '';
 
 		// Admin-authored CSS: no HTML tags, so it can never close its <style> element.
 		$out['custom_css'] = wp_strip_all_tags( (string) ( is_array( $raw ) ? ( $raw['custom_css'] ?? '' ) : '' ) );
@@ -183,7 +335,7 @@ final class Options_Page {
 
 		if ( 'textarea' === $f['type'] ) {
 			$rows = in_array( $f['key'], array( 'custom_css', 'redirects' ), true ) ? 8 : 3;
-			printf( '<textarea id="%s" name="%s" rows="%d" class="large-text%s">%s</textarea>', esc_attr( $id ), esc_attr( $name ), $rows, 8 === $rows ? ' code' : '', esc_textarea( (string) $value ) );
+			printf( '<textarea id="%s" name="%s" rows="%d" class="large-text%s">%s</textarea>', esc_attr( $id ), esc_attr( $name ), absint( $rows ), 8 === $rows ? ' code' : '', esc_textarea( (string) $value ) );
 			return;
 		}
 		if ( 'image' === $f['type'] ) {
@@ -215,7 +367,8 @@ final class Options_Page {
 			return;
 		}
 		if ( 'number' === $f['type'] ) {
-			printf( '<input type="number" class="small-text" id="%s" name="%s" value="%s" min="800" max="1800" step="10">', esc_attr( $id ), esc_attr( $name ), esc_attr( (string) $value ) );
+			$range = 'log_retention_days' === $f['key'] ? array( 7, 365, 1 ) : array( 800, 1800, 10 );
+			printf( '<input type="number" class="small-text" id="%s" name="%s" value="%s" min="%d" max="%d" step="%d">', esc_attr( $id ), esc_attr( $name ), esc_attr( (string) $value ), (int) $range[0], (int) $range[1], (int) $range[2] );
 			return;
 		}
 		$type = in_array( $f['type'], array( 'url', 'email', 'tel' ), true ) ? $f['type'] : 'text';

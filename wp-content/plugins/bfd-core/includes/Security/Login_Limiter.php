@@ -50,8 +50,12 @@ final class Login_Limiter {
 		if ( $error instanceof \WP_Error && $error->get_error_code() === 'bfd_locked' ) {
 			return; // Don't extend the lock with our own error.
 		}
-		$key = $this->key();
-		set_transient( $key, (int) get_transient( $key ) + 1, $this->lock_seconds() );
+		$key   = $this->key();
+		$count = (int) get_transient( $key ) + 1;
+		set_transient( $key, $count, $this->lock_seconds() );
+		if ( $count === $this->max_attempts() ) {
+			do_action( 'bfd_login_locked' );
+		}
 	}
 
 	public function clear(): void {

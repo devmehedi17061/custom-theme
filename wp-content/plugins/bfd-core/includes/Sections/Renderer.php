@@ -22,7 +22,7 @@ final class Renderer {
 				continue;
 			}
 			$container = $def['container'] ?? true;
-			$settings = $section['settings'] ?? array();
+			$settings  = $section['settings'] ?? array();
 
 			$classes = array(
 				'bfd-section',
@@ -31,7 +31,7 @@ final class Renderer {
 				'bfd-align--' . ( $settings['align'] ?? 'left' ),
 				'bfd-pad--' . ( $settings['padding'] ?? 'normal' ),
 			);
-			$hide = $settings['hide'] ?? 'none';
+			$hide    = $settings['hide'] ?? 'none';
 			if ( in_array( $hide, array( 'mobile', 'desktop' ), true ) ) {
 				$classes[] = 'bfd-hide-' . $hide;
 			}

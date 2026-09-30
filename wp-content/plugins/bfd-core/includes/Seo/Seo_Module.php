@@ -41,7 +41,7 @@ final class Seo_Module implements Module {
 	/* ---------- Data ---------- */
 
 	public static function seo_post_types(): array {
-		return array_values( get_post_types( array( 'public' => true ) ) ) ;
+		return array_values( get_post_types( array( 'public' => true ) ) );
 	}
 
 	private static function meta( int $post_id, string $key ): string {
@@ -213,7 +213,13 @@ final class Seo_Module implements Module {
 		if ( $graph ) {
 			printf(
 				"<script type=\"application/ld+json\">%s</script>\n",
-				wp_json_encode( array( '@context' => 'https://schema.org', '@graph' => $graph ), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP )
+				wp_json_encode(
+					array(
+						'@context' => 'https://schema.org',
+						'@graph'   => $graph,
+					),
+					JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP
+				)
 			);
 		}
 	}
@@ -235,10 +241,14 @@ final class Seo_Module implements Module {
 		// Skip for editors so their own visits don't skew the numbers.
 		$track = ! ( is_user_logged_in() && current_user_can( 'edit_posts' ) );
 		if ( $track && (bool) apply_filters( 'bfd_analytics_enabled', true ) && preg_match( '/^G-[A-Z0-9]{4,12}$/', $ga ) ) {
-			printf( "<script async src=\"https://www.googletagmanager.com/gtag/js?id=%s\"></script>\n", esc_attr( $ga ) );
-			printf(
-				"<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','%s');</script>\n",
-				esc_js( $ga )
+			wp_print_script_tag(
+				array(
+					'async' => true,
+					'src'   => 'https://www.googletagmanager.com/gtag/js?id=' . rawurlencode( $ga ),
+				)
+			);
+			wp_print_inline_script_tag(
+				"window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','" . esc_js( $ga ) . "');"
 			);
 		}
 	}
@@ -261,8 +271,15 @@ final class Seo_Module implements Module {
 	public function sitemap_exclude_noindex( array $args ): array {
 		$args['meta_query'] = array(
 			'relation' => 'OR',
-			array( 'key' => '_bfd_seo_noindex', 'compare' => 'NOT EXISTS' ),
-			array( 'key' => '_bfd_seo_noindex', 'value' => '1', 'compare' => '!=' ),
+			array(
+				'key'     => '_bfd_seo_noindex',
+				'compare' => 'NOT EXISTS',
+			),
+			array(
+				'key'     => '_bfd_seo_noindex',
+				'value'   => '1',
+				'compare' => '!=',
+			),
 		);
 		return $args;
 	}

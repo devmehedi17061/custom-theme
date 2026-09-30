@@ -2,33 +2,83 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: bfd-core\n"
-"POT-Creation-Date: 2026-09-30 04:04+0000\n"
+"POT-Creation-Date: 2026-09-30 04:49+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Domain: bfd-core\n"
 
-#: includes/Sections/Builtin_Sections.php:77
+#: includes/Security/Activity_Log.php:167
+msgid "\"%1$s\": %2$s to %3$s"
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:117
 msgid "\"View all\" button text"
 msgstr ""
 
-#: includes/Sections/Builtin_Sections.php:78
+#: includes/Sections/Builtin_Sections.php:121
 msgid "\"View all\" URL"
 msgstr ""
 
-#: includes/Forms/Submission_Handler.php:285
+#: includes/Security/Activity_Log.php:197
+msgid "%1$s published: %2$s"
+msgstr ""
+
+#: includes/Security/Activity_Log.php:200
+msgid "%1$s trashed: %2$s"
+msgstr ""
+
+#: includes/Security/Two_Factor.php:246
+msgid "%d backup code left."
+msgid_plural "%d backup codes left."
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/Forms/Submission_Handler.php:344
 msgid "%s: we received your message"
 msgstr ""
 
-#: includes/Security/Login_Limiter.php:67
+#: includes/Security/Activity_Log.php:38
+msgid "2FA disabled"
+msgstr ""
+
+#: includes/Security/Activity_Log.php:37
+msgid "2FA enabled"
+msgstr ""
+
+#: includes/Security/Two_Factor.php:268
+msgid "6-digit code"
+msgstr ""
+
+#: includes/Security/Two_Factor.php:157
+msgid "<strong>Error:</strong> Enter the authentication code from your app (or a backup code)."
+msgstr ""
+
+#: includes/Security/Two_Factor.php:162
+msgid "<strong>Error:</strong> The authentication code is invalid or was already used."
+msgstr ""
+
+#: includes/Security/Login_Limiter.php:71
 msgid "<strong>Error:</strong> The username or password is incorrect."
+msgstr ""
+
+#: includes/Security/Two_Factor.php:264
+msgid "Account: your username. Type: time-based. On a phone you can also tap:"
+msgstr ""
+
+#: includes/Security/Activity_Log.php:172
+msgid "Activated %s"
+msgstr ""
+
+#: includes/Security/Activity_Log.php:230 includes/Security/Activity_Log.php:230 includes/Security/Activity_Log.php:249
+msgid "Activity Log"
 msgstr ""
 
 #: includes/PostTypes/PostTypes_Module.php:89
 msgid "Add New %s"
 msgstr ""
 
-#: includes/Sections/Custom_Sections.php:55
+#: includes/Sections/Custom_Sections.php:64
 msgid "Add New Custom Section"
 msgstr ""
 
@@ -36,147 +86,183 @@ msgstr ""
 msgid "Add New Form"
 msgstr ""
 
-#: includes/Admin/Options_Page.php:73
+#: includes/Admin/Options_Page.php:181
 msgid "Additional CSS"
 msgstr ""
 
-#: includes/Admin/Options_Page.php:39
+#: includes/Admin/Options_Page.php:62
 msgid "Address"
 msgstr ""
 
-#: includes/Admin/Options_Page.php:87
+#: includes/Admin/Options_Page.php:216
 msgid "Advanced"
+msgstr ""
+
+#: includes/Security/Activity_Log.php:253
+msgid "All events"
 msgstr ""
 
 #: includes/Forms/Submissions.php:100
 msgid "All forms"
 msgstr ""
 
-#: includes/Sections/Section_Registry.php:62
+#: includes/Sections/Section_Registry.php:73
 msgid "Anchor ID (for menu links like #pricing)"
 msgstr ""
 
-#: includes/Sections/Section_Registry.php:128
+#: includes/Sections/Section_Registry.php:219
 msgid "Answer"
 msgstr ""
 
-#: includes/Forms/Forms_Module.php:152
+#: includes/Security/Two_Factor.php:143
+msgid "Authentication code (only if you use two-factor)"
+msgstr ""
+
+#: includes/Forms/Forms_Module.php:160
 msgid "Auto-reply"
 msgstr ""
 
-#: includes/Sections/Custom_Sections.php:280
+#: includes/Sections/Custom_Sections.php:289
 msgid "Automatically scoped to this section using CSS nesting. Write normal selectors like .my-section h2 { … }; use & for the section wrapper itself."
+msgstr ""
+
+#: includes/Forms/Form_Renderer.php:89
+msgid "Back"
 msgstr ""
 
 #: includes/Sections/Section_Registry.php:21
 msgid "Background"
 msgstr ""
 
-#: includes/Sections/Section_Registry.php:29
+#: includes/Sections/Section_Registry.php:32
 msgid "Background image"
 msgstr ""
 
-#: includes/Admin/Options_Page.php:112 includes/Admin/Options_Page.php:112 includes/Admin/Options_Page.php:160
+#: includes/Admin/Options_Page.php:261 includes/Admin/Options_Page.php:261 includes/Admin/Options_Page.php:312
 msgid "BFD Options"
 msgstr ""
 
-#: includes/Admin/Options_Page.php:81
+#: includes/Security/Activity_Log.php:206
+msgid "BFD Options were saved"
+msgstr ""
+
+#: includes/Admin/Options_Page.php:201
 msgid "Bing Webmaster verification code"
 msgstr ""
 
-#: includes/Seo/Breadcrumbs.php:50
+#: includes/Seo/Breadcrumbs.php:78
 msgid "Blog"
 msgstr ""
 
-#: includes/Admin/Options_Page.php:70
+#: includes/Admin/Options_Page.php:159
 msgid "Body font"
 msgstr ""
 
-#: includes/Seo/Breadcrumbs.php:67
+#: includes/Seo/Breadcrumbs.php:106
 msgid "Breadcrumb"
 msgstr ""
 
-#: includes/Forms/Forms_Module.php:148
+#: includes/Forms/Forms_Module.php:156
 msgid "Button label"
 msgstr ""
 
-#: includes/Sections/Builtin_Sections.php:58 includes/Sections/Builtin_Sections.php:102 includes/Sections/Section_Registry.php:80
+#: includes/Sections/Builtin_Sections.php:86 includes/Sections/Builtin_Sections.php:150 includes/Sections/Section_Registry.php:111
 msgid "Button text"
 msgstr ""
 
-#: includes/Sections/Builtin_Sections.php:59 includes/Sections/Builtin_Sections.php:103 includes/Sections/Section_Registry.php:81
+#: includes/Sections/Builtin_Sections.php:90 includes/Sections/Builtin_Sections.php:154 includes/Sections/Section_Registry.php:116
 msgid "Button URL"
 msgstr ""
 
-#: includes/Sections/Section_Registry.php:110
+#: includes/Sections/Section_Registry.php:174
 msgid "Call to Action"
 msgstr ""
 
-#: includes/Seo/Seo_Module.php:311
+#: includes/Seo/Seo_Module.php:328
 msgid "Canonical URL"
 msgstr ""
 
-#: includes/Sections/Builtin_Sections.php:166 includes/Sections/Builtin_Sections.php:176
+#: includes/Sections/Builtin_Sections.php:238 includes/Sections/Builtin_Sections.php:252
 msgid "Caption"
 msgstr ""
 
-#: includes/Sections/Section_Registry.php:99
+#: includes/Sections/Section_Registry.php:147
 msgid "Cards"
 msgstr ""
 
-#: includes/Sections/Section_Registry.php:37
+#: includes/Sections/Section_Registry.php:45
 msgid "Center"
 msgstr ""
 
-#: includes/Forms/Forms_Module.php:127
+#: includes/Forms/Forms_Module.php:134
 msgid "Checkbox"
 msgstr ""
 
-#: includes/Forms/Submission_Handler.php:151
+#: includes/Forms/Submission_Handler.php:210
 msgid "Choose a valid option."
 msgstr ""
 
-#: includes/Admin/Options_Page.php:83
+#: includes/Admin/Options_Page.php:211
 msgid "Cloudflare Turnstile secret key"
 msgstr ""
 
-#: includes/Admin/Options_Page.php:82
+#: includes/Admin/Options_Page.php:206
 msgid "Cloudflare Turnstile site key (spam protection for forms)"
 msgstr ""
 
-#: includes/Sections/Builtin_Sections.php:23 includes/Sections/Section_Registry.php:92
+#: includes/Sections/Builtin_Sections.php:31 includes/Sections/Section_Registry.php:136
 msgid "Columns"
 msgstr ""
 
-#: includes/Admin/Options_Page.php:35
+#: includes/Security/Two_Factor.php:269
+msgid "Confirm and turn on"
+msgstr ""
+
+#: includes/Admin/Options_Page.php:47
 msgid "Contact"
 msgstr ""
 
-#: includes/Sections/Section_Registry.php:137
+#: includes/Sections/Section_Registry.php:236
 msgid "Content (HTML allowed)"
 msgstr ""
 
-#: includes/Sections/Builtin_Sections.php:70
+#: includes/Security/Activity_Log.php:34
+msgid "Content published"
+msgstr ""
+
+#: includes/Security/Activity_Log.php:35
+msgid "Content trashed"
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:102
 msgid "Content type"
 msgstr ""
 
-#: includes/Admin/Options_Page.php:71
+#: includes/Admin/Options_Page.php:166
 msgid "Content width in px (800-1800)"
 msgstr ""
 
-#: includes/Sections/Custom_Sections.php:226
+#: includes/Admin/Options_Page.php:221
+msgid "Content-Security-Policy for the public site"
+msgstr ""
+
+#: includes/Sections/Custom_Sections.php:235
 msgid "CSS"
 msgstr ""
 
-#: includes/Sections/Section_Registry.php:141
+#: includes/Security/Two_Factor.php:252
+msgid "Current code or backup code"
+msgstr ""
+
+#: includes/Sections/Section_Registry.php:241
 msgid "Custom HTML"
 msgstr ""
 
-#: includes/Sections/Custom_Sections.php:54
+#: includes/Sections/Custom_Sections.php:63
 msgid "Custom Section"
 msgstr ""
 
-#: includes/Sections/Custom_Sections.php:53 includes/Sections/Custom_Sections.php:57
+#: includes/Sections/Custom_Sections.php:62 includes/Sections/Custom_Sections.php:66
 msgid "Custom Sections"
 msgstr ""
 
@@ -184,7 +270,7 @@ msgstr ""
 msgid "Dark"
 msgstr ""
 
-#: includes/Sections/Section_Registry.php:30
+#: includes/Sections/Section_Registry.php:37
 msgid "Dark overlay on background image"
 msgstr ""
 
@@ -196,15 +282,19 @@ msgstr ""
 msgid "Date"
 msgstr ""
 
-#: includes/Admin/Options_Page.php:56
+#: includes/Security/Activity_Log.php:177
+msgid "Deactivated %s"
+msgstr ""
+
+#: includes/Admin/Options_Page.php:107
 msgid "Default social share image"
 msgstr ""
 
-#: includes/Seo/Seo_Module.php:312
+#: includes/Seo/Seo_Module.php:329
 msgid "Default: the permalink"
 msgstr ""
 
-#: includes/Sections/Custom_Sections.php:233
+#: includes/Sections/Custom_Sections.php:242
 msgid "Define the fields editors fill in when they add this section to a page."
 msgstr ""
 
@@ -212,7 +302,7 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: includes/Admin/Options_Page.php:89
+#: includes/Admin/Options_Page.php:237
 msgid "Delete ALL plugin data (forms, submissions, custom sections, page sections, SEO fields, settings) when this plugin is deleted"
 msgstr ""
 
@@ -220,15 +310,19 @@ msgstr ""
 msgid "Delete this submission?"
 msgstr ""
 
-#: includes/Admin/Options_Page.php:62
+#: includes/Admin/Options_Page.php:122
 msgid "Design"
+msgstr ""
+
+#: includes/Security/Activity_Log.php:265
+msgid "Details"
 msgstr ""
 
 #: includes/PostTypes/PostTypes_Module.php:90
 msgid "Edit %s"
 msgstr ""
 
-#: includes/Sections/Custom_Sections.php:56
+#: includes/Sections/Custom_Sections.php:65
 msgid "Edit Custom Section"
 msgstr ""
 
@@ -236,91 +330,123 @@ msgstr ""
 msgid "Edit Form"
 msgstr ""
 
-#: includes/Admin/Options_Page.php:38 includes/Forms/Forms_Module.php:123
+#: includes/Admin/Options_Page.php:57 includes/Forms/Forms_Module.php:130
 msgid "Email"
 msgstr ""
 
-#: includes/Forms/Forms_Module.php:144
+#: includes/Forms/Forms_Module.php:152
 msgid "Email subject"
 msgstr ""
 
-#: includes/Forms/Submission_Handler.php:148
+#: includes/Security/Two_Factor.php:211
+msgid "Enabled"
+msgstr ""
+
+#: includes/Security/Two_Factor.php:245
+msgid "Enabled."
+msgstr ""
+
+#: includes/Admin/Options_Page.php:226
+msgid "Enforce"
+msgstr ""
+
+#: includes/Forms/Submission_Handler.php:207
 msgid "Enter a number."
 msgstr ""
 
-#: includes/Forms/Submission_Handler.php:142
+#: includes/Forms/Submission_Handler.php:201
 msgid "Enter a valid email address."
 msgstr ""
 
-#: includes/Forms/Submission_Handler.php:146
+#: includes/Forms/Submission_Handler.php:205
 msgid "Enter a valid phone number."
+msgstr ""
+
+#: includes/Security/Activity_Log.php:264
+msgid "Event"
 msgstr ""
 
 #: includes/Forms/Submissions.php:106
 msgid "Export CSV"
 msgstr ""
 
-#: includes/Sections/Section_Registry.php:63
+#: includes/Sections/Section_Registry.php:78
 msgid "Extra CSS classes"
 msgstr ""
 
-#: includes/Sections/Section_Registry.php:119
+#: includes/Security/Activity_Log.php:25
+msgid "Failed login"
+msgstr ""
+
+#: includes/Security/Activity_Log.php:138
+msgid "Failed login for \"%s\""
+msgstr ""
+
+#: includes/Sections/Section_Registry.php:199
 msgid "FAQ"
 msgstr ""
 
-#: includes/Sections/Builtin_Sections.php:101
+#: includes/Sections/Builtin_Sections.php:149
 msgid "Features (one per line)"
 msgstr ""
 
-#: includes/Sections/Section_Registry.php:85
+#: includes/Sections/Section_Registry.php:121
 msgid "Features / Cards"
 msgstr ""
 
-#: includes/Forms/Forms_Module.php:101 includes/Sections/Custom_Sections.php:224
+#: includes/Forms/Forms_Module.php:108 includes/Sections/Custom_Sections.php:233
 msgid "Fields"
 msgstr ""
 
-#: includes/Forms/Forms_Module.php:129
+#: includes/Forms/Forms_Module.php:136
 msgid "File upload"
 msgstr ""
 
-#: includes/Forms/Forms_Module.php:134
+#: includes/Forms/Forms_Module.php:142
 msgid "File uploads accept PDF, JPG, PNG, WebP, DOC and DOCX up to 5 MB."
 msgstr ""
 
-#: includes/Forms/Submissions.php:105
+#: includes/Forms/Submissions.php:105 includes/Security/Activity_Log.php:258
 msgid "Filter"
 msgstr ""
 
-#: includes/Admin/Options_Page.php:31
+#: includes/Admin/Options_Page.php:42
 msgid "Footer text"
 msgstr ""
 
-#: includes/Forms/Forms_Module.php:44 includes/Forms/Submissions.php:110 includes/Sections/Section_Registry.php:151
+#: includes/Forms/Forms_Module.php:44 includes/Forms/Submissions.php:110 includes/Sections/Section_Registry.php:255
 msgid "Form"
 msgstr ""
 
-#: includes/Sections/Section_Registry.php:158
+#: includes/Sections/Section_Registry.php:270
 msgid "Form (create under Forms)"
 msgstr ""
 
-#: includes/Forms/Form_Renderer.php:26
+#: includes/Forms/Form_Renderer.php:35
 msgid "Form not found or not published."
+msgstr ""
+
+#: includes/Security/Activity_Log.php:220
+msgid "Form submission #%d deleted"
 msgstr ""
 
 #: includes/Forms/Submissions.php:90
 msgid "Form Submissions"
 msgstr ""
 
+#: includes/Security/Activity_Log.php:224
+msgid "Form submissions exported to CSV"
+msgstr ""
+
 #: includes/Forms/Forms_Module.php:43
 msgid "Forms"
 msgstr ""
 
-#: includes/Admin/Options_Page.php:79
+#: includes/Admin/Options_Page.php:191
 msgid "Google Analytics 4 ID (G-XXXXXXX)"
 msgstr ""
 
-#: includes/Admin/Options_Page.php:80
+#: includes/Admin/Options_Page.php:196
 msgid "Google Search Console verification code"
 msgstr ""
 
@@ -328,87 +454,95 @@ msgstr ""
 msgid "Header & Footer"
 msgstr ""
 
-#: includes/Admin/Options_Page.php:29
+#: includes/Admin/Options_Page.php:32
 msgid "Header button text"
 msgstr ""
 
-#: includes/Admin/Options_Page.php:30
+#: includes/Admin/Options_Page.php:37
 msgid "Header button URL"
 msgstr ""
 
-#: includes/Sections/Builtin_Sections.php:49 includes/Sections/Builtin_Sections.php:65 includes/Sections/Builtin_Sections.php:84
+#: includes/Sections/Builtin_Sections.php:66 includes/Sections/Builtin_Sections.php:97 includes/Sections/Builtin_Sections.php:128
 msgid "Heading"
 msgstr ""
 
-#: includes/Admin/Options_Page.php:69
+#: includes/Admin/Options_Page.php:152
 msgid "Heading font"
 msgstr ""
 
-#: includes/Sections/Section_Registry.php:75
+#: includes/Sections/Section_Registry.php:91
 msgid "Hero"
 msgstr ""
 
-#: includes/Seo/Seo_Module.php:323
+#: includes/Seo/Seo_Module.php:340
 msgid "Hide from search engines (noindex) and the sitemap"
 msgstr ""
 
-#: includes/Sections/Section_Registry.php:59
+#: includes/Sections/Section_Registry.php:67
 msgid "Hide on desktop"
 msgstr ""
 
-#: includes/Sections/Section_Registry.php:58
+#: includes/Sections/Section_Registry.php:66
 msgid "Hide on mobile"
 msgstr ""
 
-#: includes/Sections/Builtin_Sections.php:104
+#: includes/Sections/Builtin_Sections.php:159
 msgid "Highlight this plan"
 msgstr ""
 
-#: includes/Seo/Breadcrumbs.php:18
+#: includes/Seo/Breadcrumbs.php:19
 msgid "Home"
 msgstr ""
 
-#: includes/Sections/Builtin_Sections.php:74 includes/Sections/Builtin_Sections.php:85
+#: includes/Sections/Builtin_Sections.php:109 includes/Sections/Builtin_Sections.php:132
 msgid "How many (1-24)"
 msgstr ""
 
-#: includes/Sections/Section_Registry.php:143
+#: includes/Sections/Section_Registry.php:246
 msgid "HTML (unfiltered only for users with the unfiltered_html capability)"
 msgstr ""
 
-#: includes/Sections/Custom_Sections.php:225
+#: includes/Sections/Custom_Sections.php:234
 msgid "HTML Template"
 msgstr ""
 
-#: includes/Sections/Builtin_Sections.php:51 includes/Sections/Builtin_Sections.php:165 includes/Sections/Section_Registry.php:79
+#: includes/Sections/Builtin_Sections.php:75 includes/Sections/Builtin_Sections.php:236 includes/Sections/Section_Registry.php:106
 msgid "Image"
 msgstr ""
 
-#: includes/Sections/Builtin_Sections.php:47
+#: includes/Sections/Builtin_Sections.php:64
 msgid "Image + Text"
 msgstr ""
 
-#: includes/Sections/Custom_Sections.php:250
+#: includes/Sections/Custom_Sections.php:259
 msgid "image as an &lt;img&gt; tag"
 msgstr ""
 
-#: includes/Sections/Builtin_Sections.php:157
+#: includes/Sections/Builtin_Sections.php:225
 msgid "Image gallery"
 msgstr ""
 
-#: includes/Sections/Builtin_Sections.php:55
+#: includes/Sections/Builtin_Sections.php:80
 msgid "Image position"
 msgstr ""
 
-#: includes/Sections/Builtin_Sections.php:163
+#: includes/Sections/Builtin_Sections.php:231
 msgid "Images"
 msgstr ""
 
-#: includes/Admin/Options_Page.php:77
+#: includes/Security/Two_Factor.php:262
+msgid "In your authenticator app choose \"Enter a setup key\" and use:"
+msgstr ""
+
+#: includes/Admin/Options_Page.php:176
+msgid "Inline the theme stylesheet in the page head (one fewer request; best for small sites)"
+msgstr ""
+
+#: includes/Admin/Options_Page.php:186
 msgid "Integrations (optional)"
 msgstr ""
 
-#: includes/Sections/Builtin_Sections.php:66 includes/Sections/Builtin_Sections.php:93 includes/Sections/Builtin_Sections.php:113
+#: includes/Sections/Builtin_Sections.php:98 includes/Sections/Builtin_Sections.php:141 includes/Sections/Builtin_Sections.php:169
 msgid "Intro"
 msgstr ""
 
@@ -416,39 +550,51 @@ msgstr ""
 msgid "Invalid sections data."
 msgstr ""
 
+#: includes/Security/Activity_Log.php:266
+msgid "IP"
+msgstr ""
+
+#: includes/Security/Activity_Log.php:295
+msgid "IP addresses are anonymized. Entries older than the retention period (Settings > BFD Options > Advanced) are removed daily."
+msgstr ""
+
 #: includes/Sections/Sections_Module.php:53
 msgid "JavaScript is required for the section builder."
 msgstr ""
 
-#: includes/Forms/Forms_Module.php:151
+#: includes/Forms/Forms_Module.php:159
 msgid "Keep a copy in Forms > Submissions"
 msgstr ""
 
-#: includes/Admin/Options_Page.php:72
+#: includes/Admin/Options_Page.php:232
+msgid "Keep the activity log for this many days (7-365)"
+msgstr ""
+
+#: includes/Admin/Options_Page.php:171
 msgid "Keep the header visible when scrolling"
 msgstr ""
 
-#: includes/Sections/Builtin_Sections.php:136
+#: includes/Sections/Builtin_Sections.php:196
 msgid "Label"
 msgstr ""
 
-#: includes/Sections/Section_Registry.php:49
+#: includes/Sections/Section_Registry.php:57
 msgid "Large"
 msgstr ""
 
-#: includes/Seo/Seo_Module.php:308
+#: includes/Seo/Seo_Module.php:325
 msgid "Leave empty to generate from the excerpt or first section. Aim for 120-160 characters."
 msgstr ""
 
-#: includes/Seo/Seo_Module.php:303
+#: includes/Seo/Seo_Module.php:320
 msgid "Leave empty to use the page title. Aim for under 60 characters."
 msgstr ""
 
-#: includes/Forms/Form_Renderer.php:45
+#: includes/Forms/Form_Renderer.php:64
 msgid "Leave this field empty"
 msgstr ""
 
-#: includes/Sections/Builtin_Sections.php:56 includes/Sections/Section_Registry.php:36
+#: includes/Sections/Builtin_Sections.php:83 includes/Sections/Section_Registry.php:44
 msgid "Left"
 msgstr ""
 
@@ -456,51 +602,75 @@ msgstr ""
 msgid "Light"
 msgstr ""
 
-#: includes/Admin/Options_Page.php:68
+#: includes/Admin/Options_Page.php:147
 msgid "Light section background"
 msgstr ""
 
-#: includes/Sections/Builtin_Sections.php:151 includes/Sections/Section_Registry.php:104
+#: includes/Sections/Builtin_Sections.php:218 includes/Sections/Section_Registry.php:167
 msgid "Link URL"
 msgstr ""
 
-#: includes/Sections/Builtin_Sections.php:149
+#: includes/Security/Activity_Log.php:133
+msgid "Logged in"
+msgstr ""
+
+#: includes/Security/Activity_Log.php:24
+msgid "Login"
+msgstr ""
+
+#: includes/Security/Activity_Log.php:26
+msgid "Login lockout"
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:212
 msgid "Logo"
 msgstr ""
 
-#: includes/Sections/Builtin_Sections.php:142
+#: includes/Sections/Builtin_Sections.php:202
 msgid "Logo strip"
 msgstr ""
 
-#: includes/Sections/Builtin_Sections.php:147
+#: includes/Sections/Builtin_Sections.php:207
 msgid "Logos"
 msgstr ""
 
-#: includes/Sections/Custom_Sections.php:251
+#: includes/Sections/Custom_Sections.php:260
 msgid "loop over a repeater, or show only if the field is not empty"
 msgstr ""
 
-#: includes/Sections/Builtin_Sections.php:117
+#: includes/Security/Two_Factor.php:212
+msgid "Manage / reset for this user"
+msgstr ""
+
+#: includes/Security/Two_Factor.php:212
+msgid "Manage two-factor"
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:173
 msgid "Members"
 msgstr ""
 
-#: includes/Seo/Seo_Module.php:306
+#: includes/Seo/Seo_Module.php:323
 msgid "Meta description"
 msgstr ""
 
-#: includes/Sections/Builtin_Sections.php:120
+#: includes/Sections/Builtin_Sections.php:180
 msgid "Name"
 msgstr ""
 
-#: includes/Sections/Builtin_Sections.php:150
+#: includes/Sections/Builtin_Sections.php:214
 msgid "Name (used as alt text)"
 msgstr ""
 
-#: includes/Forms/Form_Definition.php:47
+#: includes/Forms/Form_Definition.php:48
 msgid "New form submission"
 msgstr ""
 
-#: includes/Forms/Submission_Handler.php:245
+#: includes/Forms/Form_Renderer.php:90
+msgid "Next"
+msgstr ""
+
+#: includes/Forms/Submission_Handler.php:304
 msgid "No"
 msgstr ""
 
@@ -508,43 +678,67 @@ msgstr ""
 msgid "No submissions yet."
 msgstr ""
 
-#: includes/Sections/Section_Registry.php:23 includes/Sections/Section_Registry.php:47
+#: includes/Sections/Section_Registry.php:23 includes/Sections/Section_Registry.php:55
 msgid "None"
 msgstr ""
 
-#: includes/Sections/Section_Registry.php:46
+#: includes/Sections/Section_Registry.php:54
 msgid "Normal"
 msgstr ""
 
-#: includes/Forms/Submissions.php:150 includes/Forms/Submissions.php:182 includes/Sections/Sections_Module.php:122
+#: includes/Forms/Submissions.php:150 includes/Forms/Submissions.php:183 includes/Sections/Sections_Module.php:122
 msgid "Not allowed."
 msgstr ""
 
-#: includes/Seo/Breadcrumbs.php:52
+#: includes/Security/Two_Factor.php:279
+msgid "Not enabled for this user."
+msgstr ""
+
+#: includes/Seo/Breadcrumbs.php:83
 msgid "Not found"
+msgstr ""
+
+#: includes/Security/Activity_Log.php:270
+msgid "Nothing logged yet."
 msgstr ""
 
 #: includes/Sections/Sections_Module.php:147
 msgid "Nothing to preview yet."
 msgstr ""
 
-#: includes/Forms/Forms_Module.php:128
+#: includes/Forms/Forms_Module.php:135
 msgid "Number"
 msgstr ""
 
-#: includes/Sections/Builtin_Sections.php:135
+#: includes/Sections/Builtin_Sections.php:195
 msgid "Number (e.g. 250+)"
 msgstr ""
 
-#: includes/Sections/Custom_Sections.php:291
+#: includes/Security/Two_Factor.php:211
+msgid "Off"
+msgstr ""
+
+#: includes/Admin/Options_Page.php:224
+msgid "Off (default)"
+msgstr ""
+
+#: includes/Security/Two_Factor.php:272
+msgid "Off. Adds a 6-digit code from an app (Google Authenticator, Authy, 1Password…) to your login."
+msgstr ""
+
+#: includes/Sections/Custom_Sections.php:300
 msgid "Only published custom sections appear in the page builder."
 msgstr ""
 
-#: includes/Admin/Options_Page.php:55
+#: includes/Security/Two_Factor.php:264
+msgid "open in authenticator app"
+msgstr ""
+
+#: includes/Admin/Options_Page.php:102
 msgid "Organization name (schema)"
 msgstr ""
 
-#: includes/Admin/Options_Page.php:67
+#: includes/Admin/Options_Page.php:142
 msgid "Page background"
 msgstr ""
 
@@ -552,51 +746,79 @@ msgstr ""
 msgid "Page Sections"
 msgstr ""
 
-#: includes/Sections/Builtin_Sections.php:100
+#: includes/Security/Activity_Log.php:27
+msgid "Password reset"
+msgstr ""
+
+#: includes/Security/Activity_Log.php:146
+msgid "Password was reset"
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:148
 msgid "Period (e.g. /month)"
 msgstr ""
 
-#: includes/Admin/Options_Page.php:37 includes/Forms/Forms_Module.php:124
+#: includes/Admin/Options_Page.php:52 includes/Forms/Forms_Module.php:131
 msgid "Phone"
 msgstr ""
 
-#: includes/Sections/Builtin_Sections.php:119
+#: includes/Sections/Builtin_Sections.php:178
 msgid "Photo"
 msgstr ""
 
-#: includes/Sections/Custom_Sections.php:247
+#: includes/Sections/Custom_Sections.php:256
 msgid "Placeholder syntax"
 msgstr ""
 
-#: includes/Sections/Builtin_Sections.php:98
+#: includes/Sections/Builtin_Sections.php:146
 msgid "Plan name"
 msgstr ""
 
-#: includes/Sections/Builtin_Sections.php:96
+#: includes/Sections/Builtin_Sections.php:144
 msgid "Plans"
 msgstr ""
 
-#: includes/Forms/Submission_Handler.php:185
+#: includes/Forms/Form_Renderer.php:12
+msgid "Please check the highlighted fields and try again."
+msgstr ""
+
+#: includes/Forms/Submission_Handler.php:244
 msgid "Please choose a file."
 msgstr ""
 
-#: includes/Sections/Builtin_Sections.php:63
+#: includes/Forms/Form_Renderer.php:20
+msgid "Please complete the spam check and try again."
+msgstr ""
+
+#: includes/Forms/Form_Renderer.php:14
+msgid "Please wait a moment and try again."
+msgstr ""
+
+#: includes/Security/Activity_Log.php:31
+msgid "Plugin activated"
+msgstr ""
+
+#: includes/Security/Activity_Log.php:32
+msgid "Plugin deactivated"
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:95
 msgid "Posts / Services / Projects grid"
 msgstr ""
 
-#: includes/Sections/Builtin_Sections.php:99
+#: includes/Sections/Builtin_Sections.php:147
 msgid "Price (e.g. $29)"
 msgstr ""
 
-#: includes/Sections/Builtin_Sections.php:90
+#: includes/Sections/Builtin_Sections.php:138
 msgid "Pricing"
 msgstr ""
 
-#: includes/Admin/Options_Page.php:64 includes/Sections/Section_Registry.php:26
+#: includes/Admin/Options_Page.php:127 includes/Sections/Section_Registry.php:26
 msgid "Primary color"
 msgstr ""
 
-#: includes/Admin/Options_Page.php:65
+#: includes/Admin/Options_Page.php:132
 msgid "Primary color (hover, dark)"
 msgstr ""
 
@@ -616,35 +838,47 @@ msgstr ""
 msgid "Projects"
 msgstr ""
 
-#: includes/Forms/Forms_Module.php:161
+#: includes/Security/Two_Factor.php:351
+msgid "Protect your admin account with two-factor authentication."
+msgstr ""
+
+#: includes/Forms/Forms_Module.php:169
 msgid "Publish the form to use it."
 msgstr ""
 
-#: includes/Sections/Section_Registry.php:127
+#: includes/Sections/Section_Registry.php:214
 msgid "Question"
 msgstr ""
 
-#: includes/Sections/Section_Registry.php:125
+#: includes/Sections/Section_Registry.php:209
 msgid "Questions"
 msgstr ""
 
-#: includes/Admin/Options_Page.php:58
+#: includes/Admin/Options_Page.php:117
 msgid "Redirects (one per line: /old-path /new-path [301|302])"
 msgstr ""
 
-#: includes/Admin/Options_Page.php:196 includes/Seo/Seo_Module.php:319
+#: includes/Admin/Options_Page.php:348 includes/Seo/Seo_Module.php:336
 msgid "Remove"
 msgstr ""
 
-#: includes/Sections/Section_Registry.php:134
+#: includes/Admin/Options_Page.php:225
+msgid "Report only (browser console shows what would be blocked)"
+msgstr ""
+
+#: includes/Security/Two_Factor.php:254
+msgid "Reset two-factor for this user (they lost their device)"
+msgstr ""
+
+#: includes/Sections/Section_Registry.php:226
 msgid "Rich Text"
 msgstr ""
 
-#: includes/Sections/Builtin_Sections.php:56
+#: includes/Sections/Builtin_Sections.php:82
 msgid "Right"
 msgstr ""
 
-#: includes/Sections/Builtin_Sections.php:121
+#: includes/Sections/Builtin_Sections.php:181
 msgid "Role"
 msgstr ""
 
@@ -652,51 +886,59 @@ msgstr ""
 msgid "Role / company"
 msgstr ""
 
-#: includes/Sections/Custom_Sections.php:253
+#: includes/Security/Activity_Log.php:30
+msgid "Role changed"
+msgstr ""
+
+#: includes/Sections/Custom_Sections.php:262
 msgid "row number inside a loop"
 msgstr ""
 
-#: includes/Forms/Forms_Module.php:150
+#: includes/Forms/Forms_Module.php:158
 msgid "Save submissions"
 msgstr ""
 
-#: includes/Seo/Breadcrumbs.php:48
+#: includes/Seo/Breadcrumbs.php:73
 msgid "Search: %s"
 msgstr ""
 
-#: includes/Forms/Forms_Module.php:126
+#: includes/Forms/Form_Renderer.php:18
+msgid "Security check failed. Please reload the page and try again."
+msgstr ""
+
+#: includes/Forms/Forms_Module.php:133
 msgid "Select"
 msgstr ""
 
-#: includes/Admin/Options_Page.php:195 includes/Seo/Seo_Module.php:318
+#: includes/Admin/Options_Page.php:347 includes/Seo/Seo_Module.php:335
 msgid "Select image"
 msgstr ""
 
-#: includes/Forms/Form_Renderer.php:109
+#: includes/Forms/Form_Renderer.php:181
 msgid "Select…"
 msgstr ""
 
-#: includes/Forms/Form_Definition.php:49
+#: includes/Forms/Form_Definition.php:50
 msgid "Send"
 msgstr ""
 
-#: includes/Forms/Forms_Module.php:153
+#: includes/Forms/Forms_Module.php:161
 msgid "Send a confirmation to the visitor (needs an Email field)"
 msgstr ""
 
-#: includes/Forms/Forms_Module.php:142
+#: includes/Forms/Forms_Module.php:150
 msgid "Send to (comma separated)"
 msgstr ""
 
-#: includes/Seo/Seo_Module.php:283
+#: includes/Seo/Seo_Module.php:300
 msgid "SEO"
 msgstr ""
 
-#: includes/Admin/Options_Page.php:53
+#: includes/Admin/Options_Page.php:97
 msgid "SEO defaults"
 msgstr ""
 
-#: includes/Seo/Seo_Module.php:301
+#: includes/Seo/Seo_Module.php:318
 msgid "SEO title"
 msgstr ""
 
@@ -716,52 +958,80 @@ msgstr ""
 msgid "Services"
 msgstr ""
 
-#: includes/Forms/Forms_Module.php:102 includes/Sections/Custom_Sections.php:227
+#: includes/Security/Two_Factor.php:353
+msgid "Set it up"
+msgstr ""
+
+#: includes/Security/Two_Factor.php:276
+msgid "Set up two-factor"
+msgstr ""
+
+#: includes/Forms/Forms_Module.php:109 includes/Sections/Custom_Sections.php:236
 msgid "Settings"
 msgstr ""
 
-#: includes/Sections/Builtin_Sections.php:122
+#: includes/Security/Activity_Log.php:36
+msgid "Settings changed"
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:182
 msgid "Short bio"
 msgstr ""
 
-#: includes/Forms/Forms_Module.php:164
+#: includes/Forms/Forms_Module.php:172
 msgid "Shortcode, or pick this form in a page's \"Form\" section:"
 msgstr ""
 
-#: includes/Sections/Section_Registry.php:57
+#: includes/Sections/Section_Registry.php:65
 msgid "Show everywhere"
 msgstr ""
 
-#: includes/Sections/Builtin_Sections.php:76
+#: includes/Sections/Builtin_Sections.php:115
 msgid "Show excerpt"
 msgstr ""
 
-#: includes/Sections/Custom_Sections.php:252
+#: includes/Sections/Custom_Sections.php:261
 msgid "show only if the field is empty"
 msgstr ""
 
-#: includes/Sections/Section_Registry.php:48
+#: includes/Sections/Section_Registry.php:56
 msgid "Small"
 msgstr ""
 
-#: includes/Admin/Options_Page.php:43
+#: includes/Admin/Options_Page.php:67
 msgid "Social links"
 msgstr ""
 
-#: includes/Seo/Seo_Module.php:315
+#: includes/Seo/Seo_Module.php:332
 msgid "Social share image"
 msgstr ""
 
-#: includes/Sections/Builtin_Sections.php:133
+#: includes/Forms/Form_Renderer.php:22
+msgid "Sorry, something went wrong. Please try again later."
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:193
 msgid "Stats"
 msgstr ""
 
-#: includes/Sections/Builtin_Sections.php:128
+#: includes/Sections/Builtin_Sections.php:188
 msgid "Stats / Counters"
 msgstr ""
 
-#: includes/Sections/Section_Registry.php:78
+#: includes/Security/Two_Factor.php:210
+msgid "Status"
+msgstr ""
+
+#: includes/Forms/Forms_Module.php:137
+msgid "Step break (starts a new step)"
+msgstr ""
+
+#: includes/Sections/Section_Registry.php:101
 msgid "Subheading"
+msgstr ""
+
+#: includes/Security/Activity_Log.php:39
+msgid "Submission deleted"
 msgstr ""
 
 #: includes/Forms/Submissions.php:93
@@ -772,11 +1042,19 @@ msgstr ""
 msgid "Submissions"
 msgstr ""
 
-#: includes/Forms/Forms_Module.php:146
+#: includes/Security/Activity_Log.php:40
+msgid "Submissions exported"
+msgstr ""
+
+#: includes/Forms/Forms_Module.php:154
 msgid "Success message"
 msgstr ""
 
-#: includes/Sections/Builtin_Sections.php:110
+#: includes/Security/Activity_Log.php:182
+msgid "Switched to theme %s"
+msgstr ""
+
+#: includes/Sections/Builtin_Sections.php:166
 msgid "Team"
 msgstr ""
 
@@ -792,55 +1070,67 @@ msgstr ""
 msgid "Testimonials"
 msgstr ""
 
-#: includes/Sections/Builtin_Sections.php:82
+#: includes/Sections/Builtin_Sections.php:126
 msgid "Testimonials (from Testimonials post type)"
 msgstr ""
 
-#: includes/Forms/Forms_Module.php:122 includes/Sections/Section_Registry.php:103 includes/Sections/Section_Registry.php:113
+#: includes/Forms/Forms_Module.php:129 includes/Sections/Section_Registry.php:162 includes/Sections/Section_Registry.php:184
 msgid "Text"
 msgstr ""
 
-#: includes/Sections/Builtin_Sections.php:50
+#: includes/Sections/Builtin_Sections.php:70
 msgid "Text (HTML allowed)"
 msgstr ""
 
-#: includes/Sections/Section_Registry.php:34
+#: includes/Sections/Section_Registry.php:42
 msgid "Text alignment"
 msgstr ""
 
-#: includes/Admin/Options_Page.php:66
+#: includes/Admin/Options_Page.php:137
 msgid "Text color"
 msgstr ""
 
-#: includes/Forms/Forms_Module.php:125
+#: includes/Forms/Forms_Module.php:132
 msgid "Textarea"
 msgstr ""
 
-#: includes/Forms/Form_Definition.php:48
+#: includes/Forms/Form_Definition.php:49
 msgid "Thank you! Your message has been sent."
 msgstr ""
 
-#: includes/Forms/Form_Definition.php:52
+#: includes/Forms/Form_Definition.php:53
 msgid "Thanks for getting in touch. We have received your message and will reply soon."
 msgstr ""
 
-#: includes/Forms/Submission_Handler.php:188
+#: includes/Security/Two_Factor.php:235
+msgid "That code was not correct. Try again."
+msgstr ""
+
+#: includes/Forms/Submission_Handler.php:247
 msgid "The file could not be uploaded."
 msgstr ""
 
-#: includes/Forms/Submission_Handler.php:193
+#: includes/Forms/Submission_Handler.php:252
 msgid "The file is too large (max %s)."
 msgstr ""
 
-#: includes/Forms/Submission_Handler.php:128
+#: includes/Security/Activity_Log.php:33
+msgid "Theme switched"
+msgstr ""
+
+#: includes/Forms/Submission_Handler.php:187
 msgid "This field is required."
 msgstr ""
 
-#: includes/Forms/Submission_Handler.php:217
+#: includes/Forms/Submission_Handler.php:276
 msgid "This file type is not allowed."
 msgstr ""
 
-#: includes/Sections/Section_Registry.php:102
+#: includes/Security/Activity_Log.php:262
+msgid "Time (UTC)"
+msgstr ""
+
+#: includes/Sections/Section_Registry.php:157
 msgid "Title"
 msgstr ""
 
@@ -852,47 +1142,99 @@ msgstr ""
 msgid "Too many failed login attempts. Try again in %d minutes."
 msgstr ""
 
-#: includes/Admin/Options_Page.php:57
+#: includes/Security/Activity_Log.php:142
+msgid "Too many failed logins: this IP is locked out"
+msgstr ""
+
+#: includes/Forms/Form_Renderer.php:16
+msgid "Too many submissions. Please try again later."
+msgstr ""
+
+#: includes/Security/Two_Factor.php:254
+msgid "Turn off two-factor"
+msgstr ""
+
+#: includes/Admin/Options_Page.php:112
 msgid "Twitter/X handle (e.g. @brand)"
 msgstr ""
 
-#: includes/Forms/Forms_Module.php:103
+#: includes/Security/Two_Factor.php:193
+msgid "Two-factor"
+msgstr ""
+
+#: includes/Security/Two_Factor.php:193 includes/Security/Two_Factor.php:209 includes/Security/Two_Factor.php:232
+msgid "Two-factor authentication"
+msgstr ""
+
+#: includes/Security/Activity_Log.php:215
+msgid "Two-factor authentication disabled (%s)"
+msgstr ""
+
+#: includes/Security/Activity_Log.php:210
+msgid "Two-factor authentication enabled"
+msgstr ""
+
+#: includes/Security/Two_Factor.php:239
+msgid "Two-factor is on. Save these backup codes now; each works once and they will not be shown again:"
+msgstr ""
+
+#: includes/Forms/Forms_Module.php:110
 msgid "Use this form"
 msgstr ""
 
-#: includes/Sections/Custom_Sections.php:249
+#: includes/Security/Activity_Log.php:263
+msgid "User"
+msgstr ""
+
+#: includes/Security/Activity_Log.php:152
+msgid "User \"%s\" created"
+msgstr ""
+
+#: includes/Security/Activity_Log.php:158
+msgid "User \"%s\" deleted"
+msgstr ""
+
+#: includes/Security/Activity_Log.php:28
+msgid "User created"
+msgstr ""
+
+#: includes/Security/Activity_Log.php:29
+msgid "User deleted"
+msgstr ""
+
+#: includes/Sections/Custom_Sections.php:258
 msgid "value, escaped (image gives its URL, url gives a safe link)"
 msgstr ""
 
-#: includes/Sections/Section_Registry.php:43
+#: includes/Sections/Section_Registry.php:51
 msgid "Vertical spacing"
 msgstr ""
 
-#: includes/Sections/Builtin_Sections.php:172
+#: includes/Sections/Builtin_Sections.php:244
 msgid "Video (YouTube, Vimeo or .mp4)"
 msgstr ""
 
-#: includes/Sections/Builtin_Sections.php:175
+#: includes/Sections/Builtin_Sections.php:250
 msgid "Video URL"
 msgstr ""
 
-#: includes/Sections/Section_Registry.php:55
+#: includes/Sections/Section_Registry.php:63
 msgid "Visibility"
 msgstr ""
 
-#: includes/Sections/Custom_Sections.php:289
+#: includes/Sections/Custom_Sections.php:298
 msgid "Wrap in the site container (uncheck for full-width HTML)"
 msgstr ""
 
-#: includes/Forms/Submission_Handler.php:245
+#: includes/Forms/Submission_Handler.php:304
 msgid "Yes"
 msgstr ""
 
-#: includes/Sections/Custom_Sections.php:259
+#: includes/Sections/Custom_Sections.php:268
 msgid "Your fields:"
 msgstr ""
 
-#: includes/Sections/Section_Registry.php:160
+#: includes/Sections/Section_Registry.php:272
 msgid "— Select a form —"
 msgstr ""
 

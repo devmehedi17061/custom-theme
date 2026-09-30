@@ -18,7 +18,7 @@ final class Security_Module implements Module {
 	private function enabled( string $feature ): bool {
 		$all = (array) apply_filters(
 			'bfd_security_features',
-			array( 'xmlrpc', 'rest_users', 'author_enum', 'headers', 'login', 'version', 'file_edit' )
+			array( 'xmlrpc', 'rest_users', 'author_enum', 'headers', 'login', 'version', 'file_edit', 'activity_log', 'two_factor', 'csp' )
 		);
 		return in_array( $feature, $all, true );
 	}
@@ -56,6 +56,12 @@ final class Security_Module implements Module {
 
 		if ( $this->enabled( 'login' ) ) {
 			( new Login_Limiter() )->register();
+		}
+		if ( $this->enabled( 'activity_log' ) ) {
+			( new Activity_Log() )->register();
+		}
+		if ( $this->enabled( 'two_factor' ) ) {
+			( new Two_Factor() )->register();
 		}
 
 		if ( $this->enabled( 'version' ) ) {
@@ -112,6 +118,10 @@ final class Security_Module implements Module {
 		if ( is_ssl() ) {
 			$headers['Strict-Transport-Security'] = 'max-age=15552000';
 		}
+		$csp = $this->csp_header();
+		if ( $csp ) {
+			$headers[ $csp[0] ] = $csp[1];
+		}
 		// Content-Security-Policy is off by default because inline styles/scripts from custom
 		// sections would break. Opt in, ideally as Report-Only first:
 		// add_filter( 'bfd_security_headers', fn( $h ) => $h + [ 'Content-Security-Policy-Report-Only' => "default-src 'self'" ] );
@@ -124,5 +134,59 @@ final class Security_Module implements Module {
 
 	public function strip_wp_version( string $src ): string {
 		return ( false !== strpos( $src, 'ver=' . get_bloginfo( 'version' ) ) ) ? remove_query_arg( 'ver', $src ) : $src;
+	}
+
+	/**
+	 * Optional CSP for the public site (never wp-admin or the login page).
+	 * The policy allows inline styles/scripts because sections, design options and analytics use them,
+	 * but blocks every external origin that is not needed, plus plugins (object-src) and framing by other sites.
+	 *
+	 * @return array{0:string,1:string}|null header name and value
+	 */
+	private function csp_header(): ?array {
+		global $pagenow;
+		$mode = (string) bfd_option( 'csp_mode', 'off' );
+		if ( ! $this->enabled( 'csp' ) || ! in_array( $mode, array( 'report_only', 'enforce' ), true ) || is_admin() || 'wp-login.php' === $pagenow ) {
+			return null;
+		}
+
+		$script  = array( "'self'", "'unsafe-inline'" );
+		$frame   = array( 'https://www.youtube-nocookie.com', 'https://player.vimeo.com' );
+		$connect = array( "'self'" );
+		if ( \BFD\Core\Forms\Turnstile::enabled() ) {
+			$script[] = 'https://challenges.cloudflare.com';
+			$frame[]  = 'https://challenges.cloudflare.com';
+		}
+		if ( '' !== (string) bfd_option( 'ga_id' ) ) {
+			$script[]  = 'https://www.googletagmanager.com';
+			$connect[] = 'https://*.google-analytics.com';
+			$connect[] = 'https://*.analytics.google.com';
+			$connect[] = 'https://www.googletagmanager.com';
+		}
+
+		$directives = array(
+			'default-src'     => array( "'self'" ),
+			'script-src'      => $script,
+			'style-src'       => array( "'self'", "'unsafe-inline'" ),
+			'img-src'         => array( "'self'", 'data:', 'https:' ),
+			'font-src'        => array( "'self'", 'data:' ),
+			'media-src'       => array( "'self'", 'https:' ),
+			'frame-src'       => $frame,
+			'connect-src'     => $connect,
+			'object-src'      => array( "'none'" ),
+			'base-uri'        => array( "'self'" ),
+			'form-action'     => array( "'self'" ),
+			'frame-ancestors' => array( "'self'" ),
+		);
+		$directives = (array) apply_filters( 'bfd_csp_directives', $directives );
+
+		$parts = array();
+		foreach ( $directives as $name => $sources ) {
+			$parts[] = $name . ' ' . implode( ' ', array_map( 'strval', (array) $sources ) );
+		}
+		return array(
+			'enforce' === $mode ? 'Content-Security-Policy' : 'Content-Security-Policy-Report-Only',
+			implode( '; ', $parts ),
+		);
 	}
 }

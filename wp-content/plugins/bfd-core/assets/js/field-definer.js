@@ -17,6 +17,7 @@
 	var ALLOW_REPEATER = cfg.repeater !== '0';
 	var SHOW_PH = cfg.ph !== '0';
 	var SHOW_REQ = cfg.required === '1';
+	var SHOW_COND = cfg.conditions === '1';
 
 	var state;
 	try { state = JSON.parse(input.value || '[]'); } catch (e) { state = []; }
@@ -55,6 +56,61 @@
 		return { label: '', key: '', type: 'text', options: '', required: false, sub_fields: [] };
 	}
 
+	var OPS = [['equals', 'is'], ['not_equals', 'is not'], ['not_empty', 'is filled in'], ['empty', 'is empty']];
+
+	function conditionBox(arr, i, f) {
+		var box = el('div', 'bfd-fd-row__extra bfd-fd-cond');
+		var candidates = arr.slice(0, i).filter(function (x) { return x.type !== 'step' && x.type !== 'file' && x.key; });
+		var on = !!f.show_if;
+
+		var toggle = el('label');
+		var cb = el('input');
+		cb.type = 'checkbox';
+		cb.checked = on;
+		cb.disabled = !candidates.length;
+		toggle.appendChild(cb);
+		toggle.appendChild(document.createTextNode(' Show only if…'));
+		box.appendChild(toggle);
+
+		cb.addEventListener('change', function () {
+			if (cb.checked) f.show_if = { field: candidates[candidates.length - 1].key, op: 'equals', value: '' };
+			else delete f.show_if;
+			sync(); render();
+		});
+
+		if (on) {
+			var fieldSel = el('select');
+			candidates.forEach(function (c) {
+				var o = el('option', '', c.label || c.key);
+				o.value = c.key;
+				fieldSel.appendChild(o);
+			});
+			fieldSel.value = f.show_if.field;
+			fieldSel.addEventListener('change', function () { f.show_if.field = fieldSel.value; sync(); });
+
+			var opSel = el('select');
+			OPS.forEach(function (o) { var op = el('option', '', o[1]); op.value = o[0]; opSel.appendChild(op); });
+			opSel.value = f.show_if.op;
+
+			var val = el('input');
+			val.type = 'text';
+			val.placeholder = 'value';
+			val.value = f.show_if.value || '';
+			val.hidden = f.show_if.op === 'not_empty' || f.show_if.op === 'empty';
+			val.addEventListener('input', function () { f.show_if.value = val.value; sync(); });
+			opSel.addEventListener('change', function () {
+				f.show_if.op = opSel.value;
+				val.hidden = opSel.value === 'not_empty' || opSel.value === 'empty';
+				sync();
+			});
+
+			box.appendChild(fieldSel);
+			box.appendChild(opSel);
+			box.appendChild(val);
+		}
+		return box;
+	}
+
 	function renderList(arr, allowRepeater) {
 		var box = el('div', 'bfd-fd-list');
 
@@ -88,6 +144,18 @@
 				f.key = slug(keyInput.value);
 				paintPh(); sync();
 			});
+			if (SHOW_COND) {
+				// When a key is finished being edited, keep conditions in later fields pointing at it.
+				var keyBefore = f.key;
+				keyInput.addEventListener('focus', function () { keyBefore = f.key; });
+				var renameRefs = function () {
+					arr.forEach(function (o) { if (o.show_if && o.show_if.field === keyBefore && keyBefore !== f.key) o.show_if.field = f.key; });
+					keyBefore = f.key;
+					sync(); render();
+				};
+				keyInput.addEventListener('change', renameRefs);
+				label.addEventListener('change', renameRefs);
+			}
 
 			var type = el('select');
 			TYPES.forEach(function (t) {
@@ -103,7 +171,7 @@
 			});
 
 			var actions = el('div', 'bfd-fd-row__actions');
-			if (SHOW_REQ && f.type !== 'checkbox_hidden') {
+			if (SHOW_REQ && f.type !== 'step') {
 				var reqLabel = el('label', 'bfd-fd-req');
 				var req = el('input');
 				req.type = 'checkbox';
@@ -124,6 +192,10 @@
 			row.appendChild(main);
 			paintPh();
 			row.appendChild(ph);
+
+			if (SHOW_COND && f.type !== 'step' && i > 0) {
+				row.appendChild(conditionBox(arr, i, f));
+			}
 
 			if (f.type === 'select') {
 				var ta = el('textarea', 'widefat');

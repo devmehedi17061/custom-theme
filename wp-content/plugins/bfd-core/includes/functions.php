@@ -16,12 +16,12 @@ function bfd_has_sections( int $post_id = 0 ): bool {
 /**
  * Site-wide option from Settings > BFD Options.
  *
- * @param mixed $default
+ * @param mixed $fallback
  * @return mixed
  */
-function bfd_option( string $key, $default = '' ) {
+function bfd_option( string $key, $fallback = '' ) {
 	$opts = get_option( 'bfd_options', array() );
-	return ( is_array( $opts ) && isset( $opts[ $key ] ) && '' !== $opts[ $key ] ) ? $opts[ $key ] : $default;
+	return ( is_array( $opts ) && isset( $opts[ $key ] ) && '' !== $opts[ $key ] ) ? $opts[ $key ] : $fallback;
 }
 
 /** Output breadcrumb navigation (also feeds the BreadcrumbList schema). */
@@ -37,11 +37,11 @@ function bfd_render_form( int $form_id ): void {
 /** Font stacks selectable in BFD Options > Design (system fonts only: no external requests). */
 function bfd_font_stacks(): array {
 	return array(
-		'system'       => array( 'System UI (default)', 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif' ),
-		'humanist'     => array( 'Humanist sans', 'Seravek, "Gill Sans Nova", Ubuntu, Calibri, "DejaVu Sans", "Source Sans Pro", sans-serif' ),
-		'geometric'    => array( 'Geometric sans', 'Avenir, Montserrat, Corbel, "URW Gothic", "Source Sans Pro", sans-serif' ),
-		'serif'        => array( 'Serif', 'Charter, "Bitstream Charter", "Sitka Text", Cambria, serif' ),
+		'system'        => array( 'System UI (default)', 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif' ),
+		'humanist'      => array( 'Humanist sans', 'Seravek, "Gill Sans Nova", Ubuntu, Calibri, "DejaVu Sans", "Source Sans Pro", sans-serif' ),
+		'geometric'     => array( 'Geometric sans', 'Avenir, Montserrat, Corbel, "URW Gothic", "Source Sans Pro", sans-serif' ),
+		'serif'         => array( 'Serif', 'Charter, "Bitstream Charter", "Sitka Text", Cambria, serif' ),
 		'classic-serif' => array( 'Classic serif', '"Iowan Old Style", "Palatino Linotype", "URW Palladio L", P052, serif' ),
-		'mono'         => array( 'Monospace', 'ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas, monospace' ),
+		'mono'          => array( 'Monospace', 'ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas, monospace' ),
 	);
 }

@@ -10,9 +10,9 @@ defined( 'ABSPATH' ) || exit;
  */
 final class Sections_Module implements Module {
 
-	private const NONCE_ACTION = 'bfd_sections_save';
-	private const NONCE_FIELD  = 'bfd_sections_nonce';
-	private const MAX_JSON     = 500000;
+	private const NONCE_ACTION  = 'bfd_sections_save';
+	private const NONCE_FIELD   = 'bfd_sections_nonce';
+	private const MAX_JSON      = 500000;
 	private const PREVIEW_NONCE = 'bfd_sections_preview';
 
 	public function slug(): string {
@@ -138,7 +138,7 @@ final class Sections_Module implements Module {
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<base target="_blank">
-	<?php wp_head(); ?>
+		<?php wp_head(); ?>
 	<style>html{margin-top:0!important}body{min-height:0}</style>
 </head>
 <body <?php body_class( 'bfd-preview' ); ?>>

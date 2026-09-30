@@ -7,7 +7,7 @@ defined( 'ABSPATH' ) || exit;
 
 final class Section_Registry {
 
-	public const META_KEY     = '_bfd_sections';
+	public const META_KEY      = '_bfd_sections';
 	private const MAX_SECTIONS = 100;
 
 	private static ?array $definitions = null;
@@ -26,8 +26,16 @@ final class Section_Registry {
 					'primary' => __( 'Primary color', 'bfd-core' ),
 				),
 			),
-			array( 'key' => 'background_image', 'type' => 'image', 'label' => __( 'Background image', 'bfd-core' ) ),
-			array( 'key' => 'overlay', 'type' => 'checkbox', 'label' => __( 'Dark overlay on background image', 'bfd-core' ) ),
+			array(
+				'key'   => 'background_image',
+				'type'  => 'image',
+				'label' => __( 'Background image', 'bfd-core' ),
+			),
+			array(
+				'key'   => 'overlay',
+				'type'  => 'checkbox',
+				'label' => __( 'Dark overlay on background image', 'bfd-core' ),
+			),
 			array(
 				'key'     => 'align',
 				'type'    => 'select',
@@ -59,8 +67,16 @@ final class Section_Registry {
 					'desktop' => __( 'Hide on desktop', 'bfd-core' ),
 				),
 			),
-			array( 'key' => 'anchor', 'type' => 'slug', 'label' => __( 'Anchor ID (for menu links like #pricing)', 'bfd-core' ) ),
-			array( 'key' => 'css_class', 'type' => 'classes', 'label' => __( 'Extra CSS classes', 'bfd-core' ) ),
+			array(
+				'key'   => 'anchor',
+				'type'  => 'slug',
+				'label' => __( 'Anchor ID (for menu links like #pricing)', 'bfd-core' ),
+			),
+			array(
+				'key'   => 'css_class',
+				'type'  => 'classes',
+				'label' => __( 'Extra CSS classes', 'bfd-core' ),
+			),
 		);
 	}
 
@@ -71,76 +87,164 @@ final class Section_Registry {
 		}
 
 		$defs = array(
-			'hero'      => array(
+			'hero'        => array(
 				'label'  => __( 'Hero', 'bfd-core' ),
 				'fields' => array(
-					array( 'key' => 'heading', 'type' => 'text', 'label' => __( 'Heading', 'bfd-core' ) ),
-					array( 'key' => 'subheading', 'type' => 'textarea', 'label' => __( 'Subheading', 'bfd-core' ) ),
-					array( 'key' => 'image', 'type' => 'image', 'label' => __( 'Image', 'bfd-core' ) ),
-					array( 'key' => 'button_text', 'type' => 'text', 'label' => __( 'Button text', 'bfd-core' ) ),
-					array( 'key' => 'button_url', 'type' => 'url', 'label' => __( 'Button URL', 'bfd-core' ) ),
+					array(
+						'key'   => 'heading',
+						'type'  => 'text',
+						'label' => __( 'Heading', 'bfd-core' ),
+					),
+					array(
+						'key'   => 'subheading',
+						'type'  => 'textarea',
+						'label' => __( 'Subheading', 'bfd-core' ),
+					),
+					array(
+						'key'   => 'image',
+						'type'  => 'image',
+						'label' => __( 'Image', 'bfd-core' ),
+					),
+					array(
+						'key'   => 'button_text',
+						'type'  => 'text',
+						'label' => __( 'Button text', 'bfd-core' ),
+					),
+					array(
+						'key'   => 'button_url',
+						'type'  => 'url',
+						'label' => __( 'Button URL', 'bfd-core' ),
+					),
 				),
 			),
-			'features'  => array(
+			'features'    => array(
 				'label'  => __( 'Features / Cards', 'bfd-core' ),
 				'fields' => array(
-					array( 'key' => 'heading', 'type' => 'text', 'label' => __( 'Heading', 'bfd-core' ) ),
-					array( 'key' => 'intro', 'type' => 'textarea', 'label' => __( 'Intro', 'bfd-core' ) ),
+					array(
+						'key'   => 'heading',
+						'type'  => 'text',
+						'label' => __( 'Heading', 'bfd-core' ),
+					),
+					array(
+						'key'   => 'intro',
+						'type'  => 'textarea',
+						'label' => __( 'Intro', 'bfd-core' ),
+					),
 					array(
 						'key'     => 'columns',
 						'type'    => 'select',
 						'label'   => __( 'Columns', 'bfd-core' ),
 						'default' => '3',
-						'options' => array( '2' => '2', '3' => '3', '4' => '4' ),
+						'options' => array(
+							'2' => '2',
+							'3' => '3',
+							'4' => '4',
+						),
 					),
 					array(
 						'key'        => 'items',
 						'type'       => 'repeater',
 						'label'      => __( 'Cards', 'bfd-core' ),
 						'sub_fields' => array(
-							array( 'key' => 'image', 'type' => 'image', 'label' => __( 'Image', 'bfd-core' ) ),
-							array( 'key' => 'title', 'type' => 'text', 'label' => __( 'Title', 'bfd-core' ) ),
-							array( 'key' => 'text', 'type' => 'textarea', 'label' => __( 'Text', 'bfd-core' ) ),
-							array( 'key' => 'url', 'type' => 'url', 'label' => __( 'Link URL', 'bfd-core' ) ),
+							array(
+								'key'   => 'image',
+								'type'  => 'image',
+								'label' => __( 'Image', 'bfd-core' ),
+							),
+							array(
+								'key'   => 'title',
+								'type'  => 'text',
+								'label' => __( 'Title', 'bfd-core' ),
+							),
+							array(
+								'key'   => 'text',
+								'type'  => 'textarea',
+								'label' => __( 'Text', 'bfd-core' ),
+							),
+							array(
+								'key'   => 'url',
+								'type'  => 'url',
+								'label' => __( 'Link URL', 'bfd-core' ),
+							),
 						),
 					),
 				),
 			),
-			'cta'       => array(
+			'cta'         => array(
 				'label'  => __( 'Call to Action', 'bfd-core' ),
 				'fields' => array(
-					array( 'key' => 'heading', 'type' => 'text', 'label' => __( 'Heading', 'bfd-core' ) ),
-					array( 'key' => 'text', 'type' => 'textarea', 'label' => __( 'Text', 'bfd-core' ) ),
-					array( 'key' => 'button_text', 'type' => 'text', 'label' => __( 'Button text', 'bfd-core' ) ),
-					array( 'key' => 'button_url', 'type' => 'url', 'label' => __( 'Button URL', 'bfd-core' ) ),
+					array(
+						'key'   => 'heading',
+						'type'  => 'text',
+						'label' => __( 'Heading', 'bfd-core' ),
+					),
+					array(
+						'key'   => 'text',
+						'type'  => 'textarea',
+						'label' => __( 'Text', 'bfd-core' ),
+					),
+					array(
+						'key'   => 'button_text',
+						'type'  => 'text',
+						'label' => __( 'Button text', 'bfd-core' ),
+					),
+					array(
+						'key'   => 'button_url',
+						'type'  => 'url',
+						'label' => __( 'Button URL', 'bfd-core' ),
+					),
 				),
 			),
-			'faq'       => array(
+			'faq'         => array(
 				'label'  => __( 'FAQ', 'bfd-core' ),
 				'fields' => array(
-					array( 'key' => 'heading', 'type' => 'text', 'label' => __( 'Heading', 'bfd-core' ) ),
+					array(
+						'key'   => 'heading',
+						'type'  => 'text',
+						'label' => __( 'Heading', 'bfd-core' ),
+					),
 					array(
 						'key'        => 'items',
 						'type'       => 'repeater',
 						'label'      => __( 'Questions', 'bfd-core' ),
 						'sub_fields' => array(
-							array( 'key' => 'question', 'type' => 'text', 'label' => __( 'Question', 'bfd-core' ) ),
-							array( 'key' => 'answer', 'type' => 'textarea', 'label' => __( 'Answer', 'bfd-core' ) ),
+							array(
+								'key'   => 'question',
+								'type'  => 'text',
+								'label' => __( 'Question', 'bfd-core' ),
+							),
+							array(
+								'key'   => 'answer',
+								'type'  => 'textarea',
+								'label' => __( 'Answer', 'bfd-core' ),
+							),
 						),
 					),
 				),
 			),
-			'rich_text' => array(
+			'rich_text'   => array(
 				'label'  => __( 'Rich Text', 'bfd-core' ),
 				'fields' => array(
-					array( 'key' => 'heading', 'type' => 'text', 'label' => __( 'Heading', 'bfd-core' ) ),
-					array( 'key' => 'content', 'type' => 'richtext', 'label' => __( 'Content (HTML allowed)', 'bfd-core' ) ),
+					array(
+						'key'   => 'heading',
+						'type'  => 'text',
+						'label' => __( 'Heading', 'bfd-core' ),
+					),
+					array(
+						'key'   => 'content',
+						'type'  => 'richtext',
+						'label' => __( 'Content (HTML allowed)', 'bfd-core' ),
+					),
 				),
 			),
 			'custom_html' => array(
 				'label'  => __( 'Custom HTML', 'bfd-core' ),
 				'fields' => array(
-					array( 'key' => 'html', 'type' => 'html', 'label' => __( 'HTML (unfiltered only for users with the unfiltered_html capability)', 'bfd-core' ) ),
+					array(
+						'key'   => 'html',
+						'type'  => 'html',
+						'label' => __( 'HTML (unfiltered only for users with the unfiltered_html capability)', 'bfd-core' ),
+					),
 				),
 			),
 		);
@@ -150,8 +254,16 @@ final class Section_Registry {
 		$defs['form'] = array(
 			'label'  => __( 'Form', 'bfd-core' ),
 			'fields' => array(
-				array( 'key' => 'heading', 'type' => 'text', 'label' => __( 'Heading', 'bfd-core' ) ),
-				array( 'key' => 'intro', 'type' => 'textarea', 'label' => __( 'Intro', 'bfd-core' ) ),
+				array(
+					'key'   => 'heading',
+					'type'  => 'text',
+					'label' => __( 'Heading', 'bfd-core' ),
+				),
+				array(
+					'key'   => 'intro',
+					'type'  => 'textarea',
+					'label' => __( 'Intro', 'bfd-core' ),
+				),
 				array(
 					'key'     => 'form_id',
 					'type'    => 'select',
@@ -193,7 +305,10 @@ final class Section_Registry {
 			if ( isset( $f['options'] ) ) {
 				$list = array();
 				foreach ( $f['options'] as $value => $label ) {
-					$list[] = array( 'value' => (string) $value, 'label' => (string) $label );
+					$list[] = array(
+						'value' => (string) $value,
+						'label' => (string) $label,
+					);
 				}
 				$f['options'] = $list;
 			}

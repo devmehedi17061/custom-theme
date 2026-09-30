@@ -33,7 +33,10 @@ final class Redirects {
 			if ( '' === $to || '' === $from ) {
 				continue;
 			}
-			$rules[ $from ] = array( 'to' => $to, 'code' => $code );
+			$rules[ $from ] = array(
+				'to'   => $to,
+				'code' => $code,
+			);
 		}
 		return $rules;
 	}
