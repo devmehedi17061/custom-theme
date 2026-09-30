@@ -6,6 +6,7 @@ Automated (run from the repo root, with `docker compose up -d`):
 ./bin/lint.sh                                                       # PHP + JS syntax
 docker compose exec -T wordpress php /var/www/html/bin/smoke-test.php   # sanitizers, engine, forms, security
 python3 bin/page-audit.py http://localhost:8081/ http://localhost:8081/about/   # SEO + accessibility basics
+./bin/ui-test.sh                                                   # real-browser admin tests
 ```
 
 ## Before going live
@@ -26,12 +27,15 @@ python3 bin/page-audit.py http://localhost:8081/ http://localhost:8081/about/   
 - [ ] Settings > BFD Options: organization name, default share image, social links, contact
 - [ ] Every page: SEO title (< 60 chars), meta description (120-160), exactly one `<h1>`
 - [ ] Images: alt text, sensible sizes; first image above the fold is not lazy-loaded (the hero section handles this)
-- [ ] Submit `/wp-sitemap.xml` to Google Search Console and Bing Webmaster Tools
+- [ ] Submit `/wp-sitemap.xml` to Google Search Console and Bing Webmaster Tools (verification codes go in BFD Options > Integrations)
+- [ ] Google Analytics ID (if used) is added only after your cookie/consent approach is decided; it is skipped for logged-in editors
 - [ ] Test share previews (Facebook debugger / LinkedIn inspector) and schema (Google Rich Results Test)
 
 **Forms**
 - [ ] Send a real test submission; confirm the email arrives and the row appears in Forms > Submissions
 - [ ] Confirm the recipients list is correct on each form
+- [ ] Optional: add Cloudflare Turnstile keys (Settings > BFD Options > Integrations) for stronger spam protection
+- [ ] Optional: enable the auto-reply per form
 - [ ] If pages are served by a full-page cache: exclude pages with forms, or the nonce/timestamp goes stale (the form then shows "Security check failed")
 
 **Performance**

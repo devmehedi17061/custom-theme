@@ -17,7 +17,7 @@ On the new WordPress: install both zips, activate **BFD Core**, then **BFD Theme
 (For local work, copy this repo and run `docker compose up -d`.)
 
 ## 2. Brand it (about an hour)
-1. **Design tokens:** edit the `:root { --color-primary … }` block at the top of `assets/css/main.css` (colors, fonts, spacing, container width). Nothing else needs to change for a re-skin.
+1. **Design:** Settings > BFD Options > *Design* (colors, fonts, content width, sticky header, additional CSS). No code needed. For deeper changes edit the `:root { --color-primary … }` tokens at the top of `assets/css/main.css`.
 2. **Logo & menus:** Appearance > Customize (logo), Appearance > Menus (Primary, Footer).
 3. **Settings > BFD Options:** header button, footer text, contact, socials, SEO defaults.
 4. **Pages:** create Home / About / Contact with the **Page Sections** builder; set the homepage under Settings > Reading.
@@ -39,6 +39,8 @@ Use a small site plugin/child theme and these hooks instead of editing the frame
 | `bfd_client_ip` | real client IP behind a proxy |
 
 A new built-in section = one entry in `bfd_section_definitions` + `template-parts/sections/{type}.php` in the theme.
+
+Translations: `python3 bin/make-pot.py` writes `languages/bfd-core.pot` and `bfd-theme.pot`.
 
 ## 4. Before launch
 Work through [LAUNCH.md](LAUNCH.md).

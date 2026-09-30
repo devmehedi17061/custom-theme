@@ -45,10 +45,19 @@ $clean = Section_Registry::sanitize_sections(
 check( 'unknown section types dropped', 1 === count( $clean ) );
 check( 'invalid setting falls back', 'none' === $clean[0]['settings']['background'] );
 check( 'unknown field dropped', ! array_key_exists( 'rogue', $clean[0]['fields'] ) );
-foreach ( array( 'hero', 'features', 'cta', 'faq', 'rich_text', 'custom_html', 'form' ) as $type ) {
+foreach ( array( 'hero', 'features', 'cta', 'faq', 'rich_text', 'custom_html', 'form', 'image_text', 'posts', 'testimonials', 'pricing', 'team', 'stats', 'logos', 'gallery', 'video' ) as $type ) {
 	check( "built-in section registered: $type", null !== Section_Registry::get( $type ) );
 	check( "theme template exists: $type", file_exists( get_theme_root() . '/bfd-theme/template-parts/sections/' . $type . '.php' ) );
 }
+
+/* Section options */
+$keys = wp_list_pluck( Section_Registry::settings_fields(), 'key' );
+foreach ( array( 'background', 'background_image', 'overlay', 'align', 'padding', 'hide', 'anchor', 'css_class' ) as $k ) {
+	check( "section option exists: $k", in_array( $k, $keys, true ) );
+}
+check( 'slug type sanitized', 'my-anchor' === Sanitizer::value( array( 'key' => 'a', 'type' => 'slug' ), 'My Anchor!' ) );
+check( 'classes type sanitized', 'foo bar' === Sanitizer::value( array( 'key' => 'c', 'type' => 'classes' ), 'foo "><script> bar' ) || 'foo script bar' === Sanitizer::value( array( 'key' => 'c', 'type' => 'classes' ), 'foo "><script> bar' ) );
+check( 'no raw markup survives in classes', false === strpbrk( Sanitizer::value( array( 'key' => 'c', 'type' => 'classes' ), 'x"><script>y' ), '<>"' ) );
 
 /* Template engine */
 $defs = array(
@@ -76,6 +85,17 @@ $endpoints = apply_filters( 'rest_endpoints', array( '/wp/v2/users' => array(), 
 check( 'anonymous REST users endpoint hidden', ! isset( $endpoints['/wp/v2/users'] ) && isset( $endpoints['/wp/v2/posts'] ) );
 check( 'xmlrpc disabled', false === apply_filters( 'xmlrpc_enabled', true ) );
 check( 'file editing disabled', defined( 'DISALLOW_FILE_EDIT' ) && DISALLOW_FILE_EDIT );
+
+/* Options + integrations */
+$o = new BFD\Core\Admin\Options_Page();
+$clean = $o->sanitize( array( 'primary_color' => 'red;}</style>', 'container_width' => '99999', 'ga_id' => 'nope', 'heading_font' => 'HACK', 'custom_css' => '.a{}</style><script>x</script>' ) );
+check( 'options: bad colour rejected', '' === $clean['primary_color'] );
+check( 'options: absurd width rejected', '' === $clean['container_width'] );
+check( 'options: bad analytics id rejected', '' === $clean['ga_id'] );
+check( 'options: unknown font falls back', 'system' === $clean['heading_font'] );
+check( 'options: custom CSS has no tags', false === strpos( $clean['custom_css'], '<' ) );
+check( 'redirect rules ignore javascript: targets', array() === array_filter( BFD\Core\Seo\Redirects::rules(), fn( $r ) => 0 === stripos( $r['to'], 'javascript' ) ) );
+check( 'uninstaller keeps data by default', 0 === array_sum( BFD\Core\Uninstaller::run( true ) ) || ! empty( get_option( 'bfd_options' )['delete_on_uninstall'] ) );
 
 /* Post types */
 foreach ( array( 'service', 'project', 'testimonial', 'bfd_section', 'bfd_form' ) as $pt ) {
