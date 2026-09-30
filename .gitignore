@@ -1,0 +1,24 @@
+# Track only our own code; everything else (WordPress core, secrets, uploads) stays out.
+/*
+!/.gitignore
+!/README.md
+!/docker-compose.yml
+!/bin/
+!/docs/
+
+!/wp-content/
+/wp-content/*
+!/wp-content/themes/
+/wp-content/themes/*
+!/wp-content/themes/bfd-theme/
+!/wp-content/plugins/
+/wp-content/plugins/*
+!/wp-content/plugins/bfd-core/
+
+# Never commit
+wp-config.php
+*.log
+node_modules/
+vendor/
+dist/
+.DS_Store
